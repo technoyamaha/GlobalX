@@ -1539,8 +1539,72 @@ const getTeamIncome = async (req, res) => {
   }
 };
 
+
+// 05-05-2026
+const getTeamStats = async (req, res) => {
+  let connection;
+  try {
+    connection = await pool.getConnection();
+
+    const auth = req.cookies.auth;
+
+    const [users] = await connection.query(
+      "SELECT code FROM users WHERE token = ?",
+      [auth]
+    );
+
+    if (!users.length) {
+      return res.status(401).json({ status: false, message: "Unauthorized" });
+    }
+
+    const userCode = users[0].code;
+
+    const [stats] = await connection.query(
+      `
+      WITH RECURSIVE team_tree AS (
+        SELECT code, status, 1 AS tree_level
+        FROM users
+        WHERE invite = ?
+
+        UNION ALL
+
+        SELECT u.code, u.status, tt.tree_level + 1
+        FROM users u
+        INNER JOIN team_tree tt ON u.invite = tt.code
+        WHERE tt.tree_level < 6
+      )
+
+      SELECT
+        COUNT(*) AS totalTeam,
+        
+        SUM(CASE WHEN tree_level = 1 THEN 1 ELSE 0 END) AS directTeam,
+
+        SUM(CASE WHEN tree_level = 1 AND status = 1 THEN 1 ELSE 0 END) AS activeDirect,
+
+        SUM(CASE WHEN status = 1 THEN 1 ELSE 0 END) AS activeTeam
+
+      FROM team_tree;
+      `,
+      [userCode]
+    );
+
+    return res.json({
+      status: true,
+      data: stats[0]
+    });
+
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ status: false, message: "Server error" });
+  } finally {
+    if (connection) connection.release();
+  }
+};
+
+
+
 const homeController = {
-  getTransferPage,
+  getTransferPage, getTeamStats,
   getTeamIncome,
   invitePage,
   getTransactionsPage,

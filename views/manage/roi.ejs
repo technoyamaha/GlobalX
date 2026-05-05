@@ -1,0 +1,180 @@
+<div class="roi-container">
+
+    <!-- HEADER -->
+    <div class="roi-header">
+        <h2>📊 ROI Analytics Dashboard</h2>
+        <p>Track daily earnings across all users</p>
+    </div>
+
+    <!-- FILTER + SUMMARY -->
+    <div class="roi-top">
+
+        <div class="filter-box">
+            <input type="date" id="dateFilter">
+            <button onclick="loadROI()">Apply</button>
+        </div>
+
+        <div class="summary-cards">
+            <div class="card gradient-blue">
+                <h4>Total ROI</h4>
+                <h2 id="totalROI">0</h2>
+            </div>
+
+            <div class="card gradient-green">
+                <h4>Total Users</h4>
+                <h2 id="totalUsers">0</h2>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- TABLE -->
+    <div class="table-box">
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>User</th>
+                    <th>Phone</th>
+                    <th>ROI</th>
+                </tr>
+            </thead>
+            <tbody id="roiTable"></tbody>
+        </table>
+    </div>
+
+</div>
+
+<style>
+.roi-container {
+    padding: 20px;
+    color: white;
+}
+
+/* HEADER */
+.roi-header h2 {
+    font-weight: 600;
+}
+
+.roi-header p {
+    opacity: 0.7;
+}
+
+/* TOP SECTION */
+.roi-top {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+/* FILTER */
+.filter-box {
+    display: flex;
+    gap: 10px;
+}
+
+.filter-box input {
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+}
+
+.filter-box button {
+    background: #4e73df;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+}
+
+/* CARDS */
+.summary-cards {
+    display: flex;
+    gap: 15px;
+}
+
+.card {
+    padding: 15px 25px;
+    border-radius: 15px;
+    min-width: 160px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+}
+
+.gradient-blue {
+    background: linear-gradient(135deg, #4e73df, #224abe);
+}
+
+.gradient-green {
+    background: linear-gradient(135deg, #1cc88a, #13855c);
+}
+
+/* TABLE */
+.table-box {
+    margin-top: 20px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background: #1e3a6e;
+    padding: 12px;
+}
+
+td {
+    padding: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .roi-top {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .summary-cards {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+</style>
+
+<script>
+async function loadROI() {
+    const date = document.getElementById("dateFilter").value;
+
+    const res = await fetch(`/admin/roi-data?date=${date}`);
+    const data = await res.json();
+
+    if (!data.status) return;
+
+    let html = "";
+    let i = 1;
+
+    data.data.forEach(user => {
+        html += `
+        <tr>
+            <td>${i++}</td>
+            <td>${user.full_name}</td>
+            <td>${user.phone}</td>
+            <td style="color:#1cc88a;font-weight:bold">
+                $${Number(user.roi).toFixed(2)}
+            </td>
+        </tr>`;
+    });
+
+    document.getElementById("roiTable").innerHTML = html;
+    document.getElementById("totalROI").innerText = data.totalROI.toFixed(2);
+    document.getElementById("totalUsers").innerText = data.data.length;
+}
+
+window.onload = loadROI;
+</script>
