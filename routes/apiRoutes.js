@@ -58,4 +58,7 @@ router.get("/deposit/usdt-limits", middlewareController,  paymentController.getU
 router.post("/cancelInvestment", middlewareController, paymentController.cancelInvestment);
 
 
+// 05-05-2026
+router.get("/team/stats", middlewareController, homecontroller.getTeamStats)
+
 export default router;

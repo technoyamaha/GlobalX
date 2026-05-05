@@ -1569,6 +1569,68 @@ const adjustWithdrawableBalance = async (req, res) => {
   }
 };
 
+// 05-05-2026
+const roiPage = (req, res) => {
+  renderWithLayout(
+    res,
+    "manage/roi.ejs",
+    {
+      title: "ROI Dashboard",
+      userType: "admin",
+      activePage: "ROI",
+    },
+    "layout/adminLayout",
+  );
+};
+
+const getRoiData = async (req, res) => {
+  let connection;
+
+  try {
+    const { date } = req.query;
+
+    const selectedDate = date
+      ? new Date(date)
+      : new Date();
+
+    const start = new Date(selectedDate.setHours(0, 0, 0, 0)).getTime();
+    const end = new Date(selectedDate.setHours(23, 59, 59, 999)).getTime();
+
+    connection = await pool.getConnection();
+
+    const [rows] = await connection.query(
+      `
+      SELECT 
+        u.id,
+        u.full_name,
+        u.phone,
+        SUM(i.amount * i.daily_percent / 100) AS roi
+      FROM investments i
+      JOIN users u ON u.id = i.user_id
+      WHERE i.status = 1
+        AND CAST(i.start_date AS UNSIGNED) <= ?
+      GROUP BY u.id
+      ORDER BY roi DESC
+      `,
+      [end]
+    );
+
+    const totalROI = rows.reduce((sum, r) => sum + Number(r.roi || 0), 0);
+
+    return res.json({
+      status: true,
+      data: rows,
+      totalROI,
+    });
+
+  } catch (err) {
+    console.error("ROI error:", err);
+    return res.json({ status: false });
+  } finally {
+    if (connection) connection.release();
+  }
+};
+
 const controller = {
   adminDashboardPage,
   login,
@@ -1600,6 +1662,7 @@ const controller = {
   browseRecharge,
   rechargeDuyet,
   adjustWithdrawableBalance,
+  roiPage ,  getRoiData
 };
 
 export default controller;

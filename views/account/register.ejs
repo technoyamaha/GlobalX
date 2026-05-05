@@ -1,6 +1,6 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
- <title>Sign Up- GlobalX</title>
+<title>Sign Up- GlobalX</title>
 <link rel="shortcut icon" type="image/png" href="/assets/images/favicon.ico" />
 <link rel="stylesheet" href="/assets/css/style.css" />
 
@@ -407,10 +407,19 @@
 
   <script>
     const params = new URLSearchParams(window.location.search);
-    const referralCode = params.get("ref") || params.get("sponsorCode");
+    const referralCode =
+      params.get("ref") ||
+      params.get("code") ||
+      params.get("invite") ||
+      params.get("sponsorCode");
 
     if (referralCode) {
-      document.getElementById("sponsorCode").value = referralCode;
+      const sponsorInput = document.getElementById("sponsorCode");
+
+      if (sponsorInput) {
+        sponsorInput.value = referralCode;        
+        sponsorInput.readOnly = true;
+      }
     }
 
     let otpSent = false;
