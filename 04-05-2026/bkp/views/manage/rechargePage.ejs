@@ -1,0 +1,883 @@
+<link rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700&display=fallback" />
+<link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+<link rel="stylesheet" href="/dist/css/adminlte.min.css" />
+<link rel="stylesheet" href="/css/admin.css" />
+<link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.34/moment-timezone-with-data.min.js"></script>
+
+
+
+<!-- <style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9fafb;
+    color: #333;
+  }
+
+  .wrapper {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 15px;
+  }
+
+  .content-wrapper {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+    padding: 20px;
+  }
+
+  h1,
+  h3 {
+    color: #222;
+  }
+
+  /* Search & total recharge container */
+  .form-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+  }
+
+  #search {
+    flex-grow: 1;
+    min-width: 250px;
+    max-width: 400px;
+    padding: 10px 15px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    transition: border-color 0.2s ease-in-out;
+  }
+
+  #search:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+
+  .total_recharge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2c3e50;
+  }
+
+  #total_recharge_count {
+    color: #555;
+    font-weight: normal;
+    font-size: 1rem;
+  }
+
+  #date_picker {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    transition: border-color 0.2s ease-in-out;
+    cursor: pointer;
+  }
+
+  #date_picker:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+
+  /* Card styling */
+  .card {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+  }
+
+  .card-header {
+    background-color: #007bff;
+    color: #fff;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    padding: 12px 20px;
+    font-weight: 600;
+    font-size: 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .card-tools button {
+    color: #fff;
+    font-size: 1.1rem;
+    transition: color 0.3s;
+  }
+
+  .card-tools button:hover {
+    color: #d1e7ff;
+  }
+
+  .pagination .active .page-link {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: white;
+  }
+
+  /* Table styling */
+  table#table1 {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+  }
+
+  table#table1 thead th {
+    background-color: #f1f3f5;
+    color: #495057;
+    font-weight: 600;
+    text-align: center;
+    padding: 12px;
+    border-radius: 6px;
+  }
+
+  table#table1 tbody tr {
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgb(0 0 0 / 0.05);
+    transition: background-color 0.2s ease;
+  }
+
+  table#table1 tbody tr:hover {
+    background-color: #f8f9fa;
+  }
+
+  table#table1 tbody td {
+    padding: 10px 12px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 0.95rem;
+  }
+
+  /* Badges */
+  .badge-success {
+    background-color: #28a745;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+  }
+
+  .badge-danger {
+    background-color: #dc3545;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+  }
+
+  /* Pagination styling */
+  nav.pagination {
+    margin-top: 20px;
+  }
+
+  ul.pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding-left: 0;
+  }
+
+  ul.pagination li.page-item {
+    margin: 0 5px;
+  }
+
+  ul.pagination li.page-item a.page-link {
+    color: #101010;
+    border: 1px solid #dee2e6;
+    padding: 7px 14px;
+    border-radius: 5px;
+    font-weight: 500;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  ul.pagination li.page-item a.page-link:hover {
+    background-color: #007bff;
+    color: white;
+  }
+
+  ul.pagination li.page-item a.page-link.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+  }
+
+  ul.pagination li.page-item.disabled a.page-link {
+    color: #6c757d;
+    pointer-events: none;
+    cursor: default;
+    background-color: #fff;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .form-group {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    #search {
+      max-width: 100%;
+      margin-bottom: 15px;
+    }
+
+    .total_recharge {
+      justify-content: center;
+      font-size: 1rem;
+    }
+
+    #date_picker {
+      max-width: 100%;
+      margin: 0 auto;
+    }
+
+    table#table1 tbody td {
+      font-size: 0.85rem;
+      padding: 8px 6px;
+    }
+  }
+</style> -->
+
+<style>
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    /* background-color: #f9fafb;
+    color: #333; */
+  }
+      body.bg-light {
+    background: #001a3d !important;
+    color: #fff;
+}
+  .table-striped>tbody>tr:nth-of-type(odd)>* {
+    background: #1E3A6E;
+    color: #fff;
+}
+
+  .content-wrapper {
+    margin-left: 250px;
+    /* Leave space for fixed sidebar */
+    /* background: #fff; */
+   background: rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+    padding: 20px;
+  }
+
+  h1,
+  h3 {
+    color: #ffffff;
+  }
+
+  .form-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+  }
+
+  #search {
+    flex-grow: 1;
+    min-width: 250px;
+    max-width: 400px;
+    padding: 10px 15px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    transition: border-color 0.2s ease-in-out;
+  }
+
+  #search:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+
+  .total_recharge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ffffff;
+  }
+
+  #total_recharge_count {
+    color: #ffffff;
+    font-weight: normal;
+    font-size: 1rem;
+  }
+  td .text-muted{
+    color: #fff !important;
+  }
+  table#table1 .text-muted {
+    color: #fff !important;
+}
+
+  #date_picker {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    transition: border-color 0.2s ease-in-out;
+    cursor: pointer;
+  }
+
+  #date_picker:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+
+  .card {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+  }
+
+  .card-header {
+    background-color: #007bff;
+    color: #fff;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    padding: 12px 20px;
+    font-weight: 600;
+    font-size: 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .card-tools button {
+    color: #fff;
+    font-size: 1.1rem;
+    transition: color 0.3s;
+  }
+
+  .card-tools button:hover {
+    color: #d1e7ff;
+  }
+
+  table#table1 {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+  }
+
+  table#table1 thead th {
+    background-color: #f1f3f5;
+    color: #495057;
+    font-weight: 600;
+    text-align: center;
+    padding: 12px;
+    border-radius: 6px;
+  }
+
+  table#table1 tbody tr {
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgb(0 0 0 / 0.05);
+    transition: background-color 0.2s ease;
+  }
+
+  table#table1 tbody tr:hover {
+    background-color: #f8f9fa;
+  }
+
+  table#table1 tbody td {
+    padding: 10px 12px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 0.95rem;
+  }
+
+  .badge-success {
+    background-color: #28a745;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+  }
+
+  .badge-danger {
+    background-color: #dc3545;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+  }
+
+  nav.pagination {
+    margin-top: 20px;
+  }
+
+  ul.pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding-left: 0;
+  }
+
+  ul.pagination li.page-item {
+    margin: 0 5px;
+  }
+
+  ul.pagination li.page-item a.page-link {
+    color: #101010;
+    border: 1px solid #dee2e6;
+    padding: 7px 14px;
+    border-radius: 5px;
+    font-weight: 500;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  ul.pagination li.page-item a.page-link:hover {
+    background-color: #007bff;
+    color: white;
+  }
+
+  ul.pagination li.page-item a.page-link.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+  }
+
+  ul.pagination li.page-item.disabled a.page-link {
+    color: #6c757d;
+    pointer-events: none;
+    cursor: default;
+    background-color: #fff;
+  }
+
+  #toast {
+    visibility: hidden;
+    min-width: auto;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    padding: 16px 20px;
+    position: fixed;
+    z-index: 9999;
+    top: 20px;
+    right: 20px;
+    transform: translateY(-100%);
+    font-size: 16px;
+    transition: all 0.4s ease-in-out;
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  #toast.show {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0%);
+  }
+
+  #toast span#toast-close {
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0.7;
+  }
+
+  @media (max-width: 768px) {
+    .content-wrapper {
+      margin-left: 0;
+      padding: 15px;
+    }
+
+    .form-group {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    #search {
+      max-width: 100%;
+      margin-bottom: 15px;
+    }
+
+    .total_recharge {
+      justify-content: center;
+      font-size: 1rem;
+    }
+
+    #date_picker {
+      max-width: 100%;
+      margin: 0 auto;
+    }
+
+    table#table1 tbody td {
+      font-size: 0.85rem;
+      padding: 8px 6px;
+    }
+  }
+</style>
+
+<div class="wrapper">
+  <!-- <div class="sidebar-toggle-wrapper" style="text-align: right; padding: 0 15px 10px 15px;">
+    <button id="sidebarToggle" class="btn btn-sm btn-light btn-tg">
+      <img src="/assets/images/toggle-img.svg" alt="tg-mg">
+    </button>
+  </div> -->
+
+  <div class="content-wrapper">
+    <div class="rec-recdDiv">
+      <section class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1>Deposit List</h1>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="form-group" style="text-align: center;">
+        <input type="text" id="search" placeholder="Enter The Account You Want To Search">
+        <div class="total_recharge">
+          <div class="total_recharge">
+            <div><b>Total Deposit:</b></div>
+            &nbsp;&nbsp;
+            <div id="total_recharge_count">0</div>
+            <!-- &nbsp;&nbsp; spacing -->
+            <!-- <div id="total_recharge_count" style="font-weight: bold; color: #555;">(0 records)</div> -->
+          </div>
+          <div>
+            <input type="date" id="date_picker" max="3000-01-01"
+              onfocus="this.max=new Date().toISOString().split('T')[0]" />
+          </div>
+        </div>
+
+      </div>
+
+      <section class="content">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Deposit List</h3>
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                <i class="fas fa-minus"></i>
+              </button>
+              <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="card-body p-0" style="overflow-y: hidden;">
+            <table class="table table-striped projects" id="table1">
+              <thead>
+                <tr>
+                  <th class="text-center">#</th>
+                  <th class="text-center">E-mail</th>
+                  <th class="text-center">Type</th>
+                  <th class="text-center">Amount</th>
+                  <th class="text-center">INR Amount</th>
+                  <th class="text-center">Order ID</th>
+                  <th class="text-center">Wallet ID</th>
+                  <th class="text-center">UTR</th>
+                  <th class="text-center">Time</th>
+                  <th class="text-center">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+        <!-- Pagination Controls -->
+        <nav aria-label="Page navigation example"
+          class="my-3 d-flex justify-content-center align-items-center flex-wrap">
+          <ul class="pagination mb-0" id="pagination-controls">
+          </ul>
+          <div class="d-flex align-items-center ms-3 mt-2 mt-md-0">
+            <input type="number" id="jump-to-page" class="form-control form-control-sm" placeholder="Page #"
+              style="width: 80px;">
+            <button class="btn btn-sm btn-primary ms-2" id="jump-go">Go</button>
+          </div>
+        </nav>
+      </section>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  let allRechargeData = [];
+  let rechargePage = 1, rechargeLimit = 10, searchQuery = "";
+  const PaymentMethodsMap = {
+    upi_gateway: "UPI GATEWAY",
+    upi_gatewa: "UPI GATEWAY",
+    upi_manual: "UPI Manual",
+    usdt_manual: "USDT Manual",
+    wow_pay: "WOW Pay",
+    usdt: "USDT",
+    india_pay: "INDIA PAY",
+    zynte_pay: "ZYNTE PAY"
+  };
+
+  // function formatTime(ts = '', addHours = 0) {
+  //   let date = ts ? new Date(Number(ts)) : new Date();
+  //   date.setHours(date.getHours() + addHours);
+  //   const yyyy = date.getFullYear();
+  //   const mm = ('0' + (date.getMonth() + 1)).slice(-2);
+  //   const dd = ('0' + date.getDate()).slice(-2);
+  //   let h = date.getHours() % 12 || 12;
+  //   const ampm = date.getHours() < 12 ? "AM" : "PM";
+  //   const min = ('0' + date.getMinutes()).slice(-2);
+  //   const sec = ('0' + date.getSeconds()).slice(-2);
+  //   return `${yyyy}-${mm}-${dd} ${h}:${min}:${sec} ${ampm}`;
+  // }
+
+  function formatTime(ts) {
+  if (!ts) return '-';
+
+  const ms = Number(ts);
+  if (isNaN(ms)) return '-';
+
+  const d = new Date(ms);
+
+  const yyyy = d.getFullYear();
+  const mm = String(d.getMonth() + 1).padStart(2, '0');
+  const dd = String(d.getDate()).padStart(2, '0');
+
+  let h = d.getHours();
+  const ampm = h >= 12 ? 'PM' : 'AM';
+  h = h % 12 || 12;
+
+  const min = String(d.getMinutes()).padStart(2, '0');
+  const sec = String(d.getSeconds()).padStart(2, '0');
+
+  return `${yyyy}-${mm}-${dd} ${h}:${min}:${sec} ${ampm}`;
+}
+
+
+  function renderRecharge(rows) {
+    const tbody = $("#table1 tbody");
+    if (!rows || rows.length === 0) {
+      tbody.html(`<tr class="text-center"><td colspan="9">No data...</td></tr>`);
+      return;
+    }
+
+    const html = rows.map(data => `
+      <tr class="text-center">
+        <td>${data.id}</td>
+        <td><b>${data.email ?? ''}</b></td>
+         <td style="min-width:190px;"><b>${PaymentMethodsMap?.[data.type] ?? data.type}</b></td>
+        <td><b>${data.money}</b></td>
+        <td><b>${data.inr_amount}</b></td>
+        <td style="min-width:190px;"><b>${data.id_order}</b></td>
+        <td style="min-width:190px;"><b>${data.wallet_id}</b></td>
+        <td style="min-width:190px;"><b>${data.utr}</b></td>       
+        <td style="min-width:190px;"><b>${formatTime(data.time)}</b></td>
+        <td>
+          <span class="badge badge-${data.status == 1 ? 'success' : 'danger'}">
+            ${data.status == 1 ? 'Success' : (data.status == 0 ? 'Pending' : 'Closed')}
+          </span>
+        </td>
+      </tr>
+    `).join('');
+
+    tbody.html(html);
+  }
+
+  function applyClientSearchFilter() {
+    let filtered = allRechargeData;
+
+    if (searchQuery) {
+      const lowerSearch = searchQuery.toLowerCase();
+      filtered = allRechargeData.filter(item => {
+        return (
+          String(item.email || '').toLowerCase().includes(lowerSearch) ||
+          String(item.type || '').toLowerCase().includes(lowerSearch) ||
+          String(item.money || '').toLowerCase().includes(lowerSearch) ||
+          String(item.id_order || '').toLowerCase().includes(lowerSearch) ||
+          String(item.utr || '').toLowerCase().includes(lowerSearch) ||
+          String(formatTime(item.time) || '').toLowerCase().includes(lowerSearch) ||
+          (item.status == 1 ? "success" : item.status == 0 ? "pending" : "closed").includes(lowerSearch)
+        );
+      });
+    }
+
+    renderRecharge(filtered);
+  }
+
+  function renderPagination(currentPage, totalPages) {
+    const pagination = $("#pagination-controls");
+    pagination.empty();
+
+    pagination.append(`
+    <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
+      <a class="page-link" href="#" id="previous">Previous</a>
+    </li>
+  `);
+
+    const maxButtons = 5;
+    let start = Math.max(currentPage - Math.floor(maxButtons / 2), 1);
+    let end = start + maxButtons - 1;
+    if (end > totalPages) {
+      end = totalPages;
+      start = Math.max(1, end - maxButtons + 1);
+    }
+
+    // Page numbers
+    for (let i = start; i <= end; i++) {
+      pagination.append(`
+      <li class="page-item ${i === currentPage ? 'active' : ''}">
+        <a class="page-link" href="#" data-page="${i}">${i}</a>
+      </li>
+    `);
+    }
+
+    // Next button
+    pagination.append(`
+    <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
+      <a class="page-link" href="#" id="next">Next</a>
+    </li>
+  `);
+  }
+
+
+  function loadRecharge(page, type = "") {
+  if (type === "Next") page += 1;
+  if (type === "Previous") page -= 1;
+  if (page < 1) return;
+
+  $.post(
+    "/admin/recharge",
+    {
+      page,
+      limit: rechargeLimit,
+      search: searchQuery
+    },
+    function (res) {
+      if (!res || !res.status) {
+        renderRecharge([]);
+        renderPagination(1, 0);
+        return;
+      }
+      rechargePage = page;
+      const totalPages = res.totalRechargesPages || 0;
+      $("#text-page").text(
+        totalPages > 0 ? `${page} / ${totalPages}` : "0 / 0"      );
+      renderRecharge(res.datas || []);
+      renderPagination(rechargePage, totalPages);
+      if (res.totalRechargeAmount !== undefined) {
+        $("#recharge_value").text(res.totalRechargeAmount);
+      }
+    }
+  );
+}
+
+
+  $(document).ready(function () {
+    loadRecharge(rechargePage);
+
+    $("#next").click((e) => { e.preventDefault(); loadRecharge(rechargePage, "Next"); });
+    $("#previous").click((e) => { e.preventDefault(); if (rechargePage > 1) loadRecharge(rechargePage, "Previous"); });
+
+
+    let debounceTimer;
+    $("#search").on("keyup", function () {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => {
+        searchQuery = $(this).val().trim();
+        rechargePage = 1;
+        loadRecharge(rechargePage);
+      }, 400);
+    });
+
+    $(document).on("click", "#pagination-controls .page-link[data-page]", function (e) {
+      e.preventDefault();
+      const targetPage = parseInt($(this).data("page"));
+      if (!isNaN(targetPage)) {
+        loadRecharge(targetPage);
+      }
+    });
+
+    $(document).on("click", "#previous", function (e) {
+      e.preventDefault();
+      if (rechargePage > 1) {
+        loadRecharge(rechargePage - 1);
+      }
+    });
+
+    $(document).on("click", "#next", function (e) {
+      e.preventDefault();
+      loadRecharge(rechargePage + 1);
+    });
+
+    $("#jump-go").click(function () {
+      const targetPage = parseInt($("#jump-to-page").val());
+      if (!isNaN(targetPage) && targetPage > 0) {
+        loadRecharge(targetPage);
+      }
+    });
+
+  });
+
+
+</script>
+
+<script>
+  let startDatefor = moment.tz("Asia/Kolkata").startOf("day");
+  let delayedDate = startDatefor.clone();
+  let startDate = delayedDate.valueOf();
+  let enddate = startDate + 86399000;
+  let total_recharge = $("#recharge_value");
+
+  $(document).ready(function () {
+    $("#date_picker").val(moment(startDate).format("YYYY-MM-DD"));
+    getTotalRecharge(startDate, enddate);
+  });
+  $("#date_picker").on("change", function () {
+    startDate = moment(this.value).valueOf();
+    enddate = startDate + 86399000;
+    getTotalRecharge(startDate, enddate);
+  });
+  const getTotalRecharge = async (first, last) => {
+    const response = await fetch(
+      `/admin/totalrecharge?start=${first}&end=${last}`,
+    );
+    const data = await response.json();
+    if (data.total_value == null) {
+      console.log("isnull");
+      total_recharge.text(0);
+    } else {
+      console.log(data.total_value);
+      total_recharge.text(data.total_value);
+    }
+  };
+  getTotalRecharge(startDate, enddate);
+
+  $('#sidebarToggle').on('click', function () {
+    $('body').toggleClass('sidebar-collapsed');
+  });
+</script>

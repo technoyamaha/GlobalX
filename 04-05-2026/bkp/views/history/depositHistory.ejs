@@ -1,0 +1,106 @@
+<link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700&display=fallback" />
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+
+<link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet" />
+
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.34/moment-timezone-with-data.min.js"></script>
+
+
+
+<div class="main px-lg-4 px-md-4">
+    <%- include('../partials/header') %>
+        <div class="body d-flex py-3">
+            <div class="container-xxl">
+                <div class="row align-items-center">
+                    <div class="border-0 mb-4">
+                        <div
+                            class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
+                            <h3 class="fw-bold mb-0">Deposit History</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">S.No.</th>
+                                                <th scope="col">Date</th>
+                                                <!-- <th scope="col">Asset</th> -->
+                                                <th scope="col">Amount</th>  
+                                                 <th scope="col">Ref</th>                                               
+                                                <th scope="col">Method</th>
+                                                <th scope="col">Status</th>
+                                                <!-- <th scope="col">Converted Price</th>
+                                                <th scope="col">USD</th> -->
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="row align-items-center">
+                                    <div class="col ps-2">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+<script>
+
+    $.ajax({
+        url: "/api/deposit-history",
+        method: "GET",
+        contentType: "application/json",
+        success: function (res) {
+            if (res.status === 200 && Array.isArray(res.data)) {
+                const tbody = $("table tbody");
+                tbody.empty();
+
+                if (res.data.length === 0) {
+                    tbody.append('<tr><td colspan="5" class="text-center">No deposits found.</td></tr>');
+                } else {
+                   let html = ``
+                    res.data.forEach((item, index) => {
+                        const date = new Date(parseInt(item.time)).toLocaleDateString();
+                        const statusText = item.status === 1 ? "Completed" : "Pending";
+                         html += `
+                        <tr>
+                            <td>${index + 1}</td>
+                            <td>${date}</td>
+                            <td>${item.type}</td>
+                            <td>${parseFloat(item.money).toFixed(2)}</td>
+                            <td>${statusText}</td>
+                        </tr>
+                    `;
+                });
+                tbody.html(html);
+                }
+            }
+        },
+        error: function (xhr, status, error) {
+            let msg = xhr.responseJSON?.message || "Failed to load deposit history!";
+            showToast(false, msg);
+            console.error("❌ Error:", msg);
+        }
+    });
+
+</script>

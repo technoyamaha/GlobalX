@@ -1,0 +1,945 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Withdraw</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/novaStyle.css" />
+
+<!-- Withdraw Page (full block: HTML + CSS + JS) -->
+<style>
+  /* --- Visual tokens like deposit UI --- */
+  :root{
+    --accent: #00aaff;
+    --accent-2: #00c0ff;
+    --bg: #f6fbff;
+    --card: #ffffff;
+    --muted:#141414;
+    --glass: rgba(255,255,255,0.6);
+    --success: #00c48c;
+    --danger: #ff6b6b;
+    --radius: 14px;
+    --max-width: 1100px;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
+  .wrap.withdraw-main-outer{
+    width:100%;
+    max-width:var(--max-width);
+    margin:18px auto;
+    display:grid;
+    grid-template-columns: 1fr 420px;
+    gap:18px;
+    align-items:start;
+    padding:18px;
+
+  }
+
+  .card{
+    background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
+    border-radius:var(--radius);
+    padding:18px;
+    box-shadow: 0 8px 30px rgba(2,6,23,0.06);
+    border: 1px solid rgba(0,0,0,0.03);
+  }
+
+  .card.bg-blue{ background: linear-gradient(180deg, rgba(0,170,255,0.06), rgba(0,170,255,0.02)); }
+
+  .balance-card{
+    display:flex;
+    gap:12px;
+    align-items:center;
+    background: linear-gradient(135deg, rgba(0,170,255,0.12), rgba(0,170,255,0.04));
+    padding:12px;
+    border-radius:12px;
+  }
+
+  .balance-avatar{
+    min-width:64px;
+    height:64px;
+    border-radius:12px;
+    display:grid;
+    place-items:center;
+    background:linear-gradient(180deg,var(--accent), #006fb3);
+    color:white;
+    font-weight:700;
+    font-size:20px;
+    box-shadow: 0 6px 18px rgba(0,170,255,0.18);
+  }
+
+  .balance-info .label{font-size:12px;color:var(--muted);}
+  .balance-info .amount{font-size:22px;font-weight:700;margin-top:4px}
+  .balance-info .sub{font-size:12px;color:var(--muted);margin-top:6px}
+
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:8px 12px;
+    border-radius:10px;
+    font-weight:700;
+    cursor:pointer;
+    border:1px solid transparent;
+    background:transparent;
+  }
+  .btn.withdraw-top{
+    background: linear-gradient(90deg,var(--accent), var(--accent-2));
+    color:white;
+    padding:10px 14px;
+    border-radius:10px;
+    box-shadow: 0 10px 30px rgba(0,170,255,0.12);
+  }
+  .btn.ghost { background:transparent;border:1px solid rgba(15,23,42,0.06); color:var(--muted); padding:8px 10px;border-radius:8px;}
+
+  .field{display:flex;flex-direction:column; gap:6px; margin-top:8px}
+  .field input[type="number"], .field input[type="text"], select{
+    padding:12px 10px;border-radius:8px;border:1px solid rgba(2,6,23,0.06);font-size:14px;outline:none;width:100%;
+  }
+  .preset-row{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+  .chip{background:rgba(0,0,0,0.03);padding:8px 12px;border-radius:10px;font-weight:700;cursor:pointer}
+
+  .history-panel .history-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  table{width:100%;border-collapse:collapse;margin-top:12px}
+  thead{font-size:12px;color:var(--muted);text-align:left}
+  th,td{padding:12px 10px;border-bottom:1px solid rgba(2,6,23,0.03)}
+  .status{padding:6px 8px;border-radius:8px;font-weight:700;font-size:12px}
+  .status.success{background:rgba(0,196,140,0.12);color:var(--success)}
+  .status.pending{background:rgba(255,171,0,0.08);color:#b36a00}
+  .status.failed{background:rgba(255,106,106,0.08);color:var(--danger)}
+
+  /* wallet block */
+#walletInfo {
+    border: 1px solid rgba(2,6,23,0.04);
+    padding: 12px;
+    border-radius: 10px;
+    background: linear-gradient(180deg, rgba(0,170,255,0.06), rgba(0,170,255,0.02));
+}
+  .tiny { font-size:12px; color:var(--muted) }
+
+  /* toast */
+  .cv-toast { position: fixed; right: 18px; bottom: 18px; padding: 10px 14px; background: rgba(0,0,0,0.8); color: white; border-radius: 10px; z-index: 99999; display:none; font-size:13px; }
+
+  @media (max-width: 980px){
+    .wrap.withdraw-main-outer{ grid-template-columns: 1fr; padding:12px; display: block;}
+  }
+
+  .otp-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.otp-modal.show {
+  display: flex;
+}
+
+.otp-card {
+  background: #fff;
+  width: 100%;
+  max-width: 360px;
+  padding: 24px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.otp-card h3 {
+  margin-bottom: 8px;
+}
+
+.otp-card input {
+  width: 100%;
+  padding: 14px;
+  font-size: 22px;
+  letter-spacing: 6px;
+  text-align: center;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin: 16px 0;
+}
+
+.otp-actions {
+  display: flex;
+  gap: 10px;
+}
+
+</style>
+
+
+</head>
+
+<body class="withdraw-main-body">
+  <%- include('../partials/supportFloat') %>
+  
+    <%- include('../partials/header') %>
+  
+<div class="wrap withdraw-main-outer">
+  <!-- Left: Main withdraw card -->
+  <div class="card bg-blue">
+    <div class="balance-card">
+      <div class="balance-avatar">W</div>
+      <div class="balance-info">
+        <div class="label">Available balance</div>
+     
+       <div class="amount withdrawBalance"></div>
+        <div class="sub">Last activity: <span id="lastActivity"></span></div>
+      </div>
+    </div>
+
+    <div style="margin-top:12px; display:flex; gap:10px; justify-content:flex-end;">
+      <button id="withdrawTopBtn" class="btn withdraw-top">Withdraw</button>
+      <!-- <button id="quickHistoryBtn" class="btn ghost">Download CSV</button> -->
+    </div>
+
+    <div style="margin-top:14px;">
+      <div class="field">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div>
+            <div style="font-weight:700">Quick withdraw</div>
+            <div class="tiny muted">Fast withdrawal to bank / UPI / USDT</div>
+          </div>
+          <div class="tiny">Method: <strong id="selectedMethod">Bank</strong></div>
+        </div>
+      </div>
+
+      <div style="height:12px"></div>
+
+      <!-- Wallet info (visible only for USDT) -->
+      <div id="walletInfo" style="display:none; margin-bottom:12px;">
+        <div style="font-weight:700; margin-bottom:8px; color: #00aaff;">Crypto Wallet (for USDT BEP20)</div>
+
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+          <div style="flex:1; min-width:220px;">
+            <label class="tiny muted" for="walletAddress">Wallet Address</label>
+            <div style="display:flex; gap:8px; align-items:center; margin-top:6px;">
+              <!-- user-entered wallet address -->
+              <input id="walletAddress" name="walletAddress" type="text" placeholder="Enter your wallet address (BEP20)" style="width:100%; padding:10px 12px; border-radius:8px; border:1px solid rgba(2,6,23,0.06); font-family:monospace;" />
+              <button id="copyWalletBtn" class="btn ghost" title="Copy wallet address" style="white-space:nowrap; padding:8px 10px;">Copy</button>
+            </div>
+          </div>
+
+          <div style="min-width:160px;">
+            <label class="tiny muted" for="walletNetwork">Wallet Network</label>
+            <input id="walletNetwork" name="walletNetwork" readonly value="USDT BEP20 (BSC)" style="padding:10px 12px; border-radius:8px; border:1px solid rgba(2,6,23,0.06); width:100%;" />
+          </div>
+        </div>
+
+        <div class="tiny muted" style="margin-top:8px">Send BEP20 USDT only — wrong network may lead to loss of funds.</div>
+      </div>
+
+      <div class="field">
+        <label for="withdrawAmount">Amount</label>
+        <input id="withdrawAmount" name="amount" type="number" placeholder="Enter amount (e.g. 500)" min="1" />
+      </div>
+
+      <div class="preset-row">
+        <div class="chip" data-val="500">$ 500</div>
+        <div class="chip" data-val="1000">$ 1,000</div>
+        <div class="chip" data-val="2500">$ 2,500</div>
+        <div class="chip" data-val="5000">$ 5,000</div>
+      </div>
+
+      <div style="height:10px"></div>
+      <div class="deposit-actions" style="display:flex;gap:10px;align-items:center; flex-wrap:wrap;">
+        <button class="btn withdraw-top" id="doWithdraw">Proceed</button>
+        <div style="display:flex;gap:8px;align-items:center">
+          <select id="methodSelect" name="method">            
+            <option value="usdt">USDT</option>
+          </select>
+
+          <!-- <div id="methodSelect" class="method-display">USDT</div> -->
+          <!-- <button class="btn ghost" id="openWithdrawSettings">Settings</button> -->
+        </div>
+      </div>
+
+      <div class="help muted" style="margin-top:10px">Withdrawals may take 1-24 hours depending on the method. Minimum $1</div>
+    </div>
+  </div>
+
+  <!-- Right: history & info -->
+  <div class="withdraw-history-main-wrp">
+    <div class="history-panel card bg-blue">
+      <div class="history-head">
+        <h3>Withdraw History</h3>
+        <div class="filter-row">
+          <select id="historyFilter">
+            <option value="all">All</option>
+            <option value="pending">Pending</option>
+            <option value="completed">Approved</option>
+            <option value="failed">Failed</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="table-main-outer" style="margin-top:12px">
+        <table aria-label="Withdraw history" id="withdrawHistoryTable">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Reference</th>
+              <th>Method</th>
+              <th>Amount</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="height:8px"></div>
+      <!-- <div class="tiny muted">Showing last 5 transactions · <a href="/history/withdraw">View all</a></div> -->
+    </div>
+
+    <div style="height:12px"></div>
+
+  </div>
+
+    <%- include('../partials/footer') %>
+
+</div>
+
+<div id='cryptoon-layout' class="theme-orange">
+  <div id="toast">
+    <span id="toast-message"></span>
+    <span id="toast-close" onclick="hideToast()"> ×</span>
+  </div>
+</div>
+
+<!-- OTP MODAL -->
+<div id="otpModal" class="otp-modal">
+  <div class="otp-card">
+    <h3>Verify Withdrawal</h3>
+    <p class="muted">Enter the 6-digit OTP sent to your email</p>
+
+    <input
+      id="otpInput"
+      type="text"
+      maxlength="6"
+      placeholder="Enter OTP"
+      inputmode="numeric"
+      autocomplete="one-time-code"
+    />
+
+    <div class="otp-actions">
+      <button id="verifyOtpBtn" class="btn btn-primary">Verify & Submit</button>
+      <button id="cancelOtpBtn" class="btn ghost">Cancel</button>
+    </div>
+
+    <div class="tiny muted" style="margin-top:10px">
+      OTP valid for 15 minutes
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+  // small native toast used for messages
+  function hideToast() {
+    const t = document.getElementById('toast');
+    t.classList.remove('show','bg-success1','bg-danger1');
+  }
+  function showToastMsg(ok, message, ms = 3000) {
+    const t = document.getElementById('toast');
+    const m = document.getElementById('toast-message');
+    m.innerText = message;
+    t.classList.remove('bg-success1','bg-danger1');
+    t.classList.add(ok ? 'bg-success1' : 'bg-danger1','show');
+    clearTimeout(t._t);
+    t._t = setTimeout(() => hideToast(), ms);
+  }
+</script>
+
+
+<script>
+  document.getElementById("withdrawTopBtn").addEventListener("click", function () {
+    const input = document.getElementById("withdrawAmount");
+    if (!input) return;
+    input.scrollIntoView({ behavior: "smooth", block: "center" });
+    setTimeout(() => {
+        input.focus();
+        input.select();
+    }, 300);
+});
+
+
+(function () {
+  const withdrawAmountEl = document.getElementById('withdrawAmount');
+  const presetEls = document.querySelectorAll('.chip');
+  const doWithdraw = document.getElementById('doWithdraw');
+  const methodSelect = document.getElementById('methodSelect');
+  const selectedMethodEl = document.getElementById('selectedMethod');
+
+  // wallet elements
+  const walletInfo = document.getElementById('walletInfo');
+  const walletAddressEl = document.getElementById('walletAddress');
+  const walletNetworkEl = document.getElementById('walletNetwork');
+  const copyWalletBtn = document.getElementById('copyWalletBtn');
+
+ 
+  // initial method UI update
+  function updateMethodUI() {
+    const v = methodSelect.value;
+    selectedMethodEl.innerText = methodSelect.options[methodSelect.selectedIndex].text;
+    if (v === 'usdt') {
+      walletInfo.style.display = 'block';
+    } else {
+      walletInfo.style.display = 'none';
+    }
+  }
+  updateMethodUI();
+
+  methodSelect.addEventListener('change', updateMethodUI);
+
+  // copy wallet
+  copyWalletBtn.addEventListener('click', function () {
+    const text = walletAddressEl.value.trim();
+    if (!text) {
+      showToastMsg(false, 'No wallet address to copy');
+      return;
+    }
+    try {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      showToastMsg(true, 'Wallet address copied');
+    } catch (e) {
+      console.error('copy failed', e);
+      showToastMsg(false, 'Copy failed');
+    }
+  });
+
+
+  (function () {
+  localStorage.removeItem('usdt_wallet_address_v1');
+})();
+
+const USER_ID = "<%= user?.id || '' %>";
+const WALLET_KEY = `usdt_wallet_${USER_ID}`;
+
+const saved = localStorage.getItem(WALLET_KEY);
+if (saved) walletAddressEl.value = saved;
+
+walletAddressEl.addEventListener('blur', () => {
+  const v = walletAddressEl.value.trim();
+  if (v && USER_ID) {
+    localStorage.setItem(WALLET_KEY, v);
+  }
+});
+
+
+
+  // presets
+  presetEls.forEach(p => {
+    p.addEventListener('click', () => {
+      withdrawAmountEl.value = Number(p.getAttribute('data-val')) || '';
+      withdrawAmountEl.focus();
+    });
+  });
+
+  // simple wallet validation
+  function validateWalletAddress(addr) {
+    if (!addr) return { ok: false, reason: 'Wallet address is required' };
+    // basic checks for BEP20 address (starts with 0x and length)
+    if (!addr.startsWith('0x')) return { ok: false, reason: 'Address should start with 0x' };
+    if (addr.length < 40 || addr.length > 66) return { ok: false, reason: 'Address length looks invalid' };
+    return { ok: true };
+  }
+
+  // ----- NEW: POST withdrawal instead of redirect (sends JSON in req.body) -----
+  doWithdraw.addEventListener('click', async (e) => {
+    e.preventDefault();
+
+    const raw = (withdrawAmountEl.value || '').toString().trim();
+    const val = Number(raw.replace(/,/g, ''));
+    if (!val || isNaN(val) || val <= 0) {
+      showToastMsg(false, 'Please enter a valid amount to withdraw.');
+      withdrawAmountEl.focus();
+      return;
+    }
+
+    const MIN_WITHDRAW = 1; 
+    if (val < MIN_WITHDRAW) {
+      showToastMsg(false, `Minimum withdraw is $${MIN_WITHDRAW}.`);
+      withdrawAmountEl.focus();
+      return;
+    }
+
+    const method = methodSelect.value;
+
+    // if USDT selected, validate wallet address
+    let wallet = null;
+    let network = null;
+    if (method === 'usdt') {
+      wallet = walletAddressEl.value.trim();
+      network = walletNetworkEl.value.trim() || 'USDT BEP20 (BSC)';
+      const v = validateWalletAddress(wallet);
+      if (!v.ok) {
+        showToastMsg(false, v.reason);
+        walletAddressEl.focus();
+        return;
+      }
+    }
+
+    // UI feedback
+    doWithdraw.disabled = true;
+    const prev = doWithdraw.innerText;
+    doWithdraw.innerText = 'Processing...';
+
+    // build payload
+    const payload = {
+      amount: Number(val.toFixed(2)),
+      method: method
+    };
+    if (method === 'usdt') {
+      payload.walletAddress = wallet;
+      payload.walletNetwork = network;
+    }
+
+    try {
+      const resp = await fetch('/api/withdraw/create', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        credentials: 'same-origin'
+      });
+
+      const text = await resp.text();
+      let json;
+      try { json = JSON.parse(text); } catch (e) { json = null; }
+
+      if (!resp.ok) {
+        const message = (json && (json.message || json.error)) || (text && text.substring(0,200)) || 'Withdraw request failed';
+        showToastMsg(false, message);
+        doWithdraw.disabled = false;
+        doWithdraw.innerText = prev;
+        return;
+      }
+
+      if (json && json.url) {
+        window.location.href = json.url;
+        return;
+      }
+
+      // If backend returns object with status/message
+     if (json && json.otp_required) {
+  showToastMsg(true, 'OTP sent to your email');
+  openOtpModal(json.order_id);
+  return;
+}
+
+      // Fallback — treat plain 200 as success
+      showToastMsg(true, 'Withdraw request sent');
+      // setTimeout(() => window.location.href = '/wallet/withdraw', 1000);
+    } catch (err) {
+      console.error('Create withdraw error:', err);
+      showToastMsg(false, 'Something went wrong while creating withdraw.');
+      doWithdraw.disabled = false;
+      doWithdraw.innerText = prev;
+    }
+  });
+
+  // CSV download demo
+  // document.getElementById('quickHistoryBtn').addEventListener('click', () => {
+  //   const rows = Array.from(document.querySelectorAll('#withdrawHistoryTable tbody tr')).map(tr => {
+  //     const cells = Array.from(tr.querySelectorAll('td')).map(td => td.textContent.trim().replace(/\s+/g,' '));
+  //     return cells.join(',');
+  //   });
+  //   if (!rows.length) {
+  //     showToastMsg(false, 'No history to export');
+  //     return;
+  //   }
+  //   const blob = new Blob([rows.join('\n')], { type: 'text/csv' });
+  //   const url = URL.createObjectURL(blob);
+  //   const a = document.createElement('a');
+  //   a.href = url; a.download = 'withdraw-history.csv'; a.click(); URL.revokeObjectURL(url);
+  // });
+
+  // history filter
+  document.getElementById('historyFilter').addEventListener('change', function () {
+    const v = this.value;
+    loadHistory(5, v === 'all' ? null : v);
+  });
+
+  // Load last 5 withdraws (try API, fallback to demo)
+//   async function loadHistory(limit = 5, statusFilter = null) {
+//     const tbody = document.querySelector('#withdrawHistoryTable tbody');
+//     tbody.innerHTML = '<tr><td colspan="5" class="tiny muted">Loading...</td></tr>';
+//     try {
+//       const q = new URLSearchParams();
+//       q.set('limit', String(limit));
+//      if (statusFilter) {
+//   const wanted = statusFilter.toLowerCase();
+//   rows = rows.filter(r => {
+//     // map server numeric status to textual key
+//     const s = (typeof r.status === 'number') ? String(r.status) : (r.status_text || String(r.status || '')).toLowerCase();
+//     if (wanted === 'pending') return (String(r.status) === '0' || /pending/i.test(s));
+//     if (wanted === 'completed') return (String(r.status) === '3' || /complete/i.test(s));
+//     if (wanted === 'failed') return (String(r.status) === '2' || /fail|reject|denied/i.test(s));
+//     return true;
+//   });
+// }
+//       const resp = await fetch(`/api/withdraw-history?${q.toString()}`, { cache: 'no-store' });
+//       if (resp.status === 401) { window.location.href = '/login'; return; }
+//       if (!resp.ok) throw new Error('API failed');
+
+//       const json = await resp.json();
+//       // expected shape: { status:true, data: [ {...} ] } or similar
+//       let rows = [];
+//       if (json && Array.isArray(json.data)) rows = json.data;
+//       else if (json && Array.isArray(json.withdraws)) rows = json.withdraws;
+//       else if (json && json.status === true && Array.isArray(json.rows)) rows = json.rows;
+
+//       if (!rows || rows.length === 0) {
+//         tbody.innerHTML = '<tr><td colspan="5" class="tiny muted" style="text-align:center;">No withdraws found.</td></tr>';
+//         return;
+//       }
+
+//       rows = rows.slice(0, limit);
+//       tbody.innerHTML = '';
+//       rows.forEach(r => {
+//         const dateRaw = r.date || r.time || r.today || r.created_at || r.time_created || Date.now();
+//         const dt = /^\d+$/.test(String(dateRaw)) ? new Date(Number(dateRaw)) : new Date(dateRaw);
+//         const dateStr = isNaN(dt.getTime()) ? String(dateRaw) : dt.toLocaleDateString() + ' ' + dt.toLocaleTimeString();
+
+       
+// const ref = r.order_id ? r.order_id : (r.id ? '#W-' + r.id : '#W-' + Math.floor(Math.random()*100000));
+
+
+// const method = (r.type || r.method || r.payment_method || '—').toString();
+// const amt = Number(r.money || r.amount || r.value || 0);
+
+
+// let statusVal = r.status;
+// if (typeof statusVal === 'string') {
+
+//   const n = Number(statusVal);
+//   if (!Number.isNaN(n)) statusVal = n;
+// }
+
+// // Decide class + text
+// let statusClass = 'unknown';
+// let statusText = (r.status_text && String(r.status_text).trim()) ? String(r.status_text).trim() : '';
+
+// if (statusVal === 0 || statusVal === '0') {
+//   statusClass = 'pending';
+//   statusText = statusText || 'Pending';
+// } else if (statusVal === 1 || statusVal === '1') {
+//   statusClass = 'success';
+//   statusText = statusText || 'Approved';
+// } else if (statusVal === 3 || statusVal === '3') {
+//   statusClass = 'success';
+//   statusText = statusText || 'Completed';
+// } else if (statusVal === 2 || statusVal === '2') {
+//   statusClass = 'failed';
+//   statusText = statusText || 'Failed';
+// } else {
+//   // fallback: check text for hints
+//   const s = String(statusVal || '').toLowerCase();
+//   if (/pend|wait/i.test(s)) {
+//     statusClass = 'pending';
+//     statusText = statusText || 'Pending';
+//   } else if (/complete|done|success/i.test(s)) {
+//     statusClass = 'success';
+//     statusText = statusText || 'Completed';
+//   } else if (/fail|reject|denied/i.test(s)) {
+//     statusClass = 'failed';
+//     statusText = statusText || 'Failed';
+//   } else {
+//     statusClass = 'unknown';
+//     statusText = statusText || 'Unknown';
+//   }
+// }
+//         const tr = document.createElement('tr');
+//         tr.innerHTML = `<td>${dateStr}</td><td>${ref}</td><td>${method}</td><td>$ ${amt.toFixed(2)}</td><td><span class="status ${statusClass}">${statusText}</span></td>`;
+//         tbody.appendChild(tr);
+//       });
+
+//     } catch (e) {
+//       console.warn('loadHistory failed, showing demo rows', e);
+//       const demoHistory = [
+//         { date: '2025-12-11', ref: '#WDR-009991', method: 'Bank', amount: 1000, status: 'Completed' },
+//         { date: '2025-12-10', ref: '#WDR-009976', method: 'UPI', amount: 500, status: 'Pending' },
+//         { date: '2025-12-09', ref: '#WDR-009960', method: 'USDT', amount: 300, status: 'Failed' },
+//         { date: '2025-12-08', ref: '#WDR-009945', method: 'Bank', amount: 750, status: 'Completed' },
+//         { date: '2025-12-07', ref: '#WDR-009930', method: 'UPI', amount: 420, status: 'Completed' }
+//       ];
+//       const rows = statusFilter ? demoHistory.filter(r => r.status.toLowerCase() === statusFilter) : demoHistory;
+//       const tbodyElm = document.querySelector('#withdrawHistoryTable tbody');
+//       tbodyElm.innerHTML = '';
+//       rows.slice(0,5).forEach(r => {
+//         const tr = document.createElement('tr');
+//         tr.innerHTML = `<td>${r.date}</td><td>${r.ref}</td><td>${r.method}</td><td>$ ${Number(r.amount).toFixed(2)}</td><td><span class="status ${r.status.toLowerCase() === 'completed' ? 'success' : (r.status.toLowerCase() === 'pending' ? 'pending' : 'failed')}">${r.status}</span></td>`;
+//         tbodyElm.appendChild(tr);
+//       });
+//     }
+//   }
+
+
+// Replace your existing loadHistory(...) with this function
+function escapeHtml(text) {
+  if (text === null || text === undefined) return '';
+  return String(text)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+async function loadHistory(limit = 5, statusFilter = null) {
+  const tbody = document.querySelector('#withdrawHistoryTable tbody');
+  tbody.innerHTML = '<tr><td colspan="5" class="tiny muted">Loading...</td></tr>';
+
+  try {
+    const q = new URLSearchParams();
+    q.set('limit', String(limit));
+    if (statusFilter && statusFilter !== 'all') q.set('status', statusFilter);
+    const resp = await fetch(`/api/withdraw-history?${q.toString()}`, { cache: 'no-store' });
+
+    if (resp.status === 401) { window.location.href = '/login'; return; }
+
+    if (!resp.ok) {
+      // Show no withdraws if backend returned a non-ok status
+      tbody.innerHTML = '<tr><td colspan="5" class="tiny muted" style="text-align:center;">No withdraws found.</td></tr>';
+      return;
+    }
+
+    const json = await resp.json();
+
+    // Accept several shapes but prefer json.data
+    let rows = [];
+    if (json && Array.isArray(json.data)) rows = json.data;
+    else if (json && Array.isArray(json.withdraws)) rows = json.withdraws;
+    else if (json && Array.isArray(json.rows)) rows = json.rows;
+
+    if (!rows || rows.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="5" class="tiny muted" style="text-align:center;">No withdraws found.</td></tr>';
+      return;
+    }
+
+    // Client-side filter if needed — map "completed" to 1 or 3
+    if (statusFilter && statusFilter !== 'all') {
+      const want = String(statusFilter).toLowerCase();
+
+      rows = rows.filter(r => {
+        // Normalize numeric/strings
+        let sVal = r.status;
+        if (typeof sVal === 'string' && /^\d+$/.test(sVal)) sVal = Number(sVal);
+        const sText = (r.status_text || '').toString().toLowerCase();
+
+        if (want === 'pending') {
+          return sVal === 0 || /pend|wait/i.test(sText);
+        }
+
+        if (want === 'completed') {
+          // treat 1 (Approved) and 3 (Completed) as completed/approved
+          return sVal === 1 || sVal === 3 || /complete|approved|done|success/i.test(sText);
+        }
+
+        if (want === 'failed') {
+          return sVal === 2 || /fail|reject|denied/i.test(sText);
+        }
+
+        // default: keep
+        return true;
+      });
+
+      // if filter produced no rows, show no-withdraws message
+      if (!rows.length) {
+        tbody.innerHTML = '<tr><td colspan="5" class="tiny muted" style="text-align:center;">No withdraws found.</td></tr>';
+        return;
+      }
+    }
+
+    // limit and render
+    rows = rows.slice(0, limit);
+    tbody.innerHTML = '';
+
+    rows.forEach(r => {
+      // date handling (created_at may be epoch string)
+      const dateRaw = r.created_at || r.time || r.today || Date.now();
+      const dt = /^\d+$/.test(String(dateRaw)) ? new Date(Number(dateRaw)) : new Date(dateRaw);
+      const dateStr = isNaN(dt.getTime()) ? String(dateRaw) : dt.toLocaleDateString() + ' ' + dt.toLocaleTimeString();
+
+      // reference: prefer order_id
+      const ref = r.order_id ? String(r.order_id) : (r.id ? '#W-' + r.id : '#W-' + Math.floor(Math.random() * 100000));
+
+      const method = escapeHtml((r.method || r.type || r.payment_method || '—').toString());
+      const amt = Number(r.amount || r.money || r.value || 0);
+
+      // status normalization & UI class
+      let statusVal = r.status;
+      if (typeof statusVal === 'string' && /^\d+$/.test(statusVal)) statusVal = Number(statusVal);
+      let statusClass = 'unknown';
+      let statusText = (r.status_text && String(r.status_text).trim()) ? String(r.status_text).trim() : '';
+
+      if (statusVal === 0) {
+        statusClass = 'pending';
+        statusText = statusText || 'Pending';
+      } else if (statusVal === 1) {
+        statusClass = 'success';
+        statusText = statusText || 'Approved';
+      } else if (statusVal === 3) {
+        statusClass = 'success';
+        statusText = statusText || 'Completed';
+      } else if (statusVal === 2) {
+        statusClass = 'failed';
+        statusText = statusText || 'Failed';
+      } else {
+        // fallback heuristics from status_text
+        const s = (statusText || '').toLowerCase();
+        if (/pend|wait/i.test(s)) { statusClass = 'pending'; statusText = statusText || 'Pending'; }
+        else if (/complete|approved|done|success/i.test(s)) { statusClass = 'success'; statusText = statusText || 'Completed'; }
+        else if (/fail|reject|denied/i.test(s)) { statusClass = 'failed'; statusText = statusText || 'Failed'; }
+        else { statusClass = 'unknown'; statusText = statusText || 'Unknown'; }
+      }
+
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${escapeHtml(dateStr)}</td>
+        <td>${escapeHtml(ref)}</td>
+        <td>${method}</td>
+        <td>$ ${Number(amt).toFixed(2)}</td>
+        <td><span class="status ${statusClass}">${escapeHtml(statusText)}</span></td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+  } catch (e) {
+    console.warn('loadHistory failed:', e);
+    tbody.innerHTML = '<tr><td colspan="5" class="tiny muted" style="text-align:center;">No withdraws found.</td></tr>';
+  }
+}
+
+
+  loadHistory(5);
+
+})();
+</script>
+
+<script>
+$.ajax({
+  url: '/api/info',
+  method: 'GET',
+  dataType: 'json',
+  cache: false,
+  success: function(res) {
+    if (!res || !res.status || !res.user) {
+      console.warn('/api/info returned unexpected', res);
+      return;
+    }
+
+    const user = res.user;
+    const lastLogin = res.last_login || (Array.isArray(res.last_5_login) ? res.last_5_login[0] : null);
+
+    function fmtMoney(n) {
+      const num = Number(n) || 0;
+      return '$ ' + num.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function fmtLastLogin(l) {
+      if (!l) return '—';
+      const raw = l.today || l.login_at || l.time || l.created_at || l.date || l.datetime || null;
+      if (!raw) {
+        const v = Object.values(l)[0];
+        if (!v) return '—';
+        return String(v);
+      }
+      let dt = /^\d+$/.test(String(raw)) ? new Date(Number(raw)) : new Date(raw);
+      if (isNaN(dt.getTime())) return String(raw);
+      const d = dt.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: '2-digit' });
+      const t = dt.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
+      return `${d} · ${t}`;
+    }
+
+    if (user.withdrawable_balance !== undefined && user.withdrawable_balance !== null) {
+      $('.withdrawBalance').text(fmtMoney(user.withdrawable_balance));
+    } 
+
+      if (user.money ) $('.depositedMoney').text(fmtMoney(user.money));
+
+    $('#lastActivity').text(fmtLastLogin(lastLogin));
+
+  },
+  error: function(xhr) {
+    if (xhr && xhr.status === 401) {
+      window.location.href = '/login';
+      return;
+    }
+    console.error('/api/info error', xhr && xhr.responseText);
+  }
+});
+</script>
+
+<script>
+let CURRENT_ORDER_ID = null;
+
+// After withdraw/create success
+async function openOtpModal(orderId) {
+  CURRENT_ORDER_ID = orderId;
+  document.getElementById('otpInput').value = '';
+  document.getElementById('otpModal').classList.add('show');
+}
+
+// Close modal
+document.getElementById('cancelOtpBtn').onclick = () => {
+  document.getElementById('otpModal').classList.remove('show');
+  CURRENT_ORDER_ID = null;
+};
+
+// VERIFY OTP
+document.getElementById('verifyOtpBtn').onclick = async () => {
+  const otp = document.getElementById('otpInput').value.trim();
+
+  if (!otp || otp.length !== 6) {
+    showToastMsg(false, 'Enter valid 6-digit OTP');
+    return;
+  }
+
+  try {
+    const resp = await fetch('/api/withdraw/verify-otp', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'same-origin',
+      body: JSON.stringify({
+        order_id: CURRENT_ORDER_ID,
+        otp: otp
+      })
+    });
+
+    const json = await resp.json();
+
+    if (!resp.ok) {
+      showToastMsg(false, json.message || 'OTP verification failed');
+      return;
+    }
+
+    document.getElementById('otpModal').classList.remove('show');
+    showToastMsg(true, 'Withdrawal submitted successfully');
+
+    // reload history & balance
+    setTimeout(() => window.location.reload(), 1000);
+
+  } catch (e) {
+    console.error(e);
+    showToastMsg(false, 'OTP verification failed');
+  }
+};
+</script>
+
+
+</body>
+</html>
