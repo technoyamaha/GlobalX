@@ -217,6 +217,21 @@ router.post(
   adminController.adjustWithdrawableBalance,
 );
 
+// 05-05-2026
+router.get(
+  "/roi",
+  adminOnly,
+  middlewareController,
+  adminController.roiPage
+);
+
+router.get(
+  "/roi-data",
+  adminOnly,
+  middlewareController,
+  adminController.getRoiData
+);
+
 // TESTING CRON ROUTE  :--------------------------------///////////////////////////
 
 router.get("/run-cron-test", async (req, res) => {
