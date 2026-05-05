@@ -1,104 +1,178 @@
-<div class="main px-lg-4 px-md-4">
-  <%- include('../partials/header') %>
-    <div class="body d-flex py-3">
-      <div class="container-xxl">
-        <div class="row align-items-center">
-          <div class="border-0 mb-4">
-            <div
-              class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
-              <h3 class="fw-bold mb-0">Team</h3>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ 
+  <link rel="icon" href="/assets/images/novaLogo2.png" type="image/png">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/novaStyle.css" />
+
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<div class="main">
+  <section class="team-custm-page">
+    <div class="container-x">
+      <div class="main-metrics-div team-top-titl">
+          <h2>Team</h2>
+        </div>
+      <div class="inner-custm-team">
+        <div class="card-boxes">
+          <div class="box box-1">
+            <div class="inner-box-cont">
+              <div class="icon-img">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="22" height="22" fill="currentColor"
+                  transform="">
+                  <!--?lit$663924764$-->
+                  <path
+                    d="M168,144a40,40,0,1,1-40-40A40,40,0,0,1,168,144ZM64,56A32,32,0,1,0,96,88,32,32,0,0,0,64,56Zm128,0a32,32,0,1,0,32,32A32,32,0,0,0,192,56Z"
+                    opacity="0.2"></path>
+                  <path
+                    d="M244.8,150.4a8,8,0,0,1-11.2-1.6A51.6,51.6,0,0,0,192,128a8,8,0,0,1,0-16,24,24,0,1,0-23.24-30,8,8,0,1,1-15.5-4A40,40,0,1,1,219,117.51a67.94,67.94,0,0,1,27.43,21.68A8,8,0,0,1,244.8,150.4ZM190.92,212a8,8,0,1,1-13.85,8,57,57,0,0,0-98.15,0,8,8,0,1,1-13.84-8,72.06,72.06,0,0,1,33.74-29.92,48,48,0,1,1,58.36,0A72.06,72.06,0,0,1,190.92,212ZM128,176a32,32,0,1,0-32-32A32,32,0,0,0,128,176ZM72,120a8,8,0,0,0-8-8A24,24,0,1,1,87.24,82a8,8,0,1,0,15.5-4A40,40,0,1,0,37,117.51,67.94,67.94,0,0,0,9.6,139.19a8,8,0,1,0,12.8,9.61A51.6,51.6,0,0,1,64,128,8,8,0,0,0,72,120Z">
+                  </path>
+                </svg>
+              </div>
+              <div class="right-card-detls">
+                <p>Total Team</p>
+                <h2>1</h2>
+              </div>
+            </div>
+          </div>
+
+          <div class="box box-2">
+            <div class="inner-box-cont">
+              <div class="icon-img">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="22" height="22" fill="currentColor"
+                  transform="">
+                  <!--?lit$663924764$-->
+                  <path
+                    d="M240,112l-33.62,37.35a8,8,0,0,1-5.94,2.65H40a8,8,0,0,1-8-8V80a8,8,0,0,1,8-8H200.44a8,8,0,0,1,5.94,2.65Z"
+                    opacity="0.2"></path>
+                  <path
+                    d="M246,106.65,212.33,69.3A16,16,0,0,0,200.44,64H136V32a8,8,0,0,0-16,0V64H40A16,16,0,0,0,24,80v64a16,16,0,0,0,16,16h80v64a8,8,0,0,0,16,0V160h64.44a16,16,0,0,0,11.89-5.3L246,117.35A8,8,0,0,0,246,106.65ZM200.44,144H40V80H200.44l28.8,32Z">
+                  </path>
+                </svg>
+              </div>
+              <div class="right-card-detls">
+                <p>Direct Team</p>
+                <h2>1</h2>
+              </div>
+            </div>
+          </div>
+
+          <div class="box box-3">
+            <div class="inner-box-cont">
+              <div class="icon-img">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="22" height="22" fill="currentColor"
+                  transform="">
+                  <!--?lit$663924764$-->
+                  <path d="M152,128a24,24,0,1,1-24-24A24,24,0,0,1,152,128Z" opacity="0.2"></path>
+                  <path
+                    d="M200,152a31.84,31.84,0,0,0-19.53,6.68l-23.11-18A31.65,31.65,0,0,0,160,128c0-.74,0-1.48-.08-2.21l13.23-4.41A32,32,0,1,0,168,104c0,.74,0,1.48.08,2.21l-13.23,4.41A32,32,0,0,0,128,96a32.59,32.59,0,0,0-5.27.44L115.89,81A32,32,0,1,0,96,88a32.59,32.59,0,0,0,5.27-.44l6.84,15.4a31.92,31.92,0,0,0-8.57,39.64L73.83,165.44a32.06,32.06,0,1,0,10.63,12l25.71-22.84a31.91,31.91,0,0,0,37.36-1.24l23.11,18A31.65,31.65,0,0,0,168,184a32,32,0,1,0,32-32Zm0-64a16,16,0,1,1-16,16A16,16,0,0,1,200,88ZM80,56A16,16,0,1,1,96,72,16,16,0,0,1,80,56ZM56,208a16,16,0,1,1,16-16A16,16,0,0,1,56,208Zm56-80a16,16,0,1,1,16,16A16,16,0,0,1,112,128Zm88,72a16,16,0,1,1,16-16A16,16,0,0,1,200,200Z">
+                  </path>
+                </svg>
+              </div>
+              <div class="right-card-detls">
+                <p>Active Direct</p>
+                <h2>0</h2>
+              </div>
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-12">
-            <div class="card mb-3">
-              <div class="card-header py-3 bg-transparent border-bottom-0">
-                <h6 class="mb-0 fw-bold mb-4">Team Stats</h6>
-                <div class="row align-items-center">
-                  <div class="col-12 col-md-6 col-lg-4 ps-2 mb-2">
-                    <div class="input-group">
-                      <input type="text" class="form-control search-field rounded-pill-left big-font"
-                        placeholder="Search..." /><span class="input-group-text text-theme rounded-pill-right"><i
-                          class="bi bi-search"></i></span>
-                    </div>
-                  </div>
-                  <div class="col-12 col-md-6 col-lg-4 ps-2 mb-2 mx-auto">
-                    <select class="form-select w-100">
-                      <option value="1">Level 1</option>
-                      <option value="2">Level 2</option>
-                      <option value="3">Level 3</option>
-                      <option value="4">Level 4</option>
-                      <option value="5">Level 5</option>
-                      <option value="6">Level 6</option>
-                      <option value="7">Level 7</option>
-                      <option value="8">Level 8</option>
-                      <option value="9">Level 9</option>
-                      <option value="10">Level 10</option>
-                    </select>
-                  </div>
-                </div>
+
+        <div class="main-fliter-fields">
+          <div class="filter-title">
+            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="18" height="18" fill="currentColor" transform="">
+              <!--?lit$663924764$--><path d="M221.9,61.38,152,136v58.65a8,8,0,0,1-3.56,6.66l-32,21.33A8,8,0,0,1,104,216V136L34.1,61.38A8,8,0,0,1,40,48H216A8,8,0,0,1,221.9,61.38Z" opacity="0.2"></path><path d="M230.6,49.53A15.81,15.81,0,0,0,216,40H40A16,16,0,0,0,28.19,66.76l.08.09L96,139.17V216a16,16,0,0,0,24.87,13.32l32-21.34A16,16,0,0,0,160,194.66V139.17l67.74-72.32.08-.09A15.8,15.8,0,0,0,230.6,49.53ZM40,56h0Zm106.18,74.58A8,8,0,0,0,144,136v58.66L112,216V136a8,8,0,0,0-2.16-5.47L40,56H216Z"></path>
+            </svg> Filters</h4>
+          </div>
+          <div class="form-section-team">
+            <div class="input-group-field">
+              <label>Level</label>
+              <select class="form-select">
+                <option value="1">Level 1</option>
+                <option value="2">Level 2</option>
+                <option value="3">Level 3</option>
+                <option value="4">Level 4</option>
+                <option value="5">Level 5</option>
+                <option value="6">Level 6</option>
+                <option value="7">Level 7</option>
+                <option value="8">Level 8</option>
+                <option value="9">Level 9</option>
+                <option value="10">Level 10</option>
+              </select>
+            </div>
+
+            <div class="input-group-field">
+              <div class="input-icon">
+                <i class="bi bi-search"></i>
               </div>
-              <div class="card-body">
-                <div class="table-responsive">
-                  <table class="table table-hover">
-                    <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">USERNAME</th>
-                        <th scope="col">EMAIL/PHONE</th>
-                        <th scope="col">LEVEL</th>
-                        <th scope="col">TEAM</th>
-                        <th scope="col">SELF BUSINESS</th>
-                        <th scope="col">Farming BUSINESS</th>
-                        <th scope="col">TEAM BUSINESS</th>
-                        <th scope="col">DATE</th>
-                      </tr>
-                    </thead>
-                    <tbody class="levelusers-body">
-                      <tr>
-                        <th scope="row">1</th>
-                        <td></td>
-                        <td><br /></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="row align-items-center">
-                  <div class="col ps-2">
-                    <div class="row align-items-center mx-0 mb-3">
-                      <div class="col-12 footable-paging-external footable-paging-right d-flex justify-content-center"
-                        id="footable-pagination">
-                        <div class="footable-pagination-wrapper">
-                          <ul class="pagination">
-                            <li class="footable-page-nav disabled ps-3 px-3" style="width: auto">
-                              <a class="footable-page-link previous-page">« Previous</a>
-                            </li>
-                            <li class="ps-3 px-3 footable-page current-page visible active" style="width: auto">
-                              <a class="footable-page-link current-page">1</a>
-                            </li>
-                            <li class="ps-3 px-3 footable-page visible" style="width: auto">
-                              <a class="footable-page-link next-page">Next »</a>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <label for="phone">Search</label>
+              <input type="text" class="form-control search-field" placeholder="Search..." />
             </div>
           </div>
+        </div>
+       
+        <div class="growth-plan-section">
+          <div class="top-growth-title">
+            <h3>Team</h3>
+          </div>
+
+          <div class="team-card-body">
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">S.No</th>
+                    <th scope="col">Team</th>
+                    <th scope="col">UserId</th>
+                    <th scope="col">Team Size</th>
+                    <th scope="col">Business</th>
+                    <th scope="col">Self Subscription</th>
+                  </tr>
+                </thead>
+                <tbody class="levelusers-body">
+                  <tr>
+                    <th scope="row">1</th>
+                    <td></td>
+                    <td><br /></td>
+                    <td class="tm-sz"></td>
+                    <td class="busnes"></td>
+                    <td class="self-sub"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="footable-pagination-wrapper">
+              <ul class="pagination">
+                <li class="footable-page-nav disabled">
+                  <a class="footable-page-link previous-page">« Previous</a>
+                </li>
+                <li class="footable-page current-page visible active">
+                  <a class="footable-page-link current-page">1</a>
+                </li>
+                <li class="footable-page visible">
+                  <a class="footable-page-link next-page">Next »</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="copy-right-footer">
+          © 2026 GlobalX.io All rights reserved.
         </div>
       </div>
-    </div>
+  </section>
 </div>
+
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
@@ -167,7 +241,7 @@
     }
 
     function RenderData(datas) {
-     
+
       if (datas.length == 0) {
         $(".levelusers-body").html(`<tr><td colspan="9" style="text-align:center;">No Record found for this level</td></tr>`);
         return;
@@ -178,12 +252,10 @@
           <th scope="row">${index + 1 + limit * (page - 1)}</th>    
           <td>${data.id_user}</td>
           <td>${data.email}<br></td>
-          <td>${data.tree_level}</td>
-          <td>${data.total_downline}</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>${convertDate(data.login_at)}</td>
+          <td class="tm-sz"><span>${data.tree_level}</span></td>
+          <td class="busnes"><span>${data.total_downline}</span></td>  
+          <td class="self-sub"><span>${convertDate(data.login_at)}</span></td>
+          
         </tr>
         `;
       });
