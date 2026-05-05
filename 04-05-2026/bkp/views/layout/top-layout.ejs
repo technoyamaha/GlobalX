@@ -1,0 +1,104 @@
+<style>
+    .gx-top-layout {
+        width: 100%;
+        height: 56px;
+        background: #000;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 34px;
+        color: #fff;
+        position: relative;
+        z-index: 50;
+    }
+
+    .gx-top-left,
+    .gx-top-right {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+    }
+
+    .gx-menu-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 11px;
+        border: none;
+        background: #fff;
+        color: #f97316;
+        font-size: 18px;
+        cursor: pointer;
+    }
+
+    .gx-brand img {
+        height: 28px;
+        object-fit: contain;
+    }
+
+    .gx-title {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.1;
+    }
+
+    .gx-title span {
+        font-size: 11px;
+        font-weight: 700;
+        color: #f5d48a;
+    }
+
+    .gx-title strong {
+        font-size: 13px;
+        color: #fff;
+    }
+
+    .gx-secure-btn {
+        border: none;
+        border-radius: 999px;
+        padding: 8px 18px;
+        background: linear-gradient(135deg, #fff1cf, #d7ad61);
+        color: #573700;
+        font-size: 12px;
+        cursor: pointer;
+    }
+
+    .gx-logout-btn {
+        text-decoration: none;
+        background: #242121;
+        color: #fff;
+        padding: 10px 15px;
+        border-radius: 10px;
+        font-weight: 700;
+        font-size: 13px;
+    }
+</style>
+
+<header class="gx-top-layout">
+    <div class="gx-top-left">
+        <button class="gx-menu-btn" type="button">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <div class="gx-brand">
+            <img src="/images/logo.jpg" alt="GlobalX" />
+        </div>
+
+        <div class="gx-title">
+            <span>CONTROL CENTER</span>
+            <strong>Operations Dashboard</strong>
+        </div>
+    </div>
+
+    <div class="gx-top-right">
+        <span class="gx-lang">🇬🇧</span>
+
+        <button class="gx-secure-btn" type="button">
+            Secure Session
+        </button>
+
+        <a href="/logout" class="gx-logout-btn">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Logout
+        </a>
+    </div>
+</header>

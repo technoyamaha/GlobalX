@@ -1,0 +1,1088 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Deposit</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/novaStyle.css" />
+
+  <style>
+    :root {
+      --accent: #00aaff;
+      --accent-2: #00c0ff;
+      --bg: #f6fbff;
+      --card: #ffffff;
+      --muted: #141414;
+      --glass: rgba(255, 255, 255, 0.6);
+      --success: #00c48c;
+      --danger: #ff6b6b;
+      --radius: 14px;
+      --max-width: 980px;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      color-scheme: light;
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html,
+    body {
+      height: 100%
+    }
+
+    body {
+      margin: 0;
+      /* background: linear-gradient(180deg, #f1fbff 0%, #f8fcff 60%); */
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 28px;
+      font-size: 14px;
+      color: #0f172a;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: var(--max-width);
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .card {
+      /* background:linear-gradient(180deg, rgba(255,255,255,0.7), rgba(255,255,255,0.55)); */
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: 0 8px 30px rgba(2, 6, 23, 0.06);
+      border: 1px solid rgba(0, 0, 0, 0.03);
+    }
+
+    .balance-card {
+      background: linear-gradient(135deg, rgba(0, 170, 255, 0.12), rgba(0, 170, 255, 0.04));
+      border-radius: 12px;
+      padding: 18px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .balance-avatar {
+      min-width: 64px;
+      height: 64px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(180deg, var(--accent), #006fb3);
+      color: white;
+      font-weight: 700;
+      font-size: 20px;
+      box-shadow: 0 6px 18px rgba(0, 170, 255, 0.18);
+    }
+
+    .balance-info {
+      flex: 1
+    }
+
+    .balance-info .label {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .balance-info .amount {
+      font-size: 22px;
+      font-weight: 700;
+      margin-top: 4px
+    }
+
+    .balance-info .sub {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 6px
+    }
+
+    /* action-row: keep button compact and approachable */
+    .action-row {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 14px
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      /* pill */
+      font-weight: 700;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all .18s ease;
+      box-shadow: 0 6px 18px rgba(2, 6, 23, 0.04);
+      background: transparent;
+      color: #0f172a;
+      white-space: nowrap;
+    }
+
+    .btn:active {
+      transform: translateY(1px)
+    }
+
+    /* compact primary deposit style */
+    .btn.deposit-top {
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      color: white;
+      padding: 8px 14px;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 170, 255, 0.18);
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      font-size: 14px;
+      min-width: 120px;
+    }
+
+    .btn.deposit-top:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 38px rgba(0, 170, 255, 0.22)
+    }
+
+    /* secondary small button (if needed) */
+    .btn.ghost-small {
+      background: transparent;
+      border: 1px solid rgba(15, 23, 42, 0.06);
+      color: var(--muted);
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-weight: 700
+    }
+
+    /* quick controls */
+    .quick {
+      margin-top: 16px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .chip {
+      background: rgba(0, 0, 0, 0.03);
+      padding: 8px 10px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 13px
+    }
+
+    /* panels */
+    .panel-area {
+      margin-top: 18px;
+      display: grid;
+      gap: 12px
+    }
+
+    .panel {
+      padding: 14px;
+      border-radius: 10px;
+      /* background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.6)); */
+      border: 1px solid rgba(14, 20, 30, 0.03);
+
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px
+    }
+
+    label {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    input[type="number"],
+    input[type="text"],
+    select {
+      padding: 12px 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(2, 6, 23, 0.06);
+      font-size: 14px;
+      outline: none;
+    }
+
+    .deposit-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .secondary {
+      background: transparent;
+      border: 1px dashed rgba(15, 23, 42, 0.06);
+      padding: 10px;
+      border-radius: 8px
+    }
+
+    .preset {
+      background: rgba(0, 170, 255, 0.07);
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-weight: 700;
+      border: 1px solid rgba(0, 170, 255, 0.06);
+      cursor: pointer;
+      color: var(--muted)
+    }
+
+    .btn.proceed-small {
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 13px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      color: white;
+      border: 1px solid rgba(0, 0, 0, 0.04)
+    }
+
+    /* history */
+    .history-panel {
+     background: rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: 0 8px 30px rgba(2, 6, 23, 0.04);
+      border: 1px solid rgba(0, 0, 0, 0.03);
+      color: #000000;
+    }
+
+    .history-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px
+    }
+
+    .history-head h3 {
+      margin: 0;
+      font-size: 16px
+    }
+
+    .filter-row {
+      display: flex;
+      gap: 8px;
+      align-items: center
+    }
+
+    .pill {
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.04);
+      font-weight: 600
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px
+    }
+
+    thead {
+      font-size: 12px;
+      color: var(--muted);
+      text-align: left
+    }
+
+    th,
+    td {
+      padding: 12px 10px;
+      border-bottom: 1px solid rgba(2, 6, 23, 0.03)
+    }
+
+    tbody tr:hover {
+      background: linear-gradient(90deg, rgba(0, 170, 255, 0.03), transparent)
+    }
+
+    .status {
+      padding: 6px 8px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 12px
+    }
+
+    .status.success {
+      background: rgba(0, 196, 140, 0.12);
+      color: var(--success)
+    }
+
+    .status.pending {
+      background: rgba(255, 171, 0, 0.08);
+      color: #b36a00
+    }
+
+    .status.failed {
+      background: rgba(255, 106, 106, 0.08);
+      color: var(--danger)
+    }
+
+
+
+ 
+
+    /* small screens */
+    @media (max-width:880px) {
+      .wrap {
+        padding: 14px
+      }
+
+      .action-row {
+        justify-content: flex-start
+      }
+
+      .btn.deposit-top {
+        min-width: 100px
+      }
+    .deposit-table-main-outer-pannel {
+    max-width:600px;
+    width: 100%;
+    overflow-x: auto;
+  }
+  #depositHistoryBody td {
+    min-width: 170px;
+}
+.wrap.deposit-main-outer {
+    display: block;
+}
+    div#cryptoon-layout {
+    width: 100%;
+}
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: 13px
+    }
+
+    .tiny {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+
+    .toast {
+    --bs-toast-zindex: 1090;
+    --bs-toast-padding-x: .75rem;
+    --bs-toast-padding-y: .5rem;
+    --bs-toast-spacing: 1.5rem;
+    --bs-toast-max-width: 350px;
+    --bs-toast-font-size: .875rem;
+    --bs-toast-color: ;
+    --bs-toast-bg: rgba(var(--bs-body-bg-rgb), .85);
+    --bs-toast-border-width: var(--bs-border-width);
+    --bs-toast-border-color: var(--bs-border-color-translucent);
+    --bs-toast-border-radius: var(--bs-border-radius);
+    --bs-toast-box-shadow: var(--bs-box-shadow);
+    --bs-toast-header-color: var(--bs-secondary-color);
+    --bs-toast-header-bg: rgba(var(--bs-body-bg-rgb), .85);
+    --bs-toast-header-border-color: var(--bs-border-color-translucent);
+    width: var(--bs-toast-max-width);
+    max-width: 100%;
+    font-size: var(--bs-toast-font-size);
+    color: var(--bs-toast-color);
+    pointer-events: auto;
+    background-color: var(--bs-toast-bg);
+    background-clip: padding-box;
+    border: var(--bs-toast-border-width) solid var(--bs-toast-border-color);
+    box-shadow: var(--bs-toast-box-shadow);
+    border-radius: var(--bs-toast-border-radius)
+}
+
+.toast-container {
+    --bs-toast-zindex: 1090;
+    position: absolute;
+    z-index: var(--bs-toast-zindex);
+    width: -moz-max-content;
+    width: max-content;
+    max-width: 100%;
+    pointer-events: none
+}
+
+
+
+.toast {
+    --bs-toast-zindex: 1090;
+    --bs-toast-padding-x: .75rem;
+    --bs-toast-padding-y: .5rem;
+    --bs-toast-spacing: 1.5rem;
+    --bs-toast-max-width: 350px;
+    --bs-toast-font-size: .875rem;
+    --bs-toast-color: ;
+    --bs-toast-bg: rgba(var(--bs-body-bg-rgb), .85);
+    --bs-toast-border-width: var(--bs-border-width);
+    --bs-toast-border-color: var(--bs-border-color-translucent);
+    --bs-toast-border-radius: var(--bs-border-radius);
+    --bs-toast-box-shadow: var(--bs-box-shadow);
+    --bs-toast-header-color: var(--bs-secondary-color);
+    --bs-toast-header-bg: rgba(var(--bs-body-bg-rgb), .85);
+    --bs-toast-header-border-color: var(--bs-border-color-translucent);
+    width: var(--bs-toast-max-width);
+    max-width: 100%;
+    font-size: var(--bs-toast-font-size);
+    color: var(--bs-toast-color);
+    pointer-events: auto;
+    background-color: var(--bs-toast-bg);
+    background-clip: padding-box;
+    border: var(--bs-toast-border-width) solid var(--bs-toast-border-color);
+    box-shadow: var(--bs-toast-box-shadow);
+    border-radius: var(--bs-toast-border-radius)
+}
+
+.toast.showing {
+    opacity: 0
+}
+
+.toast:not(.show) {
+    display: none
+}
+
+.toast-container {
+    --bs-toast-zindex: 1090;
+    position: absolute;
+    z-index: var(--bs-toast-zindex);
+    width: -moz-max-content;
+    width: max-content;
+    max-width: 100%;
+    pointer-events: none
+}
+
+.toast-container>:not(:last-child) {
+    margin-bottom: var(--bs-toast-spacing)
+}
+
+.toast-header {
+    display: flex;
+    align-items: center;
+    padding: var(--bs-toast-padding-y) var(--bs-toast-padding-x);
+    color: var(--bs-toast-header-color);
+    background-color: var(--bs-toast-header-bg);
+    background-clip: padding-box;
+    border-bottom: var(--bs-toast-border-width) solid var(--bs-toast-header-border-color);
+    border-top-left-radius: calc(var(--bs-toast-border-radius) - var(--bs-toast-border-width));
+    border-top-right-radius: calc(var(--bs-toast-border-radius) - var(--bs-toast-border-width))
+}
+
+.toast-header .btn-close {
+    margin-right: calc(-.5 * var(--bs-toast-padding-x));
+    margin-left: var(--bs-toast-padding-x)
+}
+
+.toast-body {
+    padding: var(--bs-toast-padding-x);
+    word-wrap: break-word
+}
+
+.toast-close {
+    background: transparent;
+    border: 0;
+    color: #fff;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1em;
+    opacity: .4;
+    padding: 0 5px
+}
+
+
+#toast {
+    visibility: hidden;
+    min-width: auto;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    padding: 16px 20px;
+    position: fixed;
+    z-index: 9999;
+    bottom: unset;
+    left: unset;
+    top: 20px;
+    right: 20px;
+    transform: translatey(-100%);
+    font-size: 16px;
+    transition: visibility 0s, opacity 0.5s ease-in-out;
+    transition: all .4s cubic-bezier(.215,.61,.355,1);
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+#toast span#toast-close {
+    font-size: 20px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    top: -1px;
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+
+    #toast.show {
+  visibility: visible;
+  opacity: 1;
+      transform: translatey(0%);
+}
+
+  </style>
+</head>
+
+<body>
+
+  <%- include('../partials/supportFloat') %>
+  
+   <%- include('../partials/header') %>
+  <div class="wrap deposit-main-outer">
+
+
+    <div class="card bg-blue">
+      <div class="balance-card">
+        <div class="balance-avatar">$</div>
+        <div class="balance-info">
+          <div class="label">Available balance</div>
+         <!-- <div class="amount"><span id="availableBalance">$ 0.00</span></div>
+          <div class="sub">Last activity: Dec 10, 2025 · 02:18 PM</div> -->
+           <div class="amount" id="availableAmount">$ —</div>
+          <div class="sub" id="lastActivity">Last activity: —</div>
+        </div>
+      </div>
+
+      <div class="action-row" style="margin-top:12px">
+        <button id="depositBtn" class="btn deposit-top"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="margin-right:6px">
+            <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+          </svg> Deposit</button>
+      </div>
+
+      <div class="quick">
+        <div class="chip">Auto-sweep: ON</div>
+        <div class="chip">KYC: Verified</div>
+        <div class="chip">Daily limit $50,000</div>
+      </div>
+
+      <div class="panel-area">      
+        <div class="panel" id="depositPanel">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+            <div>
+              <div style="font-weight:700">Quick deposit</div>
+              <div class="tiny">Fast top-up using UPI / Card / Wallet</div>
+            </div>
+            <div class="tiny">Payment method: <strong>UPI</strong></div>
+          </div>
+
+          <div style="height:12px"></div>
+
+          <div class="field">
+            <label for="amount">Amount</label>
+            <input id="amount" type="number" placeholder="Enter amount (e.g. 500)" min="1" />
+          </div>
+
+          <div style="height:10px"></div>
+          <div class="deposit-actions">
+            <button class="btn proceed-small" id="doDeposit">Proceed</button>
+            <div style="display:flex;gap:8px;align-items:center; flex-wrap: wrap;">
+              <button class="preset" id="presetBtn">$ 500</button>
+              <button class="preset" id="presetBtn2">$ 1,000</button>
+              <button class="preset" id="presetBtn3">$ 1,500</button>
+              <button class="preset" id="presetBtn4">$ 2,000</button>
+            </div>
+          </div>
+
+          <div class="help">You will be redirected to the payment gateway. Deposits are instant for most methods.</div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- HISTORY: now placed under the card -->
+    <div class="history-panel">
+      <div class="history-head">
+        <h3>Deposit History</h3>
+        <div class="filter-row">
+
+        </div>
+      </div>
+      <div class="deposit-table-main-outer-pannel">
+        <table aria-label="Deposit history">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Reference</th>
+              <th>Method</th>
+              <th>Amount</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+      <tbody id="depositHistoryBody">
+          <tr class="placeholder-row">
+            <td colspan="5" class="tiny">Loading deposit history…</td>
+          </tr>
+      </tbody>
+  <div style="height:8px"></div>
+  <!-- <div class="tiny" id="depositHistoryFooter">Showing last 0 transactions · <a href="/history/deposit">View all</a></div> -->
+
+        </table>
+      </div>
+    </div>
+
+    <%- include('../partials/footer') %>  
+
+  </div>
+
+  <div id='cryptoon-layout' class="theme-orange">
+  <!-- <div id="toast"></div> -->
+  <div id="toast">
+    <span id="toast-message"></span>
+    <span id="toast-close" onclick="hideToast()"> ×</span>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
+
+  <script>
+
+      let USDT_MIN = 0;
+      let USDT_MAX = 0;
+
+      $(document).ready(function () {
+      $.get("/api/deposit/usdt-limits", function (res) {
+      if (res.status && res.data) {
+        USDT_MIN = Number(res.data.min);
+        USDT_MAX = Number(res.data.max);
+        }
+       });
+     });
+
+
+      function showToast(status, message) {
+    const toast = document.getElementById("toast");
+    const toastMessage = document.getElementById("toast-message");
+    let toastTimeout;
+    toastMessage.innerText = message;
+
+    toast.classList.remove("bg-success1", "bg-danger1");
+    toast.classList.add(status ? "bg-success1" : "bg-danger1");
+    toast.classList.add("show");
+
+    clearTimeout(toastTimeout);
+    toastTimeout = setTimeout(() => {
+      hideToast();
+    }, 3000);
+  }
+
+  function hideToast() {
+    const toast = document.getElementById("toast");
+    toast.classList.remove("show");
+  }
+
+
+    (() => {
+      const depositBtn = document.getElementById('depositBtn');
+      const depositPanel = document.getElementById('depositPanel');
+      const amountInput = document.getElementById('amount');
+      const doDeposit = document.getElementById('doDeposit');
+      const presets = Array.from(document.querySelectorAll('.preset'));
+
+      const overlay = document.createElement('div');
+      overlay.id = 'deposit-overlay';
+      Object.assign(overlay.style, {
+        position: 'fixed',
+        inset: '0',
+        display: 'none',
+        'alignItems': 'center',
+        'justifyContent': 'center',
+        'background': 'rgba(0,0,0,0.32)',
+        'zIndex': 99999,
+      });
+      overlay.innerHTML = `<div style="background:#fff;padding:16px 20px;border-radius:12px;box-shadow:0 8px 30px rgba(2,6,23,0.12);font-weight:700">Redirecting to payment…</div>`;
+      document.body.appendChild(overlay);
+
+      function showOverlay(show = true) {
+        overlay.style.display = show ? 'flex' : 'none';
+      }
+
+      function parseAmount(raw) {
+        if (raw === null || raw === undefined) return NaN;
+        const cleaned = String(raw).replace(/,/g, '').trim();
+        return Number(cleaned);
+      }
+
+      function enableBtn(b = true) {
+        doDeposit.disabled = !b;
+        if (b) doDeposit.classList.remove('loading');
+        else doDeposit.classList.add('loading');
+      }
+
+      // Preset interactions
+      presets.forEach(p => {
+        p.addEventListener('click', () => {
+          const txt = p.textContent.replace(/[^\d.]/g, '').trim();
+          amountInput.value = txt;
+          amountInput.focus();
+          // visual active
+          presets.forEach(x => x.style.boxShadow = '');
+          p.style.boxShadow = '0 6px 18px rgba(0,170,255,0.12)';
+        });
+      });
+
+      // Top deposit btn scroll -> focus
+      if (depositBtn && depositPanel && amountInput) {
+        depositBtn.addEventListener('click', () => {
+          depositPanel.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+          });
+          amountInput.focus();
+          depositBtn.animate([{
+            transform: 'scale(1)'
+          }, {
+            transform: 'scale(0.98)'
+          }, {
+            transform: 'scale(1)'
+          }], {
+            duration: 220
+          });
+        });
+      }
+
+    
+      doDeposit.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        const raw = (amountInput.value || '').toString();
+        const val = parseAmount(raw);
+
+        if (!raw || isNaN(val) || val <= 0) {
+          alert('Please enter a valid amount to deposit.');
+          amountInput.focus();
+          return;
+        }
+
+        // ✅ NEW: Min / Max validation here
+  if (USDT_MIN && val < USDT_MIN) {
+    showToast(false, `Minimum Deposit is ${USDT_MIN}$`);
+    return;
+  }
+
+  if (USDT_MAX && val > USDT_MAX) {
+    showToast(false, `Maximum Deposit is ${USDT_MAX}$`);
+    return;
+  }
+
+
+        const amtForQuery = Number(val).toFixed(2);
+        const targetUrl = `/api/create-deposit?am=${encodeURIComponent(amtForQuery)}`;
+
+        // UI feedback
+        enableBtn(false);
+        const prevText = doDeposit.innerText;
+        doDeposit.innerText = 'Redirecting...';
+        showOverlay(true);
+        console.log('[deposit] navigating to', targetUrl);
+
+        // Try direct navigation
+        try {
+
+          setTimeout(() => {
+            // location.assign will create a document-level GET that should show in Network -> Doc
+            window.location.assign(targetUrl);
+          }, 120);
+        } catch (err) {
+          console.error('[deposit] navigation error', err);
+        }
+
+       
+        setTimeout(() => {
+          if (document.visibilityState === 'visible') {
+            console.warn('[deposit] navigation fallback triggered — submitting hidden form');
+            const form = document.createElement('form');
+            form.method = 'GET';
+            form.action = '/api/create-deposit';
+            form.style.display = 'none';
+
+            const inp = document.createElement('input');
+            inp.type = 'hidden';
+            inp.name = 'am';
+            inp.value = amtForQuery;
+            form.appendChild(inp);
+
+            document.body.appendChild(form);
+            form.submit();
+
+            setTimeout(() => {
+              showOverlay(false);
+              enableBtn(true);
+              doDeposit.innerText = prevText;
+            }, 2000);
+          }
+        }, 900);
+      });
+
+    })();
+
+
+    (function () {
+    if (typeof $ === 'undefined') {
+      console.warn('jQuery is required for /info ajax; please include jQuery.');
+      return;
+    }
+
+    const $available = $('#availableAmount');
+    const $lastAct = $('#lastActivity');
+
+    function formatCurrency(n) {
+      const num = Number(n) || 0;
+      return '$ ' + num.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+   
+
+    function formatLastActivity(lastLogin) {
+      if (!lastLogin) return 'Last activity: —';
+
+      // Try several common timestamp fields safely
+      const fields = ['today', 'login_at', 'created_at', 'time', 'datetime', 'date', 'time_at'];
+      let raw = null;
+      for (const f of fields) {
+        if (lastLogin[f]) {
+          raw = lastLogin[f];
+          break;
+        }
+      }
+
+      // If we still have no raw value, attempt to stringify small object
+      if (!raw) {
+        // maybe lastLogin has separate date/time fields
+        if (lastLogin.date && lastLogin.time) {
+          return `Last activity: ${lastLogin.date} · ${lastLogin.time}`;
+        }
+        return 'Last activity: —';
+      }
+
+      // If raw looks like a numeric epoch, create a date
+      // If raw already looks like an ISO/SQL string, format it
+      let dt;
+      if (/^\d+$/.test(String(raw))) {
+        dt = new Date(Number(raw));
+      } else {
+        // attempt to parse; if invalid, leave as raw
+        dt = new Date(raw);
+      }
+
+      if (!isNaN(dt.getTime())) {
+        // Format: YYYY-MM-DD · hh:mm AM/PM (local)
+        const datePart = dt.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: '2-digit' });
+        const timePart = dt.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
+        return `Last activity: ${datePart} · ${timePart}`;
+      }
+
+      // fallback: return raw string
+      return `Last activity: ${raw}`;
+    }
+
+    // Show placeholders while fetching
+    $available.text('$ —');
+    $lastAct.text('Last activity: —');
+
+    // Make AJAX call to /info
+    $.ajax({
+      url: '/api/info',
+      method: 'GET',
+      dataType: 'json',
+      cache: false,
+      success: function (res) {
+        try {
+          if (!res || res.status !== true || !res.user) {
+            console.warn('/info returned unexpected response', res);
+            return;
+          }
+
+          const u = res.user;
+          const lastLogin = res.last_login || (Array.isArray(res.last_5_login) ? res.last_5_login[0] : null);
+
+          // Update balance (money column)
+          if (u.money !== undefined && u.money !== null) {
+            $available.text(formatCurrency(u.money));
+          } else if (u.deposit_money !== undefined) {
+            // fallback to deposit_money if money missing
+            $available.text(formatCurrency(u.deposit_money));
+          } else {
+            $available.text('$ 0.00');
+          }
+
+          
+
+          if (u.withdrawable_balance !== undefined && u.withdrawable_balance !== null) {
+      $('.withdrawBalance').text(formatCurrency(u.withdrawable_balance));
+    } 
+    if (u.money ) $('.depositedMoney').text(formatCurrency(u.money));
+
+          // Update last activity
+          $lastAct.text(formatLastActivity(lastLogin));
+
+          
+
+        } catch (err) {
+          console.error('Error processing /info response', err);
+        }
+      },
+      error: function (xhr, status, err) {
+        // If user isn't authenticated, server returns 401 -> redirect to /login
+        if (xhr && xhr.status === 401) {
+          // if you want to preserve redirect path, add ?next=...
+          window.location.href = '/login';
+          return;
+        }
+
+        console.error('/info ajax error', status, err, xhr && xhr.responseText);
+      }
+    });
+  })();
+
+  (function () {
+  if (typeof $ === 'undefined') {
+    console.warn('jQuery required for deposit history AJAX.');
+    return;
+  }
+
+  const $tbody = $('#depositHistoryBody');
+  const $footer = $('#depositHistoryFooter');
+
+  function formatCurrency(n) {
+    const num = Number(n) || 0;
+    return '$ ' + num.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  function formatDate(raw) {
+    if (!raw) return '-';
+    // Try numeric epoch (seconds or ms) or date string
+    let t = raw;
+    if (/^\d+$/.test(String(raw))) {
+      // If timestamp seems seconds (10 digits), convert to ms
+      t = String(raw).length === 10 ? Number(raw) * 1000 : Number(raw);
+    }
+    const dt = new Date(t);
+    if (isNaN(dt.getTime())) return String(raw);
+    const datePart = dt.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: '2-digit' });
+    const timePart = dt.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
+    return `${datePart} · ${timePart}`;
+  }
+
+  function mapStatus(status) {
+    // status: 1 -> Completed, 0 -> Pending, other -> Failed
+    if (status === 1 || status === '1') return { text: 'Completed', cls: 'success' };
+    if (status === 0 || status === '0') return { text: 'Pending', cls: 'pending' };
+    return { text: 'Failed', cls: 'failed' };
+  }
+
+  function renderRows(rows) {
+    $tbody.empty();
+
+    if (!Array.isArray(rows) || rows.length === 0) {
+      $tbody.append(
+        `<tr><td colspan="5" class="tiny">No deposit transactions found.</td></tr>`
+      );
+      $footer.html(`Showing last 0 transactions · <a href="/history/deposit">View all</a>`);
+      return;
+    }
+
+    // Show last 3 (change slice if you want a different number)
+    const shown = rows.slice(0, 3);
+    for (const r of shown) {
+      const date = formatDate(r.time);
+      // reference: create a readable ref if id exists
+      const ref = r.utr || (r.id ? `#DEP-${String(r.id).padStart(6, '0')}` : '-');
+      const method = r.type || '-';
+      const amount = formatCurrency(r.money);
+      const st = mapStatus(r.status);
+
+      $tbody.append(
+        `<tr>
+          <td>${date}</td>
+          <td>${ref}</td>
+          <td>${method}</td>
+          <td>${amount}</td>
+          <td><span class="status ${st.cls}">${st.text}</span></td>
+        </tr>`
+      );
+    }
+
+    $footer.html(`Showing last ${Math.min(rows.length, 3)} transactions · <a href="/history/deposit">View all</a>`);
+  }
+
+  // initial placeholder already present; fetch history now
+  $.ajax({
+    url: '/api/deposit-history',   
+    method: 'GET',
+    dataType: 'json',
+    cache: false,
+    success: function (res) {
+      try {
+        if (!res) {
+          console.warn('Empty response from deposit history');
+          renderRows([]);
+          return;
+        }
+
+        if (res.status === 401 || res.status === 403) {
+          // unauthorized — send user to login
+          window.location.href = '/login';
+          return;
+        }
+
+        // support both numeric 200 or boolean true
+        const ok = (res.status === 200 || res.status === '200' || res.status === true);
+        const data = res.data || res.result || res.rows || [];
+
+        if (!ok) {
+          // if API returned a different status, show empty with message in console
+          console.warn('/api/deposit-history returned unexpected status', res);
+          renderRows(Array.isArray(data) ? data : []);
+          return;
+        }
+
+        renderRows(data);
+      } catch (err) {
+        console.error('Error processing deposit history response', err);
+        renderRows([]);
+      }
+    },
+    error: function (xhr, status, err) {
+      if (xhr && xhr.status === 401) {
+        window.location.href = '/login';
+        return;
+      }
+      if (xhr && xhr.status === 404) {
+        // maybe the route is different; show helpful hint in UI
+        $tbody.html(`<tr><td colspan="5" class="tiny">Deposit history not found (404). Check server route.</td></tr>`);
+        $footer.html(`Showing last 0 transactions · <a href="/history/deposit">View all</a>`);
+        return;
+      }
+      console.error('/api/deposit-history AJAX error', status, err, xhr && xhr.responseText);
+      $tbody.html(`<tr><td colspan="5" class="tiny">Failed to load deposit history. Please try again later.</td></tr>`);
+      $footer.html(`Showing last 0 transactions · <a href="/history/deposit">View all</a>`);
+    }
+  });
+
+})();
+  </script>
+</body>
+
+</html>

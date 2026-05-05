@@ -1,0 +1,176 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  
+
+
+
+<link rel="shortcut icon" type="image/png" href="/assets/images/favicon.png">
+<link rel="stylesheet" href="/assets/css/style.css">
+
+<style>
+.admin-login-page-main-outer h1, .admin-login-page-main-outer .text-muted {
+    color: #fff !important;
+}
+.admin-login-page-main-outer .card{
+  color: #000;
+}
+.admin-login-page-main-outer  .form-control, .form-select {
+    border-color: #000;
+}
+
+
+</style>
+
+</head>
+<body>
+<div id="cryptoon-layout" class="theme-orange admin-login-page-main-outer">
+  <div class="main p-2 py-3 p-xl-5">
+    <div class="container-xxl">
+      <!-- <div class="row align-items-center">
+        <div class="col"><a href="" class="d-flex align-item-center"><img src="/assets/images/otx.png" alt="logo" height="50"></a></div>
+        <div class="col-auto">
+          <div class="d-flex align-item-center">
+            <div class="dropdown zindex-popover"><a class="nav-link dropdown-toggle pulse" href="#" role="button" data-bs-toggle="dropdown"><img src="/assets/images/GB-1dac000a.png" alt=""></a>
+              <div class="dropdown-menu rounded-lg shadow border-0 dropdown-menu-md-end p-0 m-0">
+                <div class="card border-0">
+                  <ul class="list-unstyled py-2 px-3">
+                    <li><a href="#" class=""><img src="/#" alt="">
+                        English</a></li>
+                    <li><a href="#" class=""><img src="/#" alt="">
+                        German</a></li>
+                    <li><a href="#" class=""><img src="/#" alt="">
+                        French</a></li>
+                    <li><a href="#" class=""><img src="/#" alt="">
+                        Italian</a></li>
+                    <li><a href="#" class=""><img src="#" alt="">
+                        Russian</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+    <div class="body d-flex p-0 p-xl-5">
+      <div class="container-xxl">
+        <div class="row g-3" style="margin-top: 100px; margin-bottom: 100px;">
+          <div class="col-lg-6 d-flex justify-content-center align-items-center mx-auto">
+            <div class="d-flex flex-column">
+              <h1>Admin Login</h1><span class="text-muted">Welcome back! Log In with your Email!</span>
+              <ul class="nav nav-pills mt-4" role="tablist">
+                <li class="nav-item" role="presentation"><a class="nav-link active" data-bs-toggle="tab" href="#Email" role="tab" aria-selected="true">Email</a></li>
+              </ul>
+              <div class="tab-content mt-4 mb-3">
+                <div id="Email" class="tab-pane fade show active" role="tabpanel">
+                  <div class="card">
+                    <div class="card-body p-4">
+                      <form onsubmit="handleLogin(event)">
+                        <div class="mb-3">
+                          <label class="form-label fs-6">Email address</label>
+                          <input id="loginEmail" class="form-control" required />
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label fs-6">Password</label>
+                          <input id="loginPassword" class="form-control" required type="password" />
+                        </div>
+                        <button class="btn btn-primary text-uppercase py-2 fs-5 w-100 mt-2" type="submit">
+                          Log in
+                          <div class="spinner-grow text-white" role="status" style="display: none;">
+                            <span class="visually-hidden">Loading...</span>
+                          </div>
+                        </button>
+                      </form>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id='cryptoon-layout' class="theme-orange">
+  <div id="toast">
+    <span id="toast-message"></span>
+    <span id="toast-close" onclick="hideToast()"> ×</span>
+  </div>
+</div>
+
+
+
+<script>
+  async function handleLogin(event) {
+    event.preventDefault();
+
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
+
+    try {
+      const response = await fetch("/admin/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password
+        })
+      });
+
+      const data = await response.json();
+
+      if (data.success === true) {
+        document.cookie = `token=${data.data.token}; path=/; max-age=172800`;
+        document.cookie = `auth=${data.data.token}; path=/; max-age=172800`;
+
+
+        showToast(true, "Login successful!");
+
+        setTimeout(() => {
+
+          window.location.href = "/admin/dashboard";
+        }, 1000);
+      } else {
+        showToast(false, data.message || "Login failed");
+      }
+    } catch (error) {
+      console.error("Login Error:", error);
+      showToast(false, "Something went wrong during login.");
+    }
+  }
+
+  function showToast(status, message) {
+    const toast = document.getElementById("toast");
+    const toastMessage = document.getElementById("toast-message");
+    let toastTimeout;
+
+    toastMessage.innerText = message;
+
+    toast.classList.remove("bg-success1", "bg-danger1");
+    toast.classList.add(status ? "bg-success1" : "bg-danger1");
+    toast.classList.add("show");
+
+    clearTimeout(toastTimeout);
+    toastTimeout = setTimeout(() => {
+      hideToast();
+    }, 3000);
+  }
+
+  function hideToast() {
+    const toast = document.getElementById("toast");
+    toast.classList.remove("show");
+  }
+</script>
+</body>
+</html>

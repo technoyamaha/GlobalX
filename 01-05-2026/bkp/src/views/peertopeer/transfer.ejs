@@ -1,0 +1,274 @@
+<div class="main px-lg-4 px-md-4">
+  <%- include('../partials/header') %>
+    <div class="body d-flex py-3">
+      <div class="container-xxl">
+        <div data-v-2e0af898="" class="row align-items-center">
+          <div data-v-2e0af898="" class="border-0 mb-4">
+            <div data-v-2e0af898=""
+              class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
+              <h3 data-v-2e0af898="" class="fw-bold mb-0">P2P Transfer</h3>
+            </div>
+          </div>
+        </div>
+        <div data-v-2e0af898="" class="row">
+          <div data-v-2e0af898="" class="col-xl-12">
+            <div data-v-2e0af898="" class="card p-4">
+              <div data-v-2e0af898="" class="card-body">
+                <div data-v-2e0af898="" class="tab-content">
+                  <div data-v-2e0af898="" id="Borrow" class="tab-pane fade show active">
+                    <div data-v-2e0af898="" class="row g-3">
+                      <div data-v-2e0af898="" class="col-xl-6">
+
+                        <form id="transferForm">
+                          <div class="mb-3">
+                            <label class="form-label">Username or ID</label>
+                            <div class="input-group mb-3">
+                              <input id="searchInput" autofocus class="form-control" required
+                                placeholder="Enter user ID or username" />
+                              <button id="searchBtn" class="btn btn-warning" type="button">
+                                Search User
+                              </button>
+                            </div>
+                          </div>
+                          <div id="userDetails" style="display: none">
+                            <div class="mb-3">
+                              <label class="form-label">User Name</label>
+                              <input id="userName" class="form-control" readonly />
+                            </div>
+
+                            <div class="mb-3">
+                              <label class="form-label">Amount to Transfer</label>
+                              <input id="transferAmount" class="form-control" type="number" min="0" step="0.01"
+                                required />
+                            </div>
+
+                            <button id="transferBtn" class="btn btn-primary" type="submit">
+                              Transfer
+                            </button>
+                          </div>
+                        </form>
+                      </div>
+                      <div data-v-2e0af898="" class="col-xl-6">
+                        <div data-v-2e0af898="" class="color-bg-100 p-2 p-lg-4 mt-4">
+                          <h4 data-v-2e0af898="">
+                            Available
+                            <span data-v-2e0af898="" class="small">P2P </span>
+                            Balance
+                          </h4>
+                          <h5 data-v-2e0af898="" id="money" class="color-price-up">                           
+                          </h5>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div data-v-2e0af898="" class="row align-items-center">
+          <div data-v-2e0af898="" class="border-0 mb-4">
+            <div data-v-2e0af898=""
+              class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
+              <h3 data-v-2e0af898="" class="fw-bold mb-0">
+                P2P Transfer History
+              </h3>
+            </div>
+            <div data-v-2e0af898="" class="row align-items-center mt-3">
+              <div data-v-2e0af898="" class="col-12 col-md-6 col-lg-4">
+                <div data-v-2e0af898="" class="input-group">
+                  <input type="text" id="searchBox" class="form-control rounded-pill-left big-font"
+                    placeholder="Search..." /><span class="input-group-text text-theme rounded-pill-right"><i
+                      class="bi bi-search"></i></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div data-v-2e0af898="" class="row">
+          <div data-v-2e0af898="" class="col-12">
+            <div data-v-2e0af898="" class="card mb-3">
+              <div data-v-2e0af898="" class="card-body">
+                <div data-v-2e0af898="" class="table-responsive">
+                  <table data-v-2e0af898="" class="table table-hover">
+                    <thead data-v-2e0af898="">
+                      <tr data-v-2e0af898="">
+                        <th data-v-2e0af898="" scope="col">Sr.No</th>
+                        <th data-v-2e0af898="" scope="col">Counterparty</th>
+                        <th data-v-2e0af898="" scope="col">Amount</th>
+                        <th data-v-2e0af898="" scope="col">Type</th>
+                        <th data-v-2e0af898="" scope="col">Date</th>
+                      </tr>
+                    </thead>
+                    <tbody id="transfersBody" data-v-2e0af898=""></tbody>
+                  </table>
+                </div>
+                <div data-v-2e0af898="" class="row align-items-center">
+                  <div data-v-2e0af898="" class="col ps-2">
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  let selectedUserId = null;
+  document.addEventListener("DOMContentLoaded", function () {
+    const sidebar = document.querySelector(".sidebar");
+    const closeBtn = document.querySelector(".sidebar-mini-btn");
+
+    if (closeBtn && sidebar) {
+      closeBtn.addEventListener("click", function () {
+        sidebar.classList.remove("open");
+      });
+    }
+
+    const signoutBtn = document.getElementById("signoutBtn");
+
+    if (signoutBtn) {
+      signoutBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        deleteAllCookies();
+        localStorage.clear();
+        window.location.href = "/login";
+      });
+    }
+
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const searchBtn = document.getElementById("searchBtn");
+    const searchInput = document.getElementById("searchInput");
+    const userDetails = document.getElementById("userDetails");
+    const userNameField = document.getElementById("userName");
+    const transferAmount = document.getElementById("transferAmount");
+    const transferForm = document.getElementById("transferForm");
+    const transferBtn = document.getElementById("transferBtn");
+
+    searchBtn.addEventListener("click", async () => {
+      const query = searchInput.value.trim();
+
+
+      if (!query) return showToast(true, 'Please enter a user ID or username');
+
+      try {
+
+        const response = await fetch(
+          `/api/users/search?query=${encodeURIComponent(query)}`
+        );
+
+        // If response is empty or not JSON, this avoids crash
+        const text = await response.text();
+        console.log("text", text);
+        if (!text) return showToast(false, "Empty response from server");
+
+        const user = JSON.parse(text);
+        console.log(user);
+        if (!user || !user.id_user) return showToast(false, "Invalid user data");
+
+        selectedUserId = user.id_user;
+        userNameField.value = user.full_name;
+        userDetails.style.display = "block";
+
+        transferAmount.focus();
+      } catch (err) {
+        console.log(err.message || "Error searching user");
+        userDetails.style.display = "none";
+        selectedUserId = null;
+      }
+    });
+
+    transferForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const amount = parseFloat(transferAmount.value);
+
+      if (!selectedUserId) return
+      showToast(false, 'No user selected');
+      if (isNaN(amount) || amount <= 0) return showToast(false, 'Invalid amount')
+
+
+      try {
+        const res = await fetch("/api/p2p/transfer", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ userId: selectedUserId, amount }),
+        });
+
+        const result = await res.json();
+
+        if (!res.ok) throw new Error(result?.message || "Transfer failed");
+
+        showToast(true, 'Transfer successful!')
+        loadTransfers()
+        transferForm.reset();
+        userDetails.style.display = "none";
+        selectedUserId = null;
+      } catch (err) {
+        console.log(err.message || "Error during transfer");
+      }
+    });
+  });
+</script>
+
+<script>
+   async function loadTransfers(query = "") {
+    try {
+      const res = await fetch(`/api/p2p/transferHistory?type=debit&search=${encodeURIComponent(query)}`);
+      if (!res.ok) throw new Error("Failed to load transfers");
+      const data = await res.json();
+
+      document.getElementById("money").innerHTML = `${parseFloat(data.userMoney).toFixed(2)} USD`;
+
+      const tbody = document.getElementById("transfersBody");
+      tbody.innerHTML = "";
+
+      if (!data.transactions || data.transactions.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;">No transfers found.</td></tr>`;
+        return;
+      }
+
+      data.transactions.forEach((transfer) => {
+        const tr = document.createElement("tr");
+
+        tr.innerHTML = `
+          <td>${transfer.srNo}</td>
+          <td><p>${transfer.counterparty}</p></td>
+          <td><p>${transfer.money} USD</p></td>
+          <td><p>${transfer.type}</p></td>
+          <td><p>${transfer.datetime}</p></td>
+        `;
+
+        tbody.appendChild(tr);
+      });
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    loadTransfers();
+
+    // Search with debounce
+    let searchTimer;
+    const searchBox = document.getElementById("searchBox");
+    if (searchBox) {
+      searchBox.addEventListener("input", function () {
+        clearTimeout(searchTimer);
+        const query = this.value;
+        searchTimer = setTimeout(() => {
+          loadTransfers(query);
+        }, 300);
+      });
+    }
+  });
+</script>

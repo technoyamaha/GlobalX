@@ -1,0 +1,384 @@
+<style>
+  .admin-content {
+    margin-left: 250px;
+    /* sidebar width */
+    padding: 20px;
+  }
+  body.bg-light {
+    background-color: #001a3d !important;
+}
+
+  @media (max-width: 768px) {
+    .admin-content {
+      margin-left: 0;
+    }
+  }
+
+
+  #toast {
+    visibility: hidden;
+    min-width: auto;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    padding: 16px 20px;
+    position: fixed;
+    z-index: 9999;
+    top: 20px;
+    right: 20px;
+    transform: translateY(-100%);
+    font-size: 16px;
+    transition: all 0.4s ease-in-out;
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  #toast.show {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0%);
+  }
+
+  #toast span#toast-close {
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0.7;
+  }
+  .updates-rate-outer {
+    background-color: #1e3a6e;
+    color: #fff;
+}
+.updates-rate-outer td, .updates-rate-outer th {
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+}
+</style>
+
+<!-- <div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6" style="margin-left: 225px;">
+
+      <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+          <h5 class="mb-0">
+            <i class="fa fa-dollar"></i> USDT Rate Settings
+          </h5>
+        </div>
+
+        <div class="card-body">
+          <div class="mb-3">
+            <label class="form-label">Current USDT Rate</label>
+            <div class="input-group">
+              <span class="input-group-text">₹</span>
+              <input
+                type="text"
+                class="form-control"
+                id="currentRate"
+                disabled
+              />
+            </div>
+            <small class="text-muted" id="updatedAt"></small>
+          </div>
+
+          <hr />
+
+          <div class="mb-3">
+            <label class="form-label">Set New Rate</label>
+            <input
+              type="number"
+              min="1"
+              step="0.01"
+              class="form-control"
+              id="newRate"
+              placeholder="Enter new USDT rate"
+            />
+          </div>
+
+          <button class="btn btn-success w-100" id="saveRate">
+            <i class="fa fa-save"></i> Update Rate
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Address</th>
+      <th>QR</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody id="walletTable"></tbody>
+</table>
+
+
+</div> -->
+
+
+
+<div class="admin-content">
+
+  <!-- USDT RATE CARD -->
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card shadow-sm updates-rate-outer">
+        <div class="card-header bg-primary text-white">
+          <h5 class="mb-0">
+            <i class="fa fa-dollar"></i> USDT Rate Settings
+          </h5>
+        </div>
+
+        <div class="card-body">
+          <div class="mb-3">
+            <label class="form-label">Current USDT Rate</label>
+            <div class="input-group">
+              <span class="input-group-text">₹</span>
+              <input type="text" class="form-control" id="currentRate" disabled />
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Set New Rate</label>
+            <input type="number" min="1" step="0.01" class="form-control" id="newRate" />
+          </div>
+
+          <button class="btn btn-success w-100" id="saveRate">
+            <i class="fa fa-save"></i> Update Rate
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- ADD WALLET -->
+    
+      <div class="col-md-6">
+        <div class="card shadow-sm updates-rate-outer">
+          <div class="card-header bg-dark text-white">
+            <h5 class="mb-0">
+              <i class="fa fa-wallet"></i> Add USDT Wallet
+            </h5>
+          </div>
+
+          <div class="card-body">
+            <div class="mb-3">
+              <label class="form-label">Wallet Address</label>
+              <input type="text" id="walletAddress" class="form-control" placeholder="0x..." />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">QR Image</label>
+              <input type="file" id="walletQr" class="form-control" accept="image/png,image/jpeg" />
+            </div>
+
+            <button class="btn btn-primary w-100" id="addWallet">
+              <i class="fa fa-plus"></i> Add Wallet
+            </button>
+          </div>
+        </div>
+      </div>
+   
+  </div>
+
+  <!-- WALLET LIST -->
+  <div class="row mt-4">
+    <div class="col-md-12">
+      <div class="card shadow-sm updates-rate-outer">
+        <div class="card-header bg-secondary text-white">
+          <h5 class="mb-0">
+            <i class="fa fa-list"></i> USDT Wallet List
+          </h5>
+        </div>
+
+        <div class="card-body table-responsive">
+          <table class="table table-bordered align-middle">
+            <thead class="table-light">
+              <tr>
+                <th>ID</th>
+                <th>Address</th>
+                <th>QR</th>
+                <th>Status</th>
+                <th width="180">Action</th>
+              </tr>
+            </thead>
+            <tbody id="walletTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
+
+<div id='cryptoon-layout' class="theme-orange">
+  <div id="toast">
+    <span id="toast-message"></span>
+    <span id="toast-close" onclick="hideToast()"> ×</span>
+  </div>
+</div>
+
+
+<script>
+  function showToast(status, message) {
+    const toast = document.getElementById("toast");
+    const toastMessage = document.getElementById("toast-message");
+    let toastTimeout;
+
+    toastMessage.innerText = message;
+
+    toast.classList.remove("bg-success1", "bg-danger1");
+    toast.classList.add(status ? "bg-success1" : "bg-danger1");
+    toast.classList.add("show");
+
+    clearTimeout(toastTimeout);
+    toastTimeout = setTimeout(() => {
+      hideToast();
+    }, 3000);
+  }
+
+  function hideToast() {
+    const toast = document.getElementById("toast");
+    toast.classList.remove("show");
+  }
+
+  $(document).ready(function() {
+
+    function loadRate() {
+      $.get("/admin/settings/usdt-rate", function(res) {
+        if (!res.status) return;
+
+        if (res.data.rate) {
+          $("#currentRate").val(res.data.rate);
+          const d = new Date(res.data.updated_at);
+          $("#updatedAt").text(
+            "Last updated: " + d.toLocaleString()
+          );
+        } else {
+          $("#currentRate").val("Not set");
+          $("#updatedAt").text("");
+        }
+      });
+    }
+
+    $("#saveRate").on("click", function() {
+      const rate = $("#newRate").val();
+
+      if (!rate || rate <= 0) {
+        showToast(false, "Please enter a valid rate");
+        return;
+      }
+
+      $.post("/admin/settings/usdt-rate", {
+        rate
+      }, function(res) {
+        if (res.status) {
+          showToast(true, "Rate updated successfully.");
+          $("#newRate").val("");
+          loadRate();
+        } else {
+          showToast(false, res.message || "Failed to update rate");
+        }
+      });
+    });
+
+    loadRate();
+  });
+
+
+
+  function loadWallets() {
+    $.get("/admin/usdt-wallets", res => {
+      if (!res.status) return;
+
+      let html = "";
+      res.data.forEach(w => {
+        html += `
+        <tr>
+          <td>${w.id}</td>
+          <td style="word-break:break-all">${w.address}</td>
+          <td><img src="${w.qr_image}" width="60" class="border rounded"></td>
+          <td>
+            <span class="badge ${w.is_active ? 'bg-success' : 'bg-danger'}">
+              ${w.is_active ? 'Active' : 'Disabled'}
+            </span>
+          </td>
+          <td>
+            <button class="btn btn-sm btn-warning" onclick="toggleWallet(${w.id}, ${w.is_active})">
+              ${w.is_active ? 'Disable' : 'Enable'}
+            </button>
+            <button class="btn btn-sm btn-danger ms-1" onclick="deleteWallet(${w.id})">
+              Delete
+            </button>
+          </td>
+        </tr>
+      `;
+      });
+
+      $("#walletTable").html(html);
+    });
+  }
+
+  $("#addWallet").on("click", function() {
+    const address = $("#walletAddress").val().trim();
+    const file = $("#walletQr")[0].files[0];
+
+    if (!address || !file) {
+      showToast(false, "Wallet address and QR image required");
+      return;
+    }
+
+    const fd = new FormData();
+    fd.append("address", address);
+    fd.append("qr", file);
+
+    $.ajax({
+      url: "/admin/usdt-wallets/add",
+      type: "POST",
+      data: fd,
+      contentType: false,
+      processData: false,
+      success: function(res) {
+        showToast(res.status, res.message);
+        if (res.status) {
+          $("#walletAddress").val("");
+          $("#walletQr").val("");
+          loadWallets();
+        }
+      },
+      error: function() {
+        showToast(false, "Upload failed");
+      }
+    });
+  });
+
+
+  function toggleWallet(id, currentStatus) {
+    $.post("/admin/usdt-wallets/update-status", {
+      id,
+      is_active: currentStatus ? 0 : 1
+    }, res => {
+      showToast(res.status, res.message);
+      if (res.status) loadWallets();
+    });
+  }
+
+  function deleteWallet(id) {
+    if (!confirm("Are you sure you want to delete this wallet?")) return;
+
+    $.post("/admin/usdt-wallets/delete", {
+      id
+    }, res => {
+      showToast(res.status, res.message);
+      if (res.status) loadWallets();
+    });
+  }
+
+  $(document).ready(loadWallets);
+</script>

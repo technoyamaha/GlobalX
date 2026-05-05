@@ -1,0 +1,209 @@
+<div class="main px-lg-4 px-md-4">
+  <%- include('../partials/header') %>
+    <div class="body d-flex py-3">
+      <div class="container-xxl">
+        <div class="row align-items-center">
+          <div class="border-0 mb-4">
+            <div
+              class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
+              <h3 class="fw-bold mb-0">Team</h3>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="card mb-3">
+              <div class="card-header py-3 bg-transparent border-bottom-0">
+                <h6 class="mb-0 fw-bold mb-4">Team Stats</h6>
+                <div class="row align-items-center">
+                  <div class="col-12 col-md-6 col-lg-4 ps-2 mb-2">
+                    <div class="input-group">
+                      <input type="text" class="form-control search-field rounded-pill-left big-font"
+                        placeholder="Search..." /><span class="input-group-text text-theme rounded-pill-right"><i
+                          class="bi bi-search"></i></span>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6 col-lg-4 ps-2 mb-2 mx-auto">
+                    <select class="form-select w-100">
+                      <option value="1">Level 1</option>
+                      <option value="2">Level 2</option>
+                      <option value="3">Level 3</option>
+                      <option value="4">Level 4</option>
+                      <option value="5">Level 5</option>
+                      <option value="6">Level 6</option>
+                      <option value="7">Level 7</option>
+                      <option value="8">Level 8</option>
+                      <option value="9">Level 9</option>
+                      <option value="10">Level 10</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">USERNAME</th>
+                        <th scope="col">EMAIL/PHONE</th>
+                        <th scope="col">LEVEL</th>
+                        <th scope="col">TEAM</th>
+                        <th scope="col">SELF BUSINESS</th>
+                        <th scope="col">Farming BUSINESS</th>
+                        <th scope="col">TEAM BUSINESS</th>
+                        <th scope="col">DATE</th>
+                      </tr>
+                    </thead>
+                    <tbody class="levelusers-body">
+                      <tr>
+                        <th scope="row">1</th>
+                        <td></td>
+                        <td><br /></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="row align-items-center">
+                  <div class="col ps-2">
+                    <div class="row align-items-center mx-0 mb-3">
+                      <div class="col-12 footable-paging-external footable-paging-right d-flex justify-content-center"
+                        id="footable-pagination">
+                        <div class="footable-pagination-wrapper">
+                          <ul class="pagination">
+                            <li class="footable-page-nav disabled ps-3 px-3" style="width: auto">
+                              <a class="footable-page-link previous-page">« Previous</a>
+                            </li>
+                            <li class="ps-3 px-3 footable-page current-page visible active" style="width: auto">
+                              <a class="footable-page-link current-page">1</a>
+                            </li>
+                            <li class="ps-3 px-3 footable-page visible" style="width: auto">
+                              <a class="footable-page-link next-page">Next »</a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  $(document).ready(async function () {
+    let level = 1;
+    let page = 1;
+    const limit = 10;
+    let total = 1;
+    let search = "";
+
+    $(".form-select").on("change", function () {
+      const selectedValue = $(this).val();
+      level = selectedValue;
+      page = 1;
+      console.log("Selected Level:", selectedValue);
+      showUserByLevel(level, page);
+    });
+    let searchTimeout;
+
+    $(".search-field").on("input", function () {
+      clearTimeout(searchTimeout);
+      search = $(this).val().trim();
+      page = 1;
+      searchTimeout = setTimeout(() => {
+        showUserByLevel(level, page, search);
+      }, 400);
+    });
+
+    const showUserByLevel = async (level, page) => {
+      const response = await fetch("/api/user/teamByLevel", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          level: level,
+          page: page,
+          limit: limit,
+          search: search,
+        }),
+      });
+      const usersByLevel = await response.json();
+      if (usersByLevel.status == true) {
+        total = Math.ceil(usersByLevel.total / limit);
+        $(".current-page").html(page)
+        RenderData(usersByLevel.data);
+      }
+    };
+
+    showUserByLevel(level, page);
+
+    function convertDate(unixMillis) {
+      const ts = Number(unixMillis);
+      if (isNaN(ts)) {
+        throw new Error("Invalid timestamp: " + unixMillis);
+      }
+      const date = new Date(ts);
+      const options = {
+        timeZone: "Asia/Kolkata",
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+      };
+      const formatted = date.toLocaleDateString("en-GB", options);
+      return formatted.replace(/\//g, "-");
+    }
+
+    function RenderData(datas) {
+     
+      if (datas.length == 0) {
+        $(".levelusers-body").html(`<tr><td colspan="9" style="text-align:center;">No Record found for this level</td></tr>`);
+        return;
+      }
+      let html = datas.map((data, index) => {
+        return `
+        <tr>
+          <th scope="row">${index + 1 + limit * (page - 1)}</th>    
+          <td>${data.id_user}</td>
+          <td>${data.email}<br></td>
+          <td>${data.tree_level}</td>
+          <td>${data.total_downline}</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+          <td>${convertDate(data.login_at)}</td>
+        </tr>
+        `;
+      });
+      $(".levelusers-body").html(html);
+    }
+
+    $(".next-page").on("click", () => {
+      if (page >= total) {
+        return;
+      }
+      page = page + 1;
+      showUserByLevel(level, page);
+    });
+
+    $(".previous-page").on("click", () => {
+      if (page == 1) {
+        return;
+      }
+      page = page - 1;
+      showUserByLevel(level, page);
+    });
+  });
+</script>
