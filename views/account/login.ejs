@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login - GlobalX</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="shortcut icon" type="image/png" href="/assets/images/favicon.ico" />
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/novaStyle.css" />
+</head>
+
+<body class="custm-logn-form">
+  <!-- <%- include("../layout/top-layout") %> -->
+  <style>
+    .input-icon-eye svg {
+      transition: 0.2s ease;
+    }
+  </style>
+
+  <section class="main-login-section">
+    <div class="container">
+      <div class="main-bg-bnner-img">
+        <img src="/images/main-banner-bg.png">
+      </div>
+      <div class="inner-login-div inner-register-div">
+        <div class="cutm-login-left-description custm-card">
+          <div class="gx-top-logo">
+            <img src="/images/logo.jpg">
+          </div>
+          <div class="left-box-content">
+            <div class="main-content-box">
+              <div class="left-icon-img">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="26" height="26" fill="currentColor"
+                  transform="">
+                  <!--?lit$313919856$-->
+                  <path
+                    d="M232,208a8,8,0,0,1-8,8H32a8,8,0,0,1-8-8V48a8,8,0,0,1,16,0V156.69l50.34-50.35a8,8,0,0,1,11.32,0L128,132.69,180.69,80H160a8,8,0,0,1,0-16h40a8,8,0,0,1,8,8v40a8,8,0,0,1-16,0V91.31l-58.34,58.35a8,8,0,0,1-11.32,0L96,123.31l-56,56V200H224A8,8,0,0,1,232,208Z">
+                  </path>
+                </svg>
+              </div>
+              <div class="right-content">
+                <h3>Track Earnings</h3>
+                <p>Monitor your daily yields and income growth in real-time. </p>
+              </div>
+            </div>
+            <div class="main-content-box">
+              <div class="left-icon-img">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="26" height="26" fill="currentColor"
+                  transform="">
+                  <!--?lit$313919856$-->
+                  <path
+                    d="M244.8,150.4a8,8,0,0,1-11.2-1.6A51.6,51.6,0,0,0,192,128a8,8,0,0,1-7.37-4.89,8,8,0,0,1,0-6.22A8,8,0,0,1,192,112a24,24,0,1,0-23.24-30,8,8,0,1,1-15.5-4A40,40,0,1,1,219,117.51a67.94,67.94,0,0,1,27.43,21.68A8,8,0,0,1,244.8,150.4ZM190.92,212a8,8,0,1,1-13.84,8,57,57,0,0,0-98.16,0,8,8,0,1,1-13.84-8,72.06,72.06,0,0,1,33.74-29.92,48,48,0,1,1,58.36,0A72.06,72.06,0,0,1,190.92,212ZM128,176a32,32,0,1,0-32-32A32,32,0,0,0,128,176ZM72,120a8,8,0,0,0-8-8A24,24,0,1,1,87.24,82a8,8,0,1,0,15.5-4A40,40,0,1,0,37,117.51,67.94,67.94,0,0,0,9.6,139.19a8,8,0,1,0,12.8,9.61A51.6,51.6,0,0,1,64,128,8,8,0,0,0,72,120Z">
+                  </path>
+                </svg>
+              </div>
+              <div class="right-content">
+                <h3>Grow Your Network</h3>
+                <p>Expand your referral network and maximize rewards.</p>
+              </div>
+            </div>
+            <div class="main-content-box">
+              <div class="left-icon-img">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="26" height="26" fill="currentColor"
+                  transform="">
+                  <!--?lit$313919856$-->
+                  <path
+                    d="M152,120H136V56h8a32,32,0,0,1,32,32,8,8,0,0,0,16,0,48.05,48.05,0,0,0-48-48h-8V24a8,8,0,0,0-16,0V40h-8a48,48,0,0,0,0,96h8v64H104a32,32,0,0,1-32-32,8,8,0,0,0-16,0,48.05,48.05,0,0,0,48,48h16v16a8,8,0,0,0,16,0V216h16a48,48,0,0,0,0-96Zm-40,0a32,32,0,0,1,0-64h8v64Zm40,80H136V136h16a32,32,0,0,1,0,64Z">
+                  </path>
+                </svg>
+              </div>
+              <div class="right-content">
+                <h3>Automated Rewards</h3>
+                <p>Earn passive income from the GlobalX system.</p>
+              </div>
+            </div>
+          </div>
+          <div class="c-right">
+            <p>© 2026 GlobalX</p>
+          </div>
+        </div>
+
+
+
+        <div class="center-login-form custm-card">
+          <div class="login-main-title">
+            <h2>Sign In</h2>
+            <p>Access your GlobalX dashboard</p>
+          </div>
+
+          <div class="login-form-container">
+            <form class="log-in-form" id="MainloginForm">
+
+              <div class="input-group-field">
+                <div class="input-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide v-icon notranslate v-theme--dark v-icon--size-default lucide-mail-icon lucide-mail v-icon notranslate v-theme--dark v-icon--size-default">
+                    <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path>
+                    <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                  </svg>
+                </div>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Email" required="">
+              </div>
+
+              <div class="input-group-field">
+                <div class="input-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide v-icon notranslate v-theme--dark v-icon--size-default lucide-lock-icon lucide-lock v-icon notranslate v-theme--dark v-icon--size-default">
+                    <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                  </svg>
+                </div>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Password" required="">
+                <div class="input-icon input-icon-eye">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide v-icon notranslate v-theme--dark v-icon--size-default v-icon--clickable lucide-eye-icon lucide-eye v-icon notranslate v-theme--dark v-icon--size-default v-icon--clickable">
+                    <path
+                      d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0">
+                    </path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>
+                </div>
+              </div>
+
+              <div class="checkbox-group">
+                <div class="cheeck-box-col">
+                  <input type="checkbox" id="remember">
+                  <label for="remember">Remember me</label>
+                </div>
+                <a href="https://globalxcryptoarb.com/forgot-password">Forgot Password</a>
+              </div>
+
+              <button type="submit" class="btn-send">Sign In</button>
+
+            </form>
+
+            <div class="footer-form">
+              Don’t have an account? <a href="https://globalxcryptoarb.com/register">Create Account</a>
+            </div>
+          </div>
+        </div>
+        <div class="right-welcom-ak custm-card">
+          <div class="inner-rght-content">
+            <div class="top-crow-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="48" height="48" fill="currentColor"
+                transform="">
+                <!--?lit$313919856$-->
+                <path
+                  d="M216.71,99.73l-15.6,93.59a8,8,0,0,1-7.89,6.68H62.78a8,8,0,0,1-7.89-6.68L39.29,99.73l.08,0a19.82,19.82,0,0,0,9.22-4.16h0L88,144l32-73.65h0a20,20,0,0,0,15.92,0h0L168,144l39.39-48.48h0a19.82,19.82,0,0,0,9.22,4.16Z"
+                  opacity="0.2"></path>
+                <path
+                  d="M248,80a28,28,0,1,0-51.12,15.77l-26.79,33L146,73.4a28,28,0,1,0-36.06,0L85.91,128.74l-26.79-33a28,28,0,1,0-26.6,12L47,194.63A16,16,0,0,0,62.78,208H193.22A16,16,0,0,0,209,194.63l14.47-86.85A28,28,0,0,0,248,80ZM128,40a12,12,0,1,1-12,12A12,12,0,0,1,128,40ZM24,80A12,12,0,1,1,36,92,12,12,0,0,1,24,80ZM193.22,192H62.78L48.86,108.52,81.79,149A8,8,0,0,0,88,152a7.83,7.83,0,0,0,1.08-.07,8,8,0,0,0,6.26-4.74l29.3-67.4a27,27,0,0,0,6.72,0l29.3,67.4a8,8,0,0,0,6.26,4.74A7.83,7.83,0,0,0,168,152a8,8,0,0,0,6.21-3l32.93-40.52ZM220,92a12,12,0,1,1,12-12A12,12,0,0,1,220,92Z">
+                </path>
+              </svg>
+            </div>
+            <h3>Welcome Back</h3>
+            <p>Log in to continue managing your network, tracking earnings, and growing your rewards.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <div id="gxToastContainer"></div>
+  <style>
+    #gxToastContainer {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      z-index: 999999;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .gx-toast {
+      min-width: 280px;
+      max-width: 360px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      animation: gxSlideIn 0.25s ease;
+    }
+
+    .gx-toast-success {
+      background: linear-gradient(135deg, #16a34a, #22c55e);
+    }
+
+    .gx-toast-error {
+      background: linear-gradient(135deg, #dc2626, #ef4444);
+    }
+
+    .gx-toast-close {
+      cursor: pointer;
+      font-size: 20px;
+      line-height: 1;
+      opacity: 0.9;
+    }
+
+    @keyframes gxSlideIn {
+      from {
+        transform: translateX(120%);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+  </style>
+
+  <script>
+    function showToast(status, message) {
+      const container = document.getElementById("gxToastContainer");
+      if (!container) return console.error("Toast container not found");
+
+      container.innerHTML = "";
+
+      const toast = document.createElement("div");
+      toast.className = `gx-toast ${status ? "gx-toast-success" : "gx-toast-error"}`;
+      toast.innerHTML = `
+      <span>${message}</span>
+      <span class="gx-toast-close">&times;</span>
+    `;
+
+      container.appendChild(toast);
+
+      toast.querySelector(".gx-toast-close").addEventListener("click", function () {
+        toast.remove();
+      });
+
+      setTimeout(function () {
+        toast.remove();
+      }, 3000);
+    }
+
+    async function handleLogin(e) {
+      e.preventDefault();
+
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const submitBtn = document.querySelector("#MainloginForm button[type='submit']");
+
+      if (!email || !password) {
+        showToast(false, "Email and password are required.");
+        return;
+      }
+
+      try {
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Signing In...";
+
+        const response = await fetch("/api/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            pwd: password,
+          }),
+        });
+
+        const data = await response.json();
+
+        if (data.status === true) {
+          document.cookie = `token=${data.token}; path=/; max-age=172800`;
+          document.cookie = `auth=${data.hashedToken}; path=/; max-age=172800`;
+
+          showToast(true, data.message || "Login successful!");
+
+          setTimeout(() => {
+            window.location.assign("/dashboard");
+          }, 800);
+        } else {
+          showToast(false, data.message || "Invalid email or password.");
+          submitBtn.disabled = false;
+          submitBtn.innerText = "Sign In";
+        }
+      } catch (error) {
+        console.error("Login Error:", error);
+        showToast(false, "Something went wrong during login.");
+        submitBtn.disabled = false;
+        submitBtn.innerText = "Sign In";
+      }
+    }
+
+    document.getElementById("MainloginForm").addEventListener("submit", handleLogin);
+
+
+    // Password toggle (show/hide with icon change)
+    document.querySelectorAll(".input-icon-eye").forEach((eyeWrapper) => {
+      eyeWrapper.style.cursor = "pointer";
+
+      eyeWrapper.addEventListener("click", function () {
+        const input = this.parentElement.querySelector("input");
+        const icon = this.querySelector("svg");
+
+        if (!input || !icon) return;
+
+        if (input.type === "password") {
+          // Show password
+          input.type = "text";
+
+          // Change to eye-off icon
+          icon.innerHTML = `
+        <path d="M17.94 17.94A10.94 10.94 0 0 1 12 19C7 19 2.73 15.11 1 12c.73-1.31 1.71-2.61 2.92-3.79M9.88 9.88A3 3 0 0 0 12 15a3 3 0 0 0 2.12-.88M1 1l22 22"></path>
+        <path d="M10.58 5.09A10.94 10.94 0 0 1 12 5c5 0 9.27 3.89 11 7-1 1.73-2.45 3.34-4.22 4.54"></path>
+      `;
+        } else {
+          // Hide password
+          input.type = "password";
+
+          // Change to eye icon
+          icon.innerHTML = `
+        <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"></path>
+        <circle cx="12" cy="12" r="3"></circle>
+      `;
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

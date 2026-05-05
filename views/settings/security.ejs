@@ -1,0 +1,392 @@
+<!-- <div class="card">
+  <div class="card-header">
+    <h3 class="card-title"><%= title %></h3>
+  </div>
+  <div class="card-body">
+    <p>This is the <strong>Security Settings</strong> page.</p>
+
+    <form method="POST" action="/user/settings/security/update-password">
+      <div class="form-group">
+        <label for="currentPassword">Current Password</label>
+        <input
+          type="password"
+          id="currentPassword"
+          name="currentPassword"
+          class="form-control"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="newPassword">New Password</label>
+        <input
+          type="password"
+          id="newPassword"
+          name="newPassword"
+          class="form-control"
+          required
+        />
+      </div>
+
+      <button type="submit" class="btn btn-primary">Update Password</button>
+    </form>
+  </div>
+</div> -->
+<div class="main px-lg-4 px-md-4">
+  <%- include('../partials/header') %>
+  <div class="body d-flex py-3">
+    <div class="container-xxl">
+      <div class="row align-items-center">
+        <div class="border-0 mb-4">
+          <div
+            class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap"
+          >
+            <h3 class="fw-bold mb-0">Security</h3>
+          </div>
+        </div>
+      </div>
+      <div class="row align-item-center mb-3">
+        <div class="col-xl-12">
+          <div class="card">
+            <div
+              class="card-header py-3 d-flex justify-content-between bg-transparent align-items-center"
+            >
+              <h6 class="mb-0 fw-bold">Authentication (2FA)</h6>
+            </div>
+            <div class="card-body">
+              <!-- <div class="border-bottom py-2 mb-2">
+                <div class="row justify-content-between">
+                  <div class="col-lg-4 col-xl-4">
+                    <div class="d-flex">
+                      <i class="icofont-network fs-5 text-primary"></i>
+                      <div class="d-flex flex-column px-2">
+                        <span class="fw-bold"
+                          >Google Authenticator (Recommended)</span
+                        ><span class="text-muted small"
+                          >Protect your account and transactions.</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-xl-4">
+                    <div class="d-flex align-items-center">
+                      <i class="fs-5 icofont-close-circled text-danger"></i
+                      ><span class="px-2">InActive</span>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-xl-4">
+                    <button
+                      class="btn flex-fill btn-light-warning py-2 fs-6 text-uppercase px-3 mt-2 mt-lg-0 float-lg-end"
+                      data-bs-target="#Enable2FaModal"
+                      data-bs-toggle="modal"
+                      type="button"
+                    >
+                      Enable
+                    </button>
+                  </div>
+                </div>
+              </div> -->
+              <div class="border-bottom py-2 mb-2">
+                <div class="row justify-content-between">
+                  <div class="col-lg-4 col-xl-4">
+                    <div class="d-flex">
+                      <i class="icofont-smart-phone fs-5 text-primary"></i>
+                      <div class="d-flex flex-column px-2">
+                        <span class="fw-bold">Phone Number Verification</span
+                        ><span class="text-muted small"
+                          >Protect your account and transactions.</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-xl-4">
+                    <div class="d-flex align-items-center">
+                      <i class="icofont-check-circled fs-5 text-success"></i
+                      ><span id="phone" class="px-2"></span>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-xl-4">
+                    <a
+                      class="btn flex-fill btn-light-success py-2 fs-6 text-uppercase px-3 mt-2 mt-lg-0 float-lg-end mx-2"
+                      href="/user/settings/profile"
+                      >Change
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="py-2">
+                <div class="row justify-content-between">
+                  <div class="col-lg-4 col-xl-4">
+                    <div class="d-flex">
+                      <i class="icofont-email fs-5 text-primary"></i>
+                      <div class="d-flex flex-column px-2">
+                        <span class="fw-bold">Email Address Verification</span
+                        ><span class="text-muted small"
+                          >Protect your account and transactions.</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-xl-4">
+                    <div class="d-flex align-items-center">
+                      <i class="icofont-check-circled fs-5 text-success"></i
+                      ><span id="email" class="px-2"></span>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-xl-4"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row align-item-center mb-3">
+        <div class="col-xl-12">
+          <div class="card">
+            <div
+              class="card-header py-3 d-flex justify-content-between bg-transparent align-items-center"
+            >
+              <h6 class="mb-0 fw-bold">Advanced Security</h6>
+            </div>
+            <div class="card-body">
+              <div class="py-2 mb-2">
+                <div class="row justify-content-between">
+                  <div class="col-lg-4 col-xl-4">
+                    <div class="d-flex">
+                      <i class="icofont-ui-lock fs-5 text-primary"></i>
+                      <div class="d-flex flex-column px-2">
+                        <span class="fw-bold">Login Password</span
+                        ><span class="text-muted small"
+                          >Login password is used to log in to your
+                          account.</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-xl-4">
+                    <button
+                      class="btn flex-fill btn-light-success py-2 fs-6 text-uppercase px-3 mt-2 mt-lg-0 float-lg-end"
+                      data-bs-target="#ChangePasswordModal"
+                      data-bs-toggle="modal"
+                      type="button"
+                    >
+                      Change
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        id="Enable2FaModal"
+        class="modal fade"
+        tabindex="-1"
+        style="display: none"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">2FA Settings</h5>
+              <button
+                aria-label="Close"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                type="button"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div>
+                <div class="mb-2 text-center">
+                  <button class="btn btn-primary" type="submit">ENABLE</button>
+                </div>
+                <!---->
+                <!---->
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+                type="button"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        id="ChangePasswordModal"
+        class="modal fade"
+        tabindex="-1"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <form id="changePasswordForm">
+              <div class="modal-header">
+                <h5 class="modal-title">Change Password</h5>
+                <button
+                  aria-label="Close"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  type="button"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <div class="mb-3">
+                  <label class="form-label" for="currentPassword"
+                    >Current Password</label
+                  >
+                  <input
+                    class="form-control"
+                    type="password"
+                    id="currentPassword"
+                    name="currentPassword"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label" for="newPassword"
+                    >New Password</label
+                  >
+                  <input
+                    class="form-control"
+                    type="password"
+                    id="newPassword"
+                    name="newPassword"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label" for="confirmPassword"
+                    >Confirm New Password</label
+                  >
+                  <input
+                    class="form-control"
+                    type="password"
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                  type="button"
+                >
+                  Close
+                </button>
+                <button class="btn btn-primary" type="submit">Update</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id='cryptoon-layout' class="theme-orange">
+  <!-- <div id="toast"></div> -->
+  <div id="toast">
+    <span id="toast-message"></span>
+    <span id="toast-close" onclick="hideToast()"> ×</span>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  document
+    .getElementById("changePasswordForm")
+    .addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const currentPassword = document.getElementById("currentPassword").value;
+      const newPassword = document.getElementById("newPassword").value;
+      const confirmPassword = document.getElementById("confirmPassword").value;
+
+      if (newPassword !== confirmPassword) {
+        showToast(false, "new password do not match");
+        return;
+      }
+
+      // Send request to backend
+      fetch("/api/user/change-password", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          currentPassword,
+          newPassword,
+        }),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            // throw new Error("Password update failed");
+        showToast(false, response.message || "Login failed");
+
+          }
+          return response.json();
+        })
+        .then((data) => {
+           showToast(true, "Password changed successfully.");
+          // Optionally close the modal
+          const modal = bootstrap.Modal.getInstance(
+            document.getElementById("ChangePasswordModal")
+          );
+          modal.hide();
+        })
+
+        .catch((error) => {
+          alert("Error: " + error.message);
+        });
+    });
+
+  $.ajax({
+    url: "/api/user/info",
+    type: "GET",
+    success: function (response) {
+      if (response.status) {
+        const user = response.user || {};
+
+        const email = document.getElementById("email");
+        const phone = document.getElementById("phone");
+        email.innerHTML = `${user.email}`;
+        phone.innerHTML=` ${user.phone}`
+ 
+      } else {
+        console.warn("Unauthorized or user not found");
+      }
+    },
+    error: function (xhr) {
+      console.error("Failed to fetch user info:", xhr);
+    },
+  });
+   function showToast(status, message) {
+    const toast = document.getElementById("toast");
+    const toastMessage = document.getElementById("toast-message");
+    let toastTimeout;
+    toastMessage.innerText = message;
+
+    toast.classList.remove("bg-success1", "bg-danger1");
+    toast.classList.add(status ? "bg-success1" : "bg-danger1");
+    toast.classList.add("show");
+
+    clearTimeout(toastTimeout);
+    toastTimeout = setTimeout(() => {
+      hideToast();
+    }, 3000);
+  }
+
+  function hideToast() {
+    const toast = document.getElementById("toast");
+    toast.classList.remove("show");
+  }
+</script>

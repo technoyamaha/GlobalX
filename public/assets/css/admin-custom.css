@@ -1,0 +1,8936 @@
+.dashboardData { margin-top: 25px; } 
+.card.dashboard-card {
+    border: none;
+    border-radius: 16px;
+    /* background: #fff; */
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    text-align: center;
+    padding: 25px 15px;
+    height: 100%;
+    color: #fff;
+}
+.card.dashboard-card:hover { transform: translateY(-5px); box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12); } 
+.dashboard-icon { font-size: 42px; color: #2868e8; margin-bottom: 12px; } 
+.dashboard-title { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 6px; } 
+.dashboard-value { font-size: 18px; font-weight: bold; color: #fff; margin-bottom: 14px; }
+.dashboard-card .btn {
+    font-size: 13px;
+    padding: 6px 14px;
+    border-radius: 8px;
+    color: #fff;
+}
+.content-wrapper{ padding: 0 !important; }
+.dashboardData { margin-top: 0; display: flex; gap: 20px; }
+.dashboardData .dh-flDiv { padding: 0; width: calc(25% - 15px); margin: 0 !important;}
+.card.dashboard-card { padding: 40px 30px; } 
+.card-body { padding: 0; }
+section.content .card-header h3 { margin: 0; font-size: 25px; line-height: 30px; font-weight: 500; } 
+section.content .card-header h3 i { font-size: 25px; margin-right: 5px; } 
+.table-responsive table { margin: 0 !important; }
+.card-tools button.btn.btn-tool { padding: 0 !important; }
+td.project-actions { display: flex; gap: 5px; }
+ul.pagination { margin: 0; }
+.rec-recdDiv { padding: 20px; } 
+section.content nav { padding-top: 20px; margin: 0 !important; }
+#search { min-width: 200px; }
+.content-area { padding: 0 !important; }
+.content-area .wrapper{ padding: 0 !important; }
+.sidebar-toggle-wrapper { padding: 0 !important; padding-bottom: 10px !important; }
+.div-sr-cl { padding-bottom: 15px; }
+.meb-lisDiv section.content nav { padding: 20px 0; margin: 0 !important; }
+.wrapper.meb-lisDiv { margin: 20px 0; }
+.userInfo section.content nav { padding: 10px 0; margin: 0 !important; }
+.userInfo .content .card .card-header { display: flex; flex-wrap: wrap; justify-content: space-between; }
+.userInfo ul.pagination { margin: 0; gap: 5px; }
+.userInfo .agentss .inneragent { width: calc(20% - 16px); min-width: unset;} 
+.userInfo .centerClass{ padding: 0; }
+.main-divrecwidHis { padding: 0 !important; }
+.userInfo .centerClass h1 { font-size: 34px; line-height: 40px; font-weight: 700; color: #308ff5 !important; }
+.userInfo .agentss .inneragent div#userEmailContainer span { word-wrap: break-word; }
+.userInfo .wrapper { margin: 20px 0; }
+.content-wrapper { width: calc(100% - 250px)!important; margin: 0 0 0 auto !important; }
+.sidebar-toggle-wrapper { display: none; }
+body.sidebar-collapsed .sidebar { transform: unset !important; }
+section.content-header .container-fluid { padding: 0 !important; }
+.btn-tg { background: #2868e8  !important; display: inline-flex !important; align-items: center; justify-content: center; padding: 5px; }
+.btn-tg:hover,.btn-tg.active{ background: #2868e8 !important; } .content-area .wrapper { padding: 0 !important; margin: 20px 0; }
+.btn-tg img { width: 20px; height: 20px; }
+
+#search { padding: 10px 15px 10px 30px !important; background-image: url(/assets/images/sr-icon.png); background-repeat: no-repeat; background-position: center left 5px; background-size: 20px; }
+@media (max-width:1440px){
+    main.container-fluid.p-4 { padding: 0 15px !important; }
+    
+}
+@media (max-width:1366px){
+    .userInfo .agentss .inneragent { width: calc(25% - 15px); }
+    .userInfo .centerClass h1 { font-size: 32px; }
+}
+@media (max-width:1200px) {
+.card.dashboard-card { padding: 25px; } 
+.dashboardData { gap: 15px; } 
+.dashboardData .dh-flDiv { padding: 0; width: calc(25% - 11.5px); }
+.dashboard-value { margin-bottom: 10px; }
+.dashboard-icon { font-size: 35px; margin-bottom: 10px; }
+.userInfo .agentss { gap: 15px; padding: 15px; margin-bottom: 25px; }
+.userInfo .agentss .inneragent { width: calc(25% - 11.25px); }
+.userInfo .centerClass h1 { font-size: 30px; }
+.sidebar-toggle-wrapper { display: block; }
+.content-wrapper { width: unset!important; margin: unset !important; }
+body.sidebar-collapsed .sidebar { transform: translateX(-100%)!important; }
+}
+@media (max-width:992px){ 
+.dashboardData { gap: 10px; }
+.dashboardData .dh-flDiv { padding: 0; width: calc(25% - 7.5px); }
+.card.dashboard-card { padding: 20px 15px; } 
+.dashboard-icon { font-size: 30px; margin-bottom: 10px; width: 30px; height: 30px; }
+section.content .card-header h3 { font-size: 20px; line-height: 28px; }
+section.content .card-header h3 i { font-size: 20px; margin-right: 5px; }
+.form-group { gap: 10px; margin-bottom: 10px ; }
+}
+@media (max-width:767px){ 
+.dashboardData .dh-flDiv { padding: 0; width: calc(50% - 7.5px) !important; }
+.rec-recdDiv .total_recharge { justify-content: space-between; font-size: 16px; flex-wrap: wrap; }
+.rec-recdDiv ul.pagination li.page-item { margin: 0; }
+.rec-recdDiv #search { margin-bottom: 0; }
+.userInfo .agentss { gap: 10px; padding: 15px; margin-bottom: 20px; }
+.userInfo .agentss .inneragent { width: calc(33.33% - 6.66px); padding: 15px 10px;}
+.userInfo .centerClass h1 { font-size: 28px; } 
+.userInfo .centerClass { padding: 0; margin: 0 !important; }
+.sidebar {        width: 200px !important;}
+#search { width: 100% !important; max-width: 100% !important; }
+}
+@media (max-width:575px){ 
+.userInfo .agentss .inneragent { width: calc(50% - 5px); padding: 15px 10px; }
+}
+@media (max-width:414px){ 
+.dashboardData .dh-flDiv { padding: 0; width: 100% !important; }
+.rec-recdDiv .content .card-header { padding: 10px; }
+.userInfo .agentss .inneragent { width: 100%; }
+.userInfo .centerClass h1 { font-size: 24px !important; }
+}
+
+
+
+.icofont-angry-monster:before {
+    content: ""
+}
+
+.icofont-bathtub:before {
+    content: ""
+}
+
+.icofont-bird-wings:before {
+    content: ""
+}
+
+.icofont-bow:before {
+    content: ""
+}
+
+.icofont-castle:before {
+    content: ""
+}
+
+.icofont-circuit:before {
+    content: ""
+}
+
+.icofont-crown-king:before {
+    content: ""
+}
+
+.icofont-crown-queen:before {
+    content: ""
+}
+
+.icofont-dart:before {
+    content: ""
+}
+
+.icofont-disability-race:before {
+    content: ""
+}
+
+.icofont-diving-goggle:before {
+    content: ""
+}
+
+.icofont-eye-open:before {
+    content: ""
+}
+
+.icofont-flora-flower:before {
+    content: ""
+}
+
+.icofont-flora:before {
+    content: ""
+}
+
+.icofont-gift-box:before {
+    content: ""
+}
+
+.icofont-halloween-pumpkin:before {
+    content: ""
+}
+
+.icofont-hand-power:before {
+    content: ""
+}
+
+.icofont-hand-thunder:before {
+    content: ""
+}
+
+.icofont-king-monster:before {
+    content: ""
+}
+
+.icofont-love:before {
+    content: ""
+}
+
+.icofont-magician-hat:before {
+    content: ""
+}
+
+.icofont-native-american:before {
+    content: ""
+}
+
+.icofont-owl-look:before {
+    content: ""
+}
+
+.icofont-phoenix:before {
+    content: ""
+}
+
+.icofont-robot-face:before {
+    content: ""
+}
+
+.icofont-sand-clock:before {
+    content: ""
+}
+
+.icofont-shield-alt:before {
+    content: ""
+}
+
+.icofont-ship-wheel:before {
+    content: ""
+}
+
+.icofont-skull-danger:before {
+    content: ""
+}
+
+.icofont-skull-face:before {
+    content: ""
+}
+
+.icofont-snowmobile:before {
+    content: ""
+}
+
+.icofont-space-shuttle:before {
+    content: ""
+}
+
+.icofont-star-cryptoon:before {
+    content: ""
+}
+
+.icofont-swirl:before {
+    content: ""
+}
+
+.icofont-tattoo-wing:before {
+    content: ""
+}
+
+.icofont-throne:before {
+    content: ""
+}
+
+.icofont-tree-alt:before {
+    content: ""
+}
+
+.icofont-triangle:before {
+    content: ""
+}
+
+.icofont-unity-hand:before {
+    content: ""
+}
+
+.icofont-weed:before {
+    content: ""
+}
+
+.icofont-woman-bird:before {
+    content: ""
+}
+
+.icofont-bat:before {
+    content: ""
+}
+
+.icofont-bear-face:before {
+    content: ""
+}
+
+.icofont-bear-tracks:before {
+    content: ""
+}
+
+.icofont-bear:before {
+    content: ""
+}
+
+.icofont-bird-alt:before {
+    content: ""
+}
+
+.icofont-bird-flying:before {
+    content: ""
+}
+
+.icofont-bird:before {
+    content: ""
+}
+
+.icofont-birds:before {
+    content: ""
+}
+
+.icofont-bone:before {
+    content: ""
+}
+
+.icofont-bull:before {
+    content: ""
+}
+
+.icofont-butterfly-alt:before {
+    content: ""
+}
+
+.icofont-butterfly:before {
+    content: ""
+}
+
+.icofont-camel-alt:before {
+    content: ""
+}
+
+.icofont-camel-head:before {
+    content: ""
+}
+
+.icofont-camel:before {
+    content: ""
+}
+
+.icofont-cat-alt-1:before {
+    content: ""
+}
+
+.icofont-cat-alt-2:before {
+    content: ""
+}
+
+.icofont-cat-alt-3:before {
+    content: ""
+}
+
+.icofont-cat-dog:before {
+    content: ""
+}
+
+.icofont-cat-face:before {
+    content: ""
+}
+
+.icofont-cat:before {
+    content: ""
+}
+
+.icofont-cow-head:before {
+    content: ""
+}
+
+.icofont-cow:before {
+    content: ""
+}
+
+.icofont-crab:before {
+    content: ""
+}
+
+.icofont-crocodile:before {
+    content: ""
+}
+
+.icofont-deer-head:before {
+    content: ""
+}
+
+.icofont-dog-alt:before {
+    content: ""
+}
+
+.icofont-dog-barking:before {
+    content: ""
+}
+
+.icofont-dog:before {
+    content: ""
+}
+
+.icofont-dolphin:before {
+    content: ""
+}
+
+.icofont-duck-tracks:before {
+    content: ""
+}
+
+.icofont-eagle-head:before {
+    content: ""
+}
+
+.icofont-eaten-fish:before {
+    content: ""
+}
+
+.icofont-elephant-alt:before {
+    content: ""
+}
+
+.icofont-elephant-head-alt:before {
+    content: ""
+}
+
+.icofont-elephant-head:before {
+    content: ""
+}
+
+.icofont-elephant:before {
+    content: ""
+}
+
+.icofont-elk:before {
+    content: ""
+}
+
+.icofont-fish-1:before {
+    content: ""
+}
+
+.icofont-fish-2:before {
+    content: ""
+}
+
+.icofont-fish-3:before {
+    content: ""
+}
+
+.icofont-fish-4:before {
+    content: ""
+}
+
+.icofont-fish-5:before {
+    content: ""
+}
+
+.icofont-fish:before {
+    content: ""
+}
+
+.icofont-fox-alt:before {
+    content: ""
+}
+
+.icofont-fox:before {
+    content: ""
+}
+
+.icofont-frog-tracks:before {
+    content: ""
+}
+
+.icofont-frog:before {
+    content: ""
+}
+
+.icofont-froggy:before {
+    content: ""
+}
+
+.icofont-giraffe-head-1:before {
+    content: ""
+}
+
+.icofont-giraffe-head-2:before {
+    content: ""
+}
+
+.icofont-giraffe-head:before {
+    content: ""
+}
+
+.icofont-giraffe:before {
+    content: ""
+}
+
+.icofont-goat-head:before {
+    content: ""
+}
+
+.icofont-gorilla:before {
+    content: ""
+}
+
+.icofont-hen-tracks:before {
+    content: ""
+}
+
+.icofont-horse-head-1:before {
+    content: ""
+}
+
+.icofont-horse-head-2:before {
+    content: ""
+}
+
+.icofont-horse-head:before {
+    content: ""
+}
+
+.icofont-horse-tracks:before {
+    content: ""
+}
+
+.icofont-jellyfish:before {
+    content: ""
+}
+
+.icofont-kangaroo:before {
+    content: ""
+}
+
+.icofont-lemur:before {
+    content: ""
+}
+
+.icofont-lion-head-1:before {
+    content: ""
+}
+
+.icofont-lion-head-2:before {
+    content: ""
+}
+
+.icofont-lion-head:before {
+    content: ""
+}
+
+.icofont-lion:before {
+    content: ""
+}
+
+.icofont-monkey-2:before {
+    content: ""
+}
+
+.icofont-monkey-3:before {
+    content: ""
+}
+
+.icofont-monkey-face:before {
+    content: ""
+}
+
+.icofont-monkey:before {
+    content: ""
+}
+
+.icofont-octopus-alt:before {
+    content: ""
+}
+
+.icofont-octopus:before {
+    content: ""
+}
+
+.icofont-owl:before {
+    content: ""
+}
+
+.icofont-panda-face:before {
+    content: ""
+}
+
+.icofont-panda:before {
+    content: ""
+}
+
+.icofont-panther:before {
+    content: ""
+}
+
+.icofont-parrot-lip:before {
+    content: ""
+}
+
+.icofont-parrot:before {
+    content: ""
+}
+
+.icofont-paw:before {
+    content: ""
+}
+
+.icofont-pelican:before {
+    content: ""
+}
+
+.icofont-penguin:before {
+    content: ""
+}
+
+.icofont-pig-face:before {
+    content: ""
+}
+
+.icofont-pig:before {
+    content: ""
+}
+
+.icofont-pigeon-1:before {
+    content: ""
+}
+
+.icofont-pigeon-2:before {
+    content: ""
+}
+
+.icofont-pigeon:before {
+    content: ""
+}
+
+.icofont-rabbit:before {
+    content: ""
+}
+
+.icofont-rat:before {
+    content: ""
+}
+
+.icofont-rhino-head:before {
+    content: ""
+}
+
+.icofont-rhino:before {
+    content: ""
+}
+
+.icofont-rooster:before {
+    content: ""
+}
+
+.icofont-seahorse:before {
+    content: ""
+}
+
+.icofont-seal:before {
+    content: ""
+}
+
+.icofont-shrimp-alt:before {
+    content: ""
+}
+
+.icofont-shrimp:before {
+    content: ""
+}
+
+.icofont-snail-1:before {
+    content: ""
+}
+
+.icofont-snail-2:before {
+    content: ""
+}
+
+.icofont-snail-3:before {
+    content: ""
+}
+
+.icofont-snail:before {
+    content: ""
+}
+
+.icofont-snake:before {
+    content: ""
+}
+
+.icofont-squid:before {
+    content: ""
+}
+
+.icofont-squirrel:before {
+    content: ""
+}
+
+.icofont-tiger-face:before {
+    content: ""
+}
+
+.icofont-tiger:before {
+    content: ""
+}
+
+.icofont-turtle:before {
+    content: ""
+}
+
+.icofont-whale:before {
+    content: ""
+}
+
+.icofont-woodpecker:before {
+    content: ""
+}
+
+.icofont-zebra:before {
+    content: ""
+}
+
+.icofont-brand-acer:before {
+    content: ""
+}
+
+.icofont-brand-adidas:before {
+    content: ""
+}
+
+.icofont-brand-adobe:before {
+    content: ""
+}
+
+.icofont-brand-air-new-zealand:before {
+    content: ""
+}
+
+.icofont-brand-airbnb:before {
+    content: ""
+}
+
+.icofont-brand-aircell:before {
+    content: ""
+}
+
+.icofont-brand-airtel:before {
+    content: ""
+}
+
+.icofont-brand-alcatel:before {
+    content: ""
+}
+
+.icofont-brand-alibaba:before {
+    content: ""
+}
+
+.icofont-brand-aliexpress:before {
+    content: ""
+}
+
+.icofont-brand-alipay:before {
+    content: ""
+}
+
+.icofont-brand-amazon:before {
+    content: ""
+}
+
+.icofont-brand-amd:before {
+    content: ""
+}
+
+.icofont-brand-american-airlines:before {
+    content: ""
+}
+
+.icofont-brand-android-robot:before {
+    content: ""
+}
+
+.icofont-brand-android:before {
+    content: ""
+}
+
+.icofont-brand-aol:before {
+    content: ""
+}
+
+.icofont-brand-apple:before {
+    content: ""
+}
+
+.icofont-brand-appstore:before {
+    content: ""
+}
+
+.icofont-brand-asus:before {
+    content: ""
+}
+
+.icofont-brand-ati:before {
+    content: ""
+}
+
+.icofont-brand-att:before {
+    content: ""
+}
+
+.icofont-brand-audi:before {
+    content: ""
+}
+
+.icofont-brand-axiata:before {
+    content: ""
+}
+
+.icofont-brand-bada:before {
+    content: ""
+}
+
+.icofont-brand-bbc:before {
+    content: ""
+}
+
+.icofont-brand-bing:before {
+    content: ""
+}
+
+.icofont-brand-blackberry:before {
+    content: ""
+}
+
+.icofont-brand-bmw:before {
+    content: ""
+}
+
+.icofont-brand-box:before {
+    content: ""
+}
+
+.icofont-brand-burger-king:before {
+    content: ""
+}
+
+.icofont-brand-business-insider:before {
+    content: ""
+}
+
+.icofont-brand-buzzfeed:before {
+    content: ""
+}
+
+.icofont-brand-cannon:before {
+    content: ""
+}
+
+.icofont-brand-casio:before {
+    content: ""
+}
+
+.icofont-brand-china-mobile:before {
+    content: ""
+}
+
+.icofont-brand-china-telecom:before {
+    content: ""
+}
+
+.icofont-brand-china-unicom:before {
+    content: ""
+}
+
+.icofont-brand-cisco:before {
+    content: ""
+}
+
+.icofont-brand-citibank:before {
+    content: ""
+}
+
+.icofont-brand-cnet:before {
+    content: ""
+}
+
+.icofont-brand-cnn:before {
+    content: ""
+}
+
+.icofont-brand-cocal-cola:before {
+    content: ""
+}
+
+.icofont-brand-compaq:before {
+    content: ""
+}
+
+.icofont-brand-debian:before {
+    content: ""
+}
+
+.icofont-brand-delicious:before {
+    content: ""
+}
+
+.icofont-brand-dell:before {
+    content: ""
+}
+
+.icofont-brand-designbump:before {
+    content: ""
+}
+
+.icofont-brand-designfloat:before {
+    content: ""
+}
+
+.icofont-brand-disney:before {
+    content: ""
+}
+
+.icofont-brand-dodge:before {
+    content: ""
+}
+
+.icofont-brand-dove:before {
+    content: ""
+}
+
+.icofont-brand-drupal:before {
+    content: ""
+}
+
+.icofont-brand-ebay:before {
+    content: ""
+}
+
+.icofont-brand-eleven:before {
+    content: ""
+}
+
+.icofont-brand-emirates:before {
+    content: ""
+}
+
+.icofont-brand-espn:before {
+    content: ""
+}
+
+.icofont-brand-etihad-airways:before {
+    content: ""
+}
+
+.icofont-brand-etisalat:before {
+    content: ""
+}
+
+.icofont-brand-etsy:before {
+    content: ""
+}
+
+.icofont-brand-fastrack:before {
+    content: ""
+}
+
+.icofont-brand-fedex:before {
+    content: ""
+}
+
+.icofont-brand-ferrari:before {
+    content: ""
+}
+
+.icofont-brand-fitbit:before {
+    content: ""
+}
+
+.icofont-brand-flikr:before {
+    content: ""
+}
+
+.icofont-brand-forbes:before {
+    content: ""
+}
+
+.icofont-brand-foursquare:before {
+    content: ""
+}
+
+.icofont-brand-foxconn:before {
+    content: ""
+}
+
+.icofont-brand-fujitsu:before {
+    content: ""
+}
+
+.icofont-brand-general-electric:before {
+    content: ""
+}
+
+.icofont-brand-gillette:before {
+    content: ""
+}
+
+.icofont-brand-gizmodo:before {
+    content: ""
+}
+
+.icofont-brand-gnome:before {
+    content: ""
+}
+
+.icofont-brand-google:before {
+    content: ""
+}
+
+.icofont-brand-gopro:before {
+    content: ""
+}
+
+.icofont-brand-gucci:before {
+    content: ""
+}
+
+.icofont-brand-hallmark:before {
+    content: ""
+}
+
+.icofont-brand-hi5:before {
+    content: ""
+}
+
+.icofont-brand-honda:before {
+    content: ""
+}
+
+.icofont-brand-hp:before {
+    content: ""
+}
+
+.icofont-brand-hsbc:before {
+    content: ""
+}
+
+.icofont-brand-htc:before {
+    content: ""
+}
+
+.icofont-brand-huawei:before {
+    content: ""
+}
+
+.icofont-brand-hulu:before {
+    content: ""
+}
+
+.icofont-brand-hyundai:before {
+    content: ""
+}
+
+.icofont-brand-ibm:before {
+    content: ""
+}
+
+.icofont-brand-icofont:before {
+    content: ""
+}
+
+.icofont-brand-icq:before {
+    content: ""
+}
+
+.icofont-brand-ikea:before {
+    content: ""
+}
+
+.icofont-brand-imdb:before {
+    content: ""
+}
+
+.icofont-brand-indiegogo:before {
+    content: ""
+}
+
+.icofont-brand-intel:before {
+    content: ""
+}
+
+.icofont-brand-ipair:before {
+    content: ""
+}
+
+.icofont-brand-jaguar:before {
+    content: ""
+}
+
+.icofont-brand-java:before {
+    content: ""
+}
+
+.icofont-brand-joomla:before {
+    content: ""
+}
+
+.icofont-brand-kickstarter:before {
+    content: ""
+}
+
+.icofont-brand-kik:before {
+    content: ""
+}
+
+.icofont-brand-lastfm:before {
+    content: ""
+}
+
+.icofont-brand-lego:before {
+    content: ""
+}
+
+.icofont-brand-lenovo:before {
+    content: ""
+}
+
+.icofont-brand-levis:before {
+    content: ""
+}
+
+.icofont-brand-lexus:before {
+    content: ""
+}
+
+.icofont-brand-lg:before {
+    content: ""
+}
+
+.icofont-brand-life-hacker:before {
+    content: ""
+}
+
+.icofont-brand-linux-mint:before {
+    content: ""
+}
+
+.icofont-brand-linux:before {
+    content: ""
+}
+
+.icofont-brand-lionix:before {
+    content: ""
+}
+
+.icofont-brand-loreal:before {
+    content: ""
+}
+
+.icofont-brand-louis-vuitton:before {
+    content: ""
+}
+
+.icofont-brand-mac-os:before {
+    content: ""
+}
+
+.icofont-brand-marvel-app:before {
+    content: ""
+}
+
+.icofont-brand-mashable:before {
+    content: ""
+}
+
+.icofont-brand-mazda:before {
+    content: ""
+}
+
+.icofont-brand-mcdonals:before {
+    content: ""
+}
+
+.icofont-brand-mercedes:before {
+    content: ""
+}
+
+.icofont-brand-micromax:before {
+    content: ""
+}
+
+.icofont-brand-microsoft:before {
+    content: ""
+}
+
+.icofont-brand-mobileme:before {
+    content: ""
+}
+
+.icofont-brand-mobily:before {
+    content: ""
+}
+
+.icofont-brand-motorola:before {
+    content: ""
+}
+
+.icofont-brand-msi:before {
+    content: ""
+}
+
+.icofont-brand-mts:before {
+    content: ""
+}
+
+.icofont-brand-myspace:before {
+    content: ""
+}
+
+.icofont-brand-mytv:before {
+    content: ""
+}
+
+.icofont-brand-nasa:before {
+    content: ""
+}
+
+.icofont-brand-natgeo:before {
+    content: ""
+}
+
+.icofont-brand-nbc:before {
+    content: ""
+}
+
+.icofont-brand-nescafe:before {
+    content: ""
+}
+
+.icofont-brand-nestle:before {
+    content: ""
+}
+
+.icofont-brand-netflix:before {
+    content: ""
+}
+
+.icofont-brand-nexus:before {
+    content: ""
+}
+
+.icofont-brand-nike:before {
+    content: ""
+}
+
+.icofont-brand-nokia:before {
+    content: ""
+}
+
+.icofont-brand-nvidia:before {
+    content: ""
+}
+
+.icofont-brand-omega:before {
+    content: ""
+}
+
+.icofont-brand-opensuse:before {
+    content: ""
+}
+
+.icofont-brand-oracle:before {
+    content: ""
+}
+
+.icofont-brand-panasonic:before {
+    content: ""
+}
+
+.icofont-brand-paypal:before {
+    content: ""
+}
+
+.icofont-brand-pepsi:before {
+    content: ""
+}
+
+.icofont-brand-philips:before {
+    content: ""
+}
+
+.icofont-brand-pizza-hut:before {
+    content: ""
+}
+
+.icofont-brand-playstation:before {
+    content: ""
+}
+
+.icofont-brand-puma:before {
+    content: ""
+}
+
+.icofont-brand-qatar-air:before {
+    content: ""
+}
+
+.icofont-brand-qvc:before {
+    content: ""
+}
+
+.icofont-brand-readernaut:before {
+    content: ""
+}
+
+.icofont-brand-redbull:before {
+    content: ""
+}
+
+.icofont-brand-reebok:before {
+    content: ""
+}
+
+.icofont-brand-reuters:before {
+    content: ""
+}
+
+.icofont-brand-samsung:before {
+    content: ""
+}
+
+.icofont-brand-sap:before {
+    content: ""
+}
+
+.icofont-brand-saudia-airlines:before {
+    content: ""
+}
+
+.icofont-brand-scribd:before {
+    content: ""
+}
+
+.icofont-brand-shell:before {
+    content: ""
+}
+
+.icofont-brand-siemens:before {
+    content: ""
+}
+
+.icofont-brand-sk-telecom:before {
+    content: ""
+}
+
+.icofont-brand-slideshare:before {
+    content: ""
+}
+
+.icofont-brand-smashing-magazine:before {
+    content: ""
+}
+
+.icofont-brand-snapchat:before {
+    content: ""
+}
+
+.icofont-brand-sony-ericsson:before {
+    content: ""
+}
+
+.icofont-brand-sony:before {
+    content: ""
+}
+
+.icofont-brand-soundcloud:before {
+    content: ""
+}
+
+.icofont-brand-sprint:before {
+    content: ""
+}
+
+.icofont-brand-squidoo:before {
+    content: ""
+}
+
+.icofont-brand-starbucks:before {
+    content: ""
+}
+
+.icofont-brand-stc:before {
+    content: ""
+}
+
+.icofont-brand-steam:before {
+    content: ""
+}
+
+.icofont-brand-suzuki:before {
+    content: ""
+}
+
+.icofont-brand-symbian:before {
+    content: ""
+}
+
+.icofont-brand-t-mobile:before {
+    content: ""
+}
+
+.icofont-brand-tango:before {
+    content: ""
+}
+
+.icofont-brand-target:before {
+    content: ""
+}
+
+.icofont-brand-tata-indicom:before {
+    content: ""
+}
+
+.icofont-brand-techcrunch:before {
+    content: ""
+}
+
+.icofont-brand-telenor:before {
+    content: ""
+}
+
+.icofont-brand-teliasonera:before {
+    content: ""
+}
+
+.icofont-brand-tesla:before {
+    content: ""
+}
+
+.icofont-brand-the-verge:before {
+    content: ""
+}
+
+.icofont-brand-thenextweb:before {
+    content: ""
+}
+
+.icofont-brand-toshiba:before {
+    content: ""
+}
+
+.icofont-brand-toyota:before {
+    content: ""
+}
+
+.icofont-brand-tribenet:before {
+    content: ""
+}
+
+.icofont-brand-ubuntu:before {
+    content: ""
+}
+
+.icofont-brand-unilever:before {
+    content: ""
+}
+
+.icofont-brand-vaio:before {
+    content: ""
+}
+
+.icofont-brand-verizon:before {
+    content: ""
+}
+
+.icofont-brand-viber:before {
+    content: ""
+}
+
+.icofont-brand-vodafone:before {
+    content: ""
+}
+
+.icofont-brand-volkswagen:before {
+    content: ""
+}
+
+.icofont-brand-walmart:before {
+    content: ""
+}
+
+.icofont-brand-warnerbros:before {
+    content: ""
+}
+
+.icofont-brand-whatsapp:before {
+    content: ""
+}
+
+.icofont-brand-wikipedia:before {
+    content: ""
+}
+
+.icofont-brand-windows:before {
+    content: ""
+}
+
+.icofont-brand-wire:before {
+    content: ""
+}
+
+.icofont-brand-wordpress:before {
+    content: ""
+}
+
+.icofont-brand-xiaomi:before {
+    content: ""
+}
+
+.icofont-brand-yahoobuzz:before {
+    content: ""
+}
+
+.icofont-brand-yamaha:before {
+    content: ""
+}
+
+.icofont-brand-youtube:before {
+    content: ""
+}
+
+.icofont-brand-zain:before {
+    content: ""
+}
+
+.icofont-bank-alt:before {
+    content: ""
+}
+
+.icofont-bank:before {
+    content: ""
+}
+
+.icofont-barcode:before {
+    content: ""
+}
+
+.icofont-bill-alt:before {
+    content: ""
+}
+
+.icofont-billboard:before {
+    content: ""
+}
+
+.icofont-briefcase-1:before {
+    content: ""
+}
+
+.icofont-briefcase-2:before {
+    content: ""
+}
+
+.icofont-businessman:before {
+    content: ""
+}
+
+.icofont-businesswoman:before {
+    content: ""
+}
+
+.icofont-chair:before {
+    content: ""
+}
+
+.icofont-coins:before {
+    content: ""
+}
+
+.icofont-company:before {
+    content: ""
+}
+
+.icofont-contact-add:before {
+    content: ""
+}
+
+.icofont-files-stack:before {
+    content: ""
+}
+
+.icofont-handshake-deal:before {
+    content: ""
+}
+
+.icofont-id-card:before {
+    content: ""
+}
+
+.icofont-meeting-add:before {
+    content: ""
+}
+
+.icofont-money-bag:before {
+    content: ""
+}
+
+.icofont-pie-chart:before {
+    content: ""
+}
+
+.icofont-presentation-alt:before {
+    content: ""
+}
+
+.icofont-presentation:before {
+    content: ""
+}
+
+.icofont-stamp:before {
+    content: ""
+}
+
+.icofont-stock-mobile:before {
+    content: ""
+}
+
+.icofont-chart-arrows-axis:before {
+    content: ""
+}
+
+.icofont-chart-bar-graph:before {
+    content: ""
+}
+
+.icofont-chart-flow-1:before {
+    content: ""
+}
+
+.icofont-chart-flow-2:before {
+    content: ""
+}
+
+.icofont-chart-flow:before {
+    content: ""
+}
+
+.icofont-chart-growth:before {
+    content: ""
+}
+
+.icofont-chart-histogram-alt:before {
+    content: ""
+}
+
+.icofont-chart-histogram:before {
+    content: ""
+}
+
+.icofont-chart-line-alt:before {
+    content: ""
+}
+
+.icofont-chart-line:before {
+    content: ""
+}
+
+.icofont-chart-pie-alt:before {
+    content: ""
+}
+
+.icofont-chart-pie:before {
+    content: ""
+}
+
+.icofont-chart-radar-graph:before {
+    content: ""
+}
+
+.icofont-architecture-alt:before {
+    content: ""
+}
+
+.icofont-architecture:before {
+    content: ""
+}
+
+.icofont-barricade:before {
+    content: ""
+}
+
+.icofont-bolt:before {
+    content: ""
+}
+
+.icofont-bricks:before {
+    content: ""
+}
+
+.icofont-building-alt:before {
+    content: ""
+}
+
+.icofont-bull-dozer:before {
+    content: ""
+}
+
+.icofont-calculations:before {
+    content: ""
+}
+
+.icofont-cement-mix:before {
+    content: ""
+}
+
+.icofont-cement-mixer:before {
+    content: ""
+}
+
+.icofont-concrete-mixer:before {
+    content: ""
+}
+
+.icofont-danger-zone:before {
+    content: ""
+}
+
+.icofont-drill:before {
+    content: ""
+}
+
+.icofont-eco-energy:before {
+    content: ""
+}
+
+.icofont-eco-environmen:before {
+    content: ""
+}
+
+.icofont-energy-air:before {
+    content: ""
+}
+
+.icofont-energy-oil:before {
+    content: ""
+}
+
+.icofont-energy-savings:before {
+    content: ""
+}
+
+.icofont-energy-solar:before {
+    content: ""
+}
+
+.icofont-energy-water:before {
+    content: ""
+}
+
+.icofont-engineer:before {
+    content: ""
+}
+
+.icofont-fire-extinguisher-alt:before {
+    content: ""
+}
+
+.icofont-fire-extinguisher:before {
+    content: ""
+}
+
+.icofont-fix-tools:before {
+    content: ""
+}
+
+.icofont-fork-lift:before {
+    content: ""
+}
+
+.icofont-glue-oil:before {
+    content: ""
+}
+
+.icofont-hammer-alt:before {
+    content: ""
+}
+
+.icofont-hammer:before {
+    content: ""
+}
+
+.icofont-help-robot:before {
+    content: ""
+}
+
+.icofont-industries-1:before {
+    content: ""
+}
+
+.icofont-industries-2:before {
+    content: ""
+}
+
+.icofont-industries-3:before {
+    content: ""
+}
+
+.icofont-industries-4:before {
+    content: ""
+}
+
+.icofont-industries-5:before {
+    content: ""
+}
+
+.icofont-industries:before {
+    content: ""
+}
+
+.icofont-labour:before {
+    content: ""
+}
+
+.icofont-mining:before {
+    content: ""
+}
+
+.icofont-paint-brush:before {
+    content: ""
+}
+
+.icofont-pollution:before {
+    content: ""
+}
+
+.icofont-power-zone:before {
+    content: ""
+}
+
+.icofont-radio-active:before {
+    content: ""
+}
+
+.icofont-recycle-alt:before {
+    content: ""
+}
+
+.icofont-recycling-man:before {
+    content: ""
+}
+
+.icofont-safety-hat-light:before {
+    content: ""
+}
+
+.icofont-safety-hat:before {
+    content: ""
+}
+
+.icofont-saw:before {
+    content: ""
+}
+
+.icofont-screw-driver:before {
+    content: ""
+}
+
+.icofont-tools-1:before {
+    content: ""
+}
+
+.icofont-tools-bag:before {
+    content: ""
+}
+
+.icofont-tow-truck:before {
+    content: ""
+}
+
+.icofont-trolley:before {
+    content: ""
+}
+
+.icofont-trowel:before {
+    content: ""
+}
+
+.icofont-under-construction-alt:before {
+    content: ""
+}
+
+.icofont-under-construction:before {
+    content: ""
+}
+
+.icofont-vehicle-cement:before {
+    content: ""
+}
+
+.icofont-vehicle-crane:before {
+    content: ""
+}
+
+.icofont-vehicle-delivery-van:before {
+    content: ""
+}
+
+.icofont-vehicle-dozer:before {
+    content: ""
+}
+
+.icofont-vehicle-excavator:before {
+    content: ""
+}
+
+.icofont-vehicle-trucktor:before {
+    content: ""
+}
+
+.icofont-vehicle-wrecking:before {
+    content: ""
+}
+
+.icofont-worker:before {
+    content: ""
+}
+
+.icofont-workers-group:before {
+    content: ""
+}
+
+.icofont-wrench:before {
+    content: ""
+}
+
+.icofont-afghani-false:before {
+    content: ""
+}
+
+.icofont-afghani-minus:before {
+    content: ""
+}
+
+.icofont-afghani-plus:before {
+    content: ""
+}
+
+.icofont-afghani-true:before {
+    content: ""
+}
+
+.icofont-afghani:before {
+    content: ""
+}
+
+.icofont-baht-false:before {
+    content: ""
+}
+
+.icofont-baht-minus:before {
+    content: ""
+}
+
+.icofont-baht-plus:before {
+    content: ""
+}
+
+.icofont-baht-true:before {
+    content: ""
+}
+
+.icofont-baht:before {
+    content: ""
+}
+
+.icofont-bitcoin-false:before {
+    content: ""
+}
+
+.icofont-bitcoin-minus:before {
+    content: ""
+}
+
+.icofont-bitcoin-plus:before {
+    content: ""
+}
+
+.icofont-bitcoin-true:before {
+    content: ""
+}
+
+.icofont-bitcoin:before {
+    content: ""
+}
+
+.icofont-dollar-flase:before {
+    content: ""
+}
+
+.icofont-dollar-minus:before {
+    content: ""
+}
+
+.icofont-dollar-plus:before {
+    content: ""
+}
+
+.icofont-dollar-true:before {
+    content: ""
+}
+
+.icofont-dollar:before {
+    content: ""
+}
+
+.icofont-dong-false:before {
+    content: ""
+}
+
+.icofont-dong-minus:before {
+    content: ""
+}
+
+.icofont-dong-plus:before {
+    content: ""
+}
+
+.icofont-dong-true:before {
+    content: ""
+}
+
+.icofont-dong:before {
+    content: ""
+}
+
+.icofont-euro-false:before {
+    content: ""
+}
+
+.icofont-euro-minus:before {
+    content: ""
+}
+
+.icofont-euro-plus:before {
+    content: ""
+}
+
+.icofont-euro-true:before {
+    content: ""
+}
+
+.icofont-euro:before {
+    content: ""
+}
+
+.icofont-frank-false:before {
+    content: ""
+}
+
+.icofont-frank-minus:before {
+    content: ""
+}
+
+.icofont-frank-plus:before {
+    content: ""
+}
+
+.icofont-frank-true:before {
+    content: ""
+}
+
+.icofont-frank:before {
+    content: ""
+}
+
+.icofont-hryvnia-false:before {
+    content: ""
+}
+
+.icofont-hryvnia-minus:before {
+    content: ""
+}
+
+.icofont-hryvnia-plus:before {
+    content: ""
+}
+
+.icofont-hryvnia-true:before {
+    content: ""
+}
+
+.icofont-hryvnia:before {
+    content: ""
+}
+
+.icofont-lira-false:before {
+    content: ""
+}
+
+.icofont-lira-minus:before {
+    content: ""
+}
+
+.icofont-lira-plus:before {
+    content: ""
+}
+
+.icofont-lira-true:before {
+    content: ""
+}
+
+.icofont-lira:before {
+    content: ""
+}
+
+.icofont-peseta-false:before {
+    content: ""
+}
+
+.icofont-peseta-minus:before {
+    content: ""
+}
+
+.icofont-peseta-plus:before {
+    content: ""
+}
+
+.icofont-peseta-true:before {
+    content: ""
+}
+
+.icofont-peseta:before {
+    content: ""
+}
+
+.icofont-peso-false:before {
+    content: ""
+}
+
+.icofont-peso-minus:before {
+    content: ""
+}
+
+.icofont-peso-plus:before {
+    content: ""
+}
+
+.icofont-peso-true:before {
+    content: ""
+}
+
+.icofont-peso:before {
+    content: ""
+}
+
+.icofont-pound-false:before {
+    content: ""
+}
+
+.icofont-pound-minus:before {
+    content: ""
+}
+
+.icofont-pound-plus:before {
+    content: ""
+}
+
+.icofont-pound-true:before {
+    content: ""
+}
+
+.icofont-pound:before {
+    content: ""
+}
+
+.icofont-renminbi-false:before {
+    content: ""
+}
+
+.icofont-renminbi-minus:before {
+    content: ""
+}
+
+.icofont-renminbi-plus:before {
+    content: ""
+}
+
+.icofont-renminbi-true:before {
+    content: ""
+}
+
+.icofont-renminbi:before {
+    content: ""
+}
+
+.icofont-riyal-false:before {
+    content: ""
+}
+
+.icofont-riyal-minus:before {
+    content: ""
+}
+
+.icofont-riyal-plus:before {
+    content: ""
+}
+
+.icofont-riyal-true:before {
+    content: ""
+}
+
+.icofont-riyal:before {
+    content: ""
+}
+
+.icofont-rouble-false:before {
+    content: ""
+}
+
+.icofont-rouble-minus:before {
+    content: ""
+}
+
+.icofont-rouble-plus:before {
+    content: ""
+}
+
+.icofont-rouble-true:before {
+    content: ""
+}
+
+.icofont-rouble:before {
+    content: ""
+}
+
+.icofont-rupee-false:before {
+    content: ""
+}
+
+.icofont-rupee-minus:before {
+    content: ""
+}
+
+.icofont-rupee-plus:before {
+    content: ""
+}
+
+.icofont-rupee-true:before {
+    content: ""
+}
+
+.icofont-rupee:before {
+    content: ""
+}
+
+.icofont-taka-false:before {
+    content: ""
+}
+
+.icofont-taka-minus:before {
+    content: ""
+}
+
+.icofont-taka-plus:before {
+    content: ""
+}
+
+.icofont-taka-true:before {
+    content: ""
+}
+
+.icofont-taka:before {
+    content: ""
+}
+
+.icofont-turkish-lira-false:before {
+    content: ""
+}
+
+.icofont-turkish-lira-minus:before {
+    content: ""
+}
+
+.icofont-turkish-lira-plus:before {
+    content: ""
+}
+
+.icofont-turkish-lira-true:before {
+    content: ""
+}
+
+.icofont-turkish-lira:before {
+    content: ""
+}
+
+.icofont-won-false:before {
+    content: ""
+}
+
+.icofont-won-minus:before {
+    content: ""
+}
+
+.icofont-won-plus:before {
+    content: ""
+}
+
+.icofont-won-true:before {
+    content: ""
+}
+
+.icofont-won:before {
+    content: ""
+}
+
+.icofont-yen-false:before {
+    content: ""
+}
+
+.icofont-yen-minus:before {
+    content: ""
+}
+
+.icofont-yen-plus:before {
+    content: ""
+}
+
+.icofont-yen-true:before {
+    content: ""
+}
+
+.icofont-yen:before {
+    content: ""
+}
+
+.icofont-android-nexus:before {
+    content: ""
+}
+
+.icofont-android-tablet:before {
+    content: ""
+}
+
+.icofont-apple-watch:before {
+    content: ""
+}
+
+.icofont-drawing-tablet:before {
+    content: ""
+}
+
+.icofont-earphone:before {
+    content: ""
+}
+
+.icofont-flash-drive:before {
+    content: ""
+}
+
+.icofont-game-console:before {
+    content: ""
+}
+
+.icofont-game-controller:before {
+    content: ""
+}
+
+.icofont-game-pad:before {
+    content: ""
+}
+
+.icofont-game:before {
+    content: ""
+}
+
+.icofont-headphone-alt-1:before {
+    content: ""
+}
+
+.icofont-headphone-alt-2:before {
+    content: ""
+}
+
+.icofont-headphone-alt-3:before {
+    content: ""
+}
+
+.icofont-headphone-alt:before {
+    content: ""
+}
+
+.icofont-headphone:before {
+    content: ""
+}
+
+.icofont-htc-one:before {
+    content: ""
+}
+
+.icofont-imac:before {
+    content: ""
+}
+
+.icofont-ipad:before {
+    content: ""
+}
+
+.icofont-iphone:before {
+    content: ""
+}
+
+.icofont-ipod-nano:before {
+    content: ""
+}
+
+.icofont-ipod-touch:before {
+    content: ""
+}
+
+.icofont-keyboard-alt:before {
+    content: ""
+}
+
+.icofont-keyboard-wireless:before {
+    content: ""
+}
+
+.icofont-keyboard:before {
+    content: ""
+}
+
+.icofont-laptop-alt:before {
+    content: ""
+}
+
+.icofont-laptop:before {
+    content: ""
+}
+
+.icofont-macbook:before {
+    content: ""
+}
+
+.icofont-magic-mouse:before {
+    content: ""
+}
+
+.icofont-micro-chip:before {
+    content: ""
+}
+
+.icofont-microphone-alt:before {
+    content: ""
+}
+
+.icofont-microphone:before {
+    content: ""
+}
+
+.icofont-monitor:before {
+    content: ""
+}
+
+.icofont-mouse:before {
+    content: ""
+}
+
+.icofont-mp3-player:before {
+    content: ""
+}
+
+.icofont-nintendo:before {
+    content: ""
+}
+
+.icofont-playstation-alt:before {
+    content: ""
+}
+
+.icofont-psvita:before {
+    content: ""
+}
+
+.icofont-radio-mic:before {
+    content: ""
+}
+
+.icofont-radio:before {
+    content: ""
+}
+
+.icofont-refrigerator:before {
+    content: ""
+}
+
+.icofont-samsung-galaxy:before {
+    content: ""
+}
+
+.icofont-surface-tablet:before {
+    content: ""
+}
+
+.icofont-ui-head-phone:before {
+    content: ""
+}
+
+.icofont-ui-keyboard:before {
+    content: ""
+}
+
+.icofont-washing-machine:before {
+    content: ""
+}
+
+.icofont-wifi-router:before {
+    content: ""
+}
+
+.icofont-wii-u:before {
+    content: ""
+}
+
+.icofont-windows-lumia:before {
+    content: ""
+}
+
+.icofont-wireless-mouse:before {
+    content: ""
+}
+
+.icofont-xbox-360:before {
+    content: ""
+}
+
+.icofont-arrow-down:before {
+    content: ""
+}
+
+.icofont-arrow-left:before {
+    content: ""
+}
+
+.icofont-arrow-right:before {
+    content: ""
+}
+
+.icofont-arrow-up:before {
+    content: ""
+}
+
+.icofont-block-down:before {
+    content: ""
+}
+
+.icofont-block-left:before {
+    content: ""
+}
+
+.icofont-block-right:before {
+    content: ""
+}
+
+.icofont-block-up:before {
+    content: ""
+}
+
+.icofont-bubble-down:before {
+    content: ""
+}
+
+.icofont-bubble-left:before {
+    content: ""
+}
+
+.icofont-bubble-right:before {
+    content: ""
+}
+
+.icofont-bubble-up:before {
+    content: ""
+}
+
+.icofont-caret-down:before {
+    content: ""
+}
+
+.icofont-caret-left:before {
+    content: ""
+}
+
+.icofont-caret-right:before {
+    content: ""
+}
+
+.icofont-caret-up:before {
+    content: ""
+}
+
+.icofont-circled-down:before {
+    content: ""
+}
+
+.icofont-circled-left:before {
+    content: ""
+}
+
+.icofont-circled-right:before {
+    content: ""
+}
+
+.icofont-circled-up:before {
+    content: ""
+}
+
+.icofont-collapse:before {
+    content: ""
+}
+
+.icofont-cursor-drag:before {
+    content: ""
+}
+
+.icofont-curved-double-left:before {
+    content: ""
+}
+
+.icofont-curved-double-right:before {
+    content: ""
+}
+
+.icofont-curved-down:before {
+    content: ""
+}
+
+.icofont-curved-left:before {
+    content: ""
+}
+
+.icofont-curved-right:before {
+    content: ""
+}
+
+.icofont-curved-up:before {
+    content: ""
+}
+
+.icofont-dotted-down:before {
+    content: ""
+}
+
+.icofont-dotted-left:before {
+    content: ""
+}
+
+.icofont-dotted-right:before {
+    content: ""
+}
+
+.icofont-dotted-up:before {
+    content: ""
+}
+
+.icofont-double-left:before {
+    content: ""
+}
+
+.icofont-double-right:before {
+    content: ""
+}
+
+.icofont-expand-alt:before {
+    content: ""
+}
+
+.icofont-hand-down:before {
+    content: ""
+}
+
+.icofont-hand-drag:before {
+    content: ""
+}
+
+.icofont-hand-drag1:before {
+    content: ""
+}
+
+.icofont-hand-drag2:before {
+    content: ""
+}
+
+.icofont-hand-drawn-alt-down:before {
+    content: ""
+}
+
+.icofont-hand-drawn-alt-left:before {
+    content: ""
+}
+
+.icofont-hand-drawn-alt-right:before {
+    content: ""
+}
+
+.icofont-hand-drawn-alt-up:before {
+    content: ""
+}
+
+.icofont-hand-drawn-down:before {
+    content: ""
+}
+
+.icofont-hand-drawn-left:before {
+    content: ""
+}
+
+.icofont-hand-drawn-right:before {
+    content: ""
+}
+
+.icofont-hand-drawn-up:before {
+    content: ""
+}
+
+.icofont-hand-grippers:before {
+    content: ""
+}
+
+.icofont-hand-left:before {
+    content: ""
+}
+
+.icofont-hand-right:before {
+    content: ""
+}
+
+.icofont-hand-up:before {
+    content: ""
+}
+
+.icofont-line-block-down:before {
+    content: ""
+}
+
+.icofont-line-block-left:before {
+    content: ""
+}
+
+.icofont-line-block-right:before {
+    content: ""
+}
+
+.icofont-line-block-up:before {
+    content: ""
+}
+
+.icofont-long-arrow-down:before {
+    content: ""
+}
+
+.icofont-long-arrow-left:before {
+    content: ""
+}
+
+.icofont-long-arrow-right:before {
+    content: ""
+}
+
+.icofont-long-arrow-up:before {
+    content: ""
+}
+
+.icofont-rounded-collapse:before {
+    content: ""
+}
+
+.icofont-rounded-double-left:before {
+    content: ""
+}
+
+.icofont-rounded-double-right:before {
+    content: ""
+}
+
+.icofont-rounded-down:before {
+    content: ""
+}
+
+.icofont-rounded-expand:before {
+    content: ""
+}
+
+.icofont-rounded-left-down:before {
+    content: ""
+}
+
+.icofont-rounded-left-up:before {
+    content: ""
+}
+
+.icofont-rounded-left:before {
+    content: ""
+}
+
+.icofont-rounded-right-down:before {
+    content: ""
+}
+
+.icofont-rounded-right-up:before {
+    content: ""
+}
+
+.icofont-rounded-right:before {
+    content: ""
+}
+
+.icofont-rounded-up:before {
+    content: ""
+}
+
+.icofont-scroll-bubble-down:before {
+    content: ""
+}
+
+.icofont-scroll-bubble-left:before {
+    content: ""
+}
+
+.icofont-scroll-bubble-right:before {
+    content: ""
+}
+
+.icofont-scroll-bubble-up:before {
+    content: ""
+}
+
+.icofont-scroll-double-down:before {
+    content: ""
+}
+
+.icofont-scroll-double-left:before {
+    content: ""
+}
+
+.icofont-scroll-double-right:before {
+    content: ""
+}
+
+.icofont-scroll-double-up:before {
+    content: ""
+}
+
+.icofont-scroll-down:before {
+    content: ""
+}
+
+.icofont-scroll-left:before {
+    content: ""
+}
+
+.icofont-scroll-long-down:before {
+    content: ""
+}
+
+.icofont-scroll-long-left:before {
+    content: ""
+}
+
+.icofont-scroll-long-right:before {
+    content: ""
+}
+
+.icofont-scroll-long-up:before {
+    content: ""
+}
+
+.icofont-scroll-right:before {
+    content: ""
+}
+
+.icofont-scroll-up:before {
+    content: ""
+}
+
+.icofont-simple-down:before {
+    content: ""
+}
+
+.icofont-simple-left-down:before {
+    content: ""
+}
+
+.icofont-simple-left-up:before {
+    content: ""
+}
+
+.icofont-simple-left:before {
+    content: ""
+}
+
+.icofont-simple-right-down:before {
+    content: ""
+}
+
+.icofont-simple-right-up:before {
+    content: ""
+}
+
+.icofont-simple-right:before {
+    content: ""
+}
+
+.icofont-simple-up:before {
+    content: ""
+}
+
+.icofont-square-down:before {
+    content: ""
+}
+
+.icofont-square-left:before {
+    content: ""
+}
+
+.icofont-square-right:before {
+    content: ""
+}
+
+.icofont-square-up:before {
+    content: ""
+}
+
+.icofont-stylish-down:before {
+    content: ""
+}
+
+.icofont-stylish-left:before {
+    content: ""
+}
+
+.icofont-stylish-right:before {
+    content: ""
+}
+
+.icofont-stylish-up:before {
+    content: ""
+}
+
+.icofont-swoosh-down:before {
+    content: ""
+}
+
+.icofont-swoosh-left:before {
+    content: ""
+}
+
+.icofont-swoosh-right:before {
+    content: ""
+}
+
+.icofont-swoosh-up:before {
+    content: ""
+}
+
+.icofont-thin-double-left:before {
+    content: ""
+}
+
+.icofont-thin-double-right:before {
+    content: ""
+}
+
+.icofont-thin-down:before {
+    content: ""
+}
+
+.icofont-thin-left:before {
+    content: ""
+}
+
+.icofont-thin-right:before {
+    content: ""
+}
+
+.icofont-thin-up:before {
+    content: ""
+}
+
+.icofont-abc:before {
+    content: ""
+}
+
+.icofont-atom:before {
+    content: ""
+}
+
+.icofont-award:before {
+    content: ""
+}
+
+.icofont-bell-alt:before {
+    content: ""
+}
+
+.icofont-black-board:before {
+    content: ""
+}
+
+.icofont-book-alt:before {
+    content: ""
+}
+
+.icofont-book:before {
+    content: ""
+}
+
+.icofont-brainstorming:before {
+    content: ""
+}
+
+.icofont-certificate-alt-1:before {
+    content: ""
+}
+
+.icofont-certificate-alt-2:before {
+    content: ""
+}
+
+.icofont-certificate:before {
+    content: ""
+}
+
+.icofont-education:before {
+    content: ""
+}
+
+.icofont-electron:before {
+    content: ""
+}
+
+.icofont-fountain-pen:before {
+    content: ""
+}
+
+.icofont-globe-alt:before {
+    content: ""
+}
+
+.icofont-graduate-alt:before {
+    content: ""
+}
+
+.icofont-graduate:before {
+    content: ""
+}
+
+.icofont-group-students:before {
+    content: ""
+}
+
+.icofont-hat-alt:before {
+    content: ""
+}
+
+.icofont-hat:before {
+    content: ""
+}
+
+.icofont-instrument:before {
+    content: ""
+}
+
+.icofont-lamp-light:before {
+    content: ""
+}
+
+.icofont-medal:before {
+    content: ""
+}
+
+.icofont-microscope-alt:before {
+    content: ""
+}
+
+.icofont-microscope:before {
+    content: ""
+}
+
+.icofont-paper:before {
+    content: ""
+}
+
+.icofont-pen-alt-4:before {
+    content: ""
+}
+
+.icofont-pen-nib:before {
+    content: ""
+}
+
+.icofont-pencil-alt-5:before {
+    content: ""
+}
+
+.icofont-quill-pen:before {
+    content: ""
+}
+
+.icofont-read-book-alt:before {
+    content: ""
+}
+
+.icofont-read-book:before {
+    content: ""
+}
+
+.icofont-school-bag:before {
+    content: ""
+}
+
+.icofont-school-bus:before {
+    content: ""
+}
+
+.icofont-student-alt:before {
+    content: ""
+}
+
+.icofont-student:before {
+    content: ""
+}
+
+.icofont-teacher:before {
+    content: ""
+}
+
+.icofont-test-bulb:before {
+    content: ""
+}
+
+.icofont-test-tube-alt:before {
+    content: ""
+}
+
+.icofont-university:before {
+    content: ""
+}
+
+.icofont-angry:before {
+    content: ""
+}
+
+.icofont-astonished:before {
+    content: ""
+}
+
+.icofont-confounded:before {
+    content: ""
+}
+
+.icofont-confused:before {
+    content: ""
+}
+
+.icofont-crying:before {
+    content: ""
+}
+
+.icofont-dizzy:before {
+    content: ""
+}
+
+.icofont-expressionless:before {
+    content: ""
+}
+
+.icofont-heart-eyes:before {
+    content: ""
+}
+
+.icofont-laughing:before {
+    content: ""
+}
+
+.icofont-nerd-smile:before {
+    content: ""
+}
+
+.icofont-open-mouth:before {
+    content: ""
+}
+
+.icofont-rage:before {
+    content: ""
+}
+
+.icofont-rolling-eyes:before {
+    content: ""
+}
+
+.icofont-sad:before {
+    content: ""
+}
+
+.icofont-simple-smile:before {
+    content: ""
+}
+
+.icofont-slightly-smile:before {
+    content: ""
+}
+
+.icofont-smirk:before {
+    content: ""
+}
+
+.icofont-stuck-out-tongue:before {
+    content: ""
+}
+
+.icofont-wink-smile:before {
+    content: ""
+}
+
+.icofont-worried:before {
+    content: ""
+}
+
+.icofont-file-alt:before {
+    content: ""
+}
+
+.icofont-file-audio:before {
+    content: ""
+}
+
+.icofont-file-avi-mp4:before {
+    content: ""
+}
+
+.icofont-file-bmp:before {
+    content: ""
+}
+
+.icofont-file-code:before {
+    content: ""
+}
+
+.icofont-file-css:before {
+    content: ""
+}
+
+.icofont-file-document:before {
+    content: ""
+}
+
+.icofont-file-eps:before {
+    content: ""
+}
+
+.icofont-file-excel:before {
+    content: ""
+}
+
+.icofont-file-exe:before {
+    content: ""
+}
+
+.icofont-file-file:before {
+    content: ""
+}
+
+.icofont-file-flv:before {
+    content: ""
+}
+
+.icofont-file-gif:before {
+    content: ""
+}
+
+.icofont-file-html5:before {
+    content: ""
+}
+
+.icofont-file-image:before {
+    content: ""
+}
+
+.icofont-file-iso:before {
+    content: ""
+}
+
+.icofont-file-java:before {
+    content: ""
+}
+
+.icofont-file-javascript:before {
+    content: ""
+}
+
+.icofont-file-jpg:before {
+    content: ""
+}
+
+.icofont-file-midi:before {
+    content: ""
+}
+
+.icofont-file-mov:before {
+    content: ""
+}
+
+.icofont-file-mp3:before {
+    content: ""
+}
+
+.icofont-file-pdf:before {
+    content: ""
+}
+
+.icofont-file-php:before {
+    content: ""
+}
+
+.icofont-file-png:before {
+    content: ""
+}
+
+.icofont-file-powerpoint:before {
+    content: ""
+}
+
+.icofont-file-presentation:before {
+    content: ""
+}
+
+.icofont-file-psb:before {
+    content: ""
+}
+
+.icofont-file-psd:before {
+    content: ""
+}
+
+.icofont-file-python:before {
+    content: ""
+}
+
+.icofont-file-ruby:before {
+    content: ""
+}
+
+.icofont-file-spreadsheet:before {
+    content: ""
+}
+
+.icofont-file-sql:before {
+    content: ""
+}
+
+.icofont-file-svg:before {
+    content: ""
+}
+
+.icofont-file-text:before {
+    content: ""
+}
+
+.icofont-file-tiff:before {
+    content: ""
+}
+
+.icofont-file-video:before {
+    content: ""
+}
+
+.icofont-file-wave:before {
+    content: ""
+}
+
+.icofont-file-wmv:before {
+    content: ""
+}
+
+.icofont-file-word:before {
+    content: ""
+}
+
+.icofont-file-zip:before {
+    content: ""
+}
+
+.icofont-cycling-alt:before {
+    content: ""
+}
+
+.icofont-cycling:before {
+    content: ""
+}
+
+.icofont-dumbbell:before {
+    content: ""
+}
+
+.icofont-dumbbells:before {
+    content: ""
+}
+
+.icofont-gym-alt-1:before {
+    content: ""
+}
+
+.icofont-gym-alt-2:before {
+    content: ""
+}
+
+.icofont-gym-alt-3:before {
+    content: ""
+}
+
+.icofont-gym:before {
+    content: ""
+}
+
+.icofont-muscle-weight:before {
+    content: ""
+}
+
+.icofont-muscle:before {
+    content: ""
+}
+
+.icofont-apple:before {
+    content: ""
+}
+
+.icofont-arabian-coffee:before {
+    content: ""
+}
+
+.icofont-artichoke:before {
+    content: ""
+}
+
+.icofont-asparagus:before {
+    content: ""
+}
+
+.icofont-avocado:before {
+    content: ""
+}
+
+.icofont-baby-food:before {
+    content: ""
+}
+
+.icofont-banana:before {
+    content: ""
+}
+
+.icofont-bbq:before {
+    content: ""
+}
+
+.icofont-beans:before {
+    content: ""
+}
+
+.icofont-beer:before {
+    content: ""
+}
+
+.icofont-bell-pepper-capsicum:before {
+    content: ""
+}
+
+.icofont-birthday-cake:before {
+    content: ""
+}
+
+.icofont-bread:before {
+    content: ""
+}
+
+.icofont-broccoli:before {
+    content: ""
+}
+
+.icofont-burger:before {
+    content: ""
+}
+
+.icofont-cabbage:before {
+    content: ""
+}
+
+.icofont-carrot:before {
+    content: ""
+}
+
+.icofont-cauli-flower:before {
+    content: ""
+}
+
+.icofont-cheese:before {
+    content: ""
+}
+
+.icofont-chef:before {
+    content: ""
+}
+
+.icofont-cherry:before {
+    content: ""
+}
+
+.icofont-chicken-fry:before {
+    content: ""
+}
+
+.icofont-chicken:before {
+    content: ""
+}
+
+.icofont-cocktail:before {
+    content: ""
+}
+
+.icofont-coconut-water:before {
+    content: ""
+}
+
+.icofont-coconut:before {
+    content: ""
+}
+
+.icofont-coffee-alt:before {
+    content: ""
+}
+
+.icofont-coffee-cup:before {
+    content: ""
+}
+
+.icofont-coffee-mug:before {
+    content: ""
+}
+
+.icofont-coffee-pot:before {
+    content: ""
+}
+
+.icofont-cola:before {
+    content: ""
+}
+
+.icofont-corn:before {
+    content: ""
+}
+
+.icofont-croissant:before {
+    content: ""
+}
+
+.icofont-crop-plant:before {
+    content: ""
+}
+
+.icofont-cucumber:before {
+    content: ""
+}
+
+.icofont-culinary:before {
+    content: ""
+}
+
+.icofont-cup-cake:before {
+    content: ""
+}
+
+.icofont-dining-table:before {
+    content: ""
+}
+
+.icofont-donut:before {
+    content: ""
+}
+
+.icofont-egg-plant:before {
+    content: ""
+}
+
+.icofont-egg-poached:before {
+    content: ""
+}
+
+.icofont-farmer-alt:before {
+    content: ""
+}
+
+.icofont-farmer:before {
+    content: ""
+}
+
+.icofont-fast-food:before {
+    content: ""
+}
+
+.icofont-food-basket:before {
+    content: ""
+}
+
+.icofont-food-cart:before {
+    content: ""
+}
+
+.icofont-fork-and-knife:before {
+    content: ""
+}
+
+.icofont-french-fries:before {
+    content: ""
+}
+
+.icofont-fruits:before {
+    content: ""
+}
+
+.icofont-grapes:before {
+    content: ""
+}
+
+.icofont-honey:before {
+    content: ""
+}
+
+.icofont-hot-dog:before {
+    content: ""
+}
+
+.icofont-ice-cream-alt:before {
+    content: ""
+}
+
+.icofont-ice-cream:before {
+    content: ""
+}
+
+.icofont-juice:before {
+    content: ""
+}
+
+.icofont-ketchup:before {
+    content: ""
+}
+
+.icofont-kiwi:before {
+    content: ""
+}
+
+.icofont-layered-cake:before {
+    content: ""
+}
+
+.icofont-lemon-alt:before {
+    content: ""
+}
+
+.icofont-lemon:before {
+    content: ""
+}
+
+.icofont-lobster:before {
+    content: ""
+}
+
+.icofont-mango:before {
+    content: ""
+}
+
+.icofont-milk:before {
+    content: ""
+}
+
+.icofont-mushroom:before {
+    content: ""
+}
+
+.icofont-noodles:before {
+    content: ""
+}
+
+.icofont-onion:before {
+    content: ""
+}
+
+.icofont-orange:before {
+    content: ""
+}
+
+.icofont-pear:before {
+    content: ""
+}
+
+.icofont-peas:before {
+    content: ""
+}
+
+.icofont-pepper:before {
+    content: ""
+}
+
+.icofont-pie-alt:before {
+    content: ""
+}
+
+.icofont-pie:before {
+    content: ""
+}
+
+.icofont-pineapple:before {
+    content: ""
+}
+
+.icofont-pizza-slice:before {
+    content: ""
+}
+
+.icofont-pizza:before {
+    content: ""
+}
+
+.icofont-plant:before {
+    content: ""
+}
+
+.icofont-popcorn:before {
+    content: ""
+}
+
+.icofont-potato:before {
+    content: ""
+}
+
+.icofont-pumpkin:before {
+    content: ""
+}
+
+.icofont-raddish:before {
+    content: ""
+}
+
+.icofont-restaurant-menu:before {
+    content: ""
+}
+
+.icofont-restaurant:before {
+    content: ""
+}
+
+.icofont-salt-and-pepper:before {
+    content: ""
+}
+
+.icofont-sandwich:before {
+    content: ""
+}
+
+.icofont-sausage:before {
+    content: ""
+}
+
+.icofont-soft-drinks:before {
+    content: ""
+}
+
+.icofont-soup-bowl:before {
+    content: ""
+}
+
+.icofont-spoon-and-fork:before {
+    content: ""
+}
+
+.icofont-steak:before {
+    content: ""
+}
+
+.icofont-strawberry:before {
+    content: ""
+}
+
+.icofont-sub-sandwich:before {
+    content: ""
+}
+
+.icofont-sushi:before {
+    content: ""
+}
+
+.icofont-taco:before {
+    content: ""
+}
+
+.icofont-tea-pot:before {
+    content: ""
+}
+
+.icofont-tea:before {
+    content: ""
+}
+
+.icofont-tomato:before {
+    content: ""
+}
+
+.icofont-watermelon:before {
+    content: ""
+}
+
+.icofont-wheat:before {
+    content: ""
+}
+
+.icofont-baby-backpack:before {
+    content: ""
+}
+
+.icofont-baby-cloth:before {
+    content: ""
+}
+
+.icofont-baby-milk-bottle:before {
+    content: ""
+}
+
+.icofont-baby-trolley:before {
+    content: ""
+}
+
+.icofont-baby:before {
+    content: ""
+}
+
+.icofont-candy:before {
+    content: ""
+}
+
+.icofont-holding-hands:before {
+    content: ""
+}
+
+.icofont-infant-nipple:before {
+    content: ""
+}
+
+.icofont-kids-scooter:before {
+    content: ""
+}
+
+.icofont-safety-pin:before {
+    content: ""
+}
+
+.icofont-teddy-bear:before {
+    content: ""
+}
+
+.icofont-toy-ball:before {
+    content: ""
+}
+
+.icofont-toy-cat:before {
+    content: ""
+}
+
+.icofont-toy-duck:before {
+    content: ""
+}
+
+.icofont-toy-elephant:before {
+    content: ""
+}
+
+.icofont-toy-hand:before {
+    content: ""
+}
+
+.icofont-toy-horse:before {
+    content: ""
+}
+
+.icofont-toy-lattu:before {
+    content: ""
+}
+
+.icofont-toy-train:before {
+    content: ""
+}
+
+.icofont-burglar:before {
+    content: ""
+}
+
+.icofont-cannon-firing:before {
+    content: ""
+}
+
+.icofont-cc-camera:before {
+    content: ""
+}
+
+.icofont-cop-badge:before {
+    content: ""
+}
+
+.icofont-cop:before {
+    content: ""
+}
+
+.icofont-court-hammer:before {
+    content: ""
+}
+
+.icofont-court:before {
+    content: ""
+}
+
+.icofont-finger-print:before {
+    content: ""
+}
+
+.icofont-gavel:before {
+    content: ""
+}
+
+.icofont-handcuff-alt:before {
+    content: ""
+}
+
+.icofont-handcuff:before {
+    content: ""
+}
+
+.icofont-investigation:before {
+    content: ""
+}
+
+.icofont-investigator:before {
+    content: ""
+}
+
+.icofont-jail:before {
+    content: ""
+}
+
+.icofont-judge:before {
+    content: ""
+}
+
+.icofont-law-alt-1:before {
+    content: ""
+}
+
+.icofont-law-alt-2:before {
+    content: ""
+}
+
+.icofont-law-alt-3:before {
+    content: ""
+}
+
+.icofont-law-book:before {
+    content: ""
+}
+
+.icofont-law-document:before {
+    content: ""
+}
+
+.icofont-law-order:before {
+    content: ""
+}
+
+.icofont-law-protect:before {
+    content: ""
+}
+
+.icofont-law-scales:before {
+    content: ""
+}
+
+.icofont-law:before {
+    content: ""
+}
+
+.icofont-lawyer-alt-1:before {
+    content: ""
+}
+
+.icofont-lawyer-alt-2:before {
+    content: ""
+}
+
+.icofont-lawyer:before {
+    content: ""
+}
+
+.icofont-legal:before {
+    content: ""
+}
+
+.icofont-pistol:before {
+    content: ""
+}
+
+.icofont-police-badge:before {
+    content: ""
+}
+
+.icofont-police-cap:before {
+    content: ""
+}
+
+.icofont-police-car-alt-1:before {
+    content: ""
+}
+
+.icofont-police-car-alt-2:before {
+    content: ""
+}
+
+.icofont-police-car:before {
+    content: ""
+}
+
+.icofont-police-hat:before {
+    content: ""
+}
+
+.icofont-police-van:before {
+    content: ""
+}
+
+.icofont-police:before {
+    content: ""
+}
+
+.icofont-thief-alt:before {
+    content: ""
+}
+
+.icofont-thief:before {
+    content: ""
+}
+
+.icofont-abacus-alt:before {
+    content: ""
+}
+
+.icofont-abacus:before {
+    content: ""
+}
+
+.icofont-angle-180:before {
+    content: ""
+}
+
+.icofont-angle-45:before {
+    content: ""
+}
+
+.icofont-angle-90:before {
+    content: ""
+}
+
+.icofont-angle:before {
+    content: ""
+}
+
+.icofont-calculator-alt-1:before {
+    content: ""
+}
+
+.icofont-calculator-alt-2:before {
+    content: ""
+}
+
+.icofont-calculator:before {
+    content: ""
+}
+
+.icofont-circle-ruler-alt:before {
+    content: ""
+}
+
+.icofont-circle-ruler:before {
+    content: ""
+}
+
+.icofont-compass-alt-1:before {
+    content: ""
+}
+
+.icofont-compass-alt-2:before {
+    content: ""
+}
+
+.icofont-compass-alt-3:before {
+    content: ""
+}
+
+.icofont-compass-alt-4:before {
+    content: ""
+}
+
+.icofont-golden-ratio:before {
+    content: ""
+}
+
+.icofont-marker-alt-1:before {
+    content: ""
+}
+
+.icofont-marker-alt-2:before {
+    content: ""
+}
+
+.icofont-marker-alt-3:before {
+    content: ""
+}
+
+.icofont-marker:before {
+    content: ""
+}
+
+.icofont-math:before {
+    content: ""
+}
+
+.icofont-mathematical-alt-1:before {
+    content: ""
+}
+
+.icofont-mathematical-alt-2:before {
+    content: ""
+}
+
+.icofont-mathematical:before {
+    content: ""
+}
+
+.icofont-pen-alt-1:before {
+    content: ""
+}
+
+.icofont-pen-alt-2:before {
+    content: ""
+}
+
+.icofont-pen-alt-3:before {
+    content: ""
+}
+
+.icofont-pen-holder-alt-1:before {
+    content: ""
+}
+
+.icofont-pen-holder:before {
+    content: ""
+}
+
+.icofont-pen:before {
+    content: ""
+}
+
+.icofont-pencil-alt-1:before {
+    content: ""
+}
+
+.icofont-pencil-alt-2:before {
+    content: ""
+}
+
+.icofont-pencil-alt-3:before {
+    content: ""
+}
+
+.icofont-pencil-alt-4:before {
+    content: ""
+}
+
+.icofont-pencil:before {
+    content: ""
+}
+
+.icofont-ruler-alt-1:before {
+    content: ""
+}
+
+.icofont-ruler-alt-2:before {
+    content: ""
+}
+
+.icofont-ruler-compass-alt:before {
+    content: ""
+}
+
+.icofont-ruler-compass:before {
+    content: ""
+}
+
+.icofont-ruler-pencil-alt-1:before {
+    content: ""
+}
+
+.icofont-ruler-pencil-alt-2:before {
+    content: ""
+}
+
+.icofont-ruler-pencil:before {
+    content: ""
+}
+
+.icofont-ruler:before {
+    content: ""
+}
+
+.icofont-rulers-alt:before {
+    content: ""
+}
+
+.icofont-rulers:before {
+    content: ""
+}
+
+.icofont-square-root:before {
+    content: ""
+}
+
+.icofont-ui-calculator:before {
+    content: ""
+}
+
+.icofont-aids:before {
+    content: ""
+}
+
+.icofont-ambulance-crescent:before {
+    content: ""
+}
+
+.icofont-ambulance-cross:before {
+    content: ""
+}
+
+.icofont-ambulance:before {
+    content: ""
+}
+
+.icofont-autism:before {
+    content: ""
+}
+
+.icofont-bandage:before {
+    content: ""
+}
+
+.icofont-blind:before {
+    content: ""
+}
+
+.icofont-blood-drop:before {
+    content: ""
+}
+
+.icofont-blood-test:before {
+    content: ""
+}
+
+.icofont-blood:before {
+    content: ""
+}
+
+.icofont-brain-alt:before {
+    content: ""
+}
+
+.icofont-brain:before {
+    content: ""
+}
+
+.icofont-capsule:before {
+    content: ""
+}
+
+.icofont-crutch:before {
+    content: ""
+}
+
+.icofont-disabled:before {
+    content: ""
+}
+
+.icofont-dna-alt-1:before {
+    content: ""
+}
+
+.icofont-dna-alt-2:before {
+    content: ""
+}
+
+.icofont-dna:before {
+    content: ""
+}
+
+.icofont-doctor-alt:before {
+    content: ""
+}
+
+.icofont-doctor:before {
+    content: ""
+}
+
+.icofont-drug-pack:before {
+    content: ""
+}
+
+.icofont-drug:before {
+    content: ""
+}
+
+.icofont-first-aid-alt:before {
+    content: ""
+}
+
+.icofont-first-aid:before {
+    content: ""
+}
+
+.icofont-heart-beat-alt:before {
+    content: ""
+}
+
+.icofont-heart-beat:before {
+    content: ""
+}
+
+.icofont-heartbeat:before {
+    content: ""
+}
+
+.icofont-herbal:before {
+    content: ""
+}
+
+.icofont-hospital:before {
+    content: ""
+}
+
+.icofont-icu:before {
+    content: ""
+}
+
+.icofont-injection-syringe:before {
+    content: ""
+}
+
+.icofont-laboratory:before {
+    content: ""
+}
+
+.icofont-medical-sign-alt:before {
+    content: ""
+}
+
+.icofont-medical-sign:before {
+    content: ""
+}
+
+.icofont-nurse-alt:before {
+    content: ""
+}
+
+.icofont-nurse:before {
+    content: ""
+}
+
+.icofont-nursing-home:before {
+    content: ""
+}
+
+.icofont-operation-theater:before {
+    content: ""
+}
+
+.icofont-paralysis-disability:before {
+    content: ""
+}
+
+.icofont-patient-bed:before {
+    content: ""
+}
+
+.icofont-patient-file:before {
+    content: ""
+}
+
+.icofont-pills:before {
+    content: ""
+}
+
+.icofont-prescription:before {
+    content: ""
+}
+
+.icofont-pulse:before {
+    content: ""
+}
+
+.icofont-stethoscope-alt:before {
+    content: ""
+}
+
+.icofont-stethoscope:before {
+    content: ""
+}
+
+.icofont-stretcher:before {
+    content: ""
+}
+
+.icofont-surgeon-alt:before {
+    content: ""
+}
+
+.icofont-surgeon:before {
+    content: ""
+}
+
+.icofont-tablets:before {
+    content: ""
+}
+
+.icofont-test-bottle:before {
+    content: ""
+}
+
+.icofont-test-tube:before {
+    content: ""
+}
+
+.icofont-thermometer-alt:before {
+    content: ""
+}
+
+.icofont-thermometer:before {
+    content: ""
+}
+
+.icofont-tooth:before {
+    content: ""
+}
+
+.icofont-xray:before {
+    content: ""
+}
+
+.icofont-ui-add:before {
+    content: ""
+}
+
+.icofont-ui-alarm:before {
+    content: ""
+}
+
+.icofont-ui-battery:before {
+    content: ""
+}
+
+.icofont-ui-block:before {
+    content: ""
+}
+
+.icofont-ui-bluetooth:before {
+    content: ""
+}
+
+.icofont-ui-brightness:before {
+    content: ""
+}
+
+.icofont-ui-browser:before {
+    content: ""
+}
+
+.icofont-ui-calendar:before {
+    content: ""
+}
+
+.icofont-ui-call:before {
+    content: ""
+}
+
+.icofont-ui-camera:before {
+    content: ""
+}
+
+.icofont-ui-cart:before {
+    content: ""
+}
+
+.icofont-ui-cell-phone:before {
+    content: ""
+}
+
+.icofont-ui-chat:before {
+    content: ""
+}
+
+.icofont-ui-check:before {
+    content: ""
+}
+
+.icofont-ui-clip-board:before {
+    content: ""
+}
+
+.icofont-ui-clip:before {
+    content: ""
+}
+
+.icofont-ui-clock:before {
+    content: ""
+}
+
+.icofont-ui-close:before {
+    content: ""
+}
+
+.icofont-ui-contact-list:before {
+    content: ""
+}
+
+.icofont-ui-copy:before {
+    content: ""
+}
+
+.icofont-ui-cut:before {
+    content: ""
+}
+
+.icofont-ui-delete:before {
+    content: ""
+}
+
+.icofont-ui-dial-phone:before {
+    content: ""
+}
+
+.icofont-ui-edit:before {
+    content: ""
+}
+
+.icofont-ui-email:before {
+    content: ""
+}
+
+.icofont-ui-file:before {
+    content: ""
+}
+
+.icofont-ui-fire-wall:before {
+    content: ""
+}
+
+.icofont-ui-flash-light:before {
+    content: ""
+}
+
+.icofont-ui-flight:before {
+    content: ""
+}
+
+.icofont-ui-folder:before {
+    content: ""
+}
+
+.icofont-ui-game:before {
+    content: ""
+}
+
+.icofont-ui-handicapped:before {
+    content: ""
+}
+
+.icofont-ui-home:before {
+    content: ""
+}
+
+.icofont-ui-image:before {
+    content: ""
+}
+
+.icofont-ui-laoding:before {
+    content: ""
+}
+
+.icofont-ui-lock:before {
+    content: ""
+}
+
+.icofont-ui-love-add:before {
+    content: ""
+}
+
+.icofont-ui-love-broken:before {
+    content: ""
+}
+
+.icofont-ui-love-remove:before {
+    content: ""
+}
+
+.icofont-ui-love:before {
+    content: ""
+}
+
+.icofont-ui-map:before {
+    content: ""
+}
+
+.icofont-ui-message:before {
+    content: ""
+}
+
+.icofont-ui-messaging:before {
+    content: ""
+}
+
+.icofont-ui-movie:before {
+    content: ""
+}
+
+.icofont-ui-music-player:before {
+    content: ""
+}
+
+.icofont-ui-music:before {
+    content: ""
+}
+
+.icofont-ui-mute:before {
+    content: ""
+}
+
+.icofont-ui-network:before {
+    content: ""
+}
+
+.icofont-ui-next:before {
+    content: ""
+}
+
+.icofont-ui-note:before {
+    content: ""
+}
+
+.icofont-ui-office:before {
+    content: ""
+}
+
+.icofont-ui-password:before {
+    content: ""
+}
+
+.icofont-ui-pause:before {
+    content: ""
+}
+
+.icofont-ui-play-stop:before {
+    content: ""
+}
+
+.icofont-ui-play:before {
+    content: ""
+}
+
+.icofont-ui-pointer:before {
+    content: ""
+}
+
+.icofont-ui-power:before {
+    content: ""
+}
+
+.icofont-ui-press:before {
+    content: ""
+}
+
+.icofont-ui-previous:before {
+    content: ""
+}
+
+.icofont-ui-rate-add:before {
+    content: ""
+}
+
+.icofont-ui-rate-blank:before {
+    content: ""
+}
+
+.icofont-ui-rate-remove:before {
+    content: ""
+}
+
+.icofont-ui-rating:before {
+    content: ""
+}
+
+.icofont-ui-record:before {
+    content: ""
+}
+
+.icofont-ui-remove:before {
+    content: ""
+}
+
+.icofont-ui-reply:before {
+    content: ""
+}
+
+.icofont-ui-rotation:before {
+    content: ""
+}
+
+.icofont-ui-rss:before {
+    content: ""
+}
+
+.icofont-ui-search:before {
+    content: ""
+}
+
+.icofont-ui-settings:before {
+    content: ""
+}
+
+.icofont-ui-social-link:before {
+    content: ""
+}
+
+.icofont-ui-tag:before {
+    content: ""
+}
+
+.icofont-ui-text-chat:before {
+    content: ""
+}
+
+.icofont-ui-text-loading:before {
+    content: ""
+}
+
+.icofont-ui-theme:before {
+    content: ""
+}
+
+.icofont-ui-timer:before {
+    content: ""
+}
+
+.icofont-ui-touch-phone:before {
+    content: ""
+}
+
+.icofont-ui-travel:before {
+    content: ""
+}
+
+.icofont-ui-unlock:before {
+    content: ""
+}
+
+.icofont-ui-user-group:before {
+    content: ""
+}
+
+.icofont-ui-user:before {
+    content: ""
+}
+
+.icofont-ui-v-card:before {
+    content: ""
+}
+
+.icofont-ui-video-chat:before {
+    content: ""
+}
+
+.icofont-ui-video-message:before {
+    content: ""
+}
+
+.icofont-ui-video-play:before {
+    content: ""
+}
+
+.icofont-ui-video:before {
+    content: ""
+}
+
+.icofont-ui-volume:before {
+    content: ""
+}
+
+.icofont-ui-weather:before {
+    content: ""
+}
+
+.icofont-ui-wifi:before {
+    content: ""
+}
+
+.icofont-ui-zoom-in:before {
+    content: ""
+}
+
+.icofont-ui-zoom-out:before {
+    content: ""
+}
+
+.icofont-cassette-player:before {
+    content: ""
+}
+
+.icofont-cassette:before {
+    content: ""
+}
+
+.icofont-forward:before {
+    content: ""
+}
+
+.icofont-guiter:before {
+    content: ""
+}
+
+.icofont-movie:before {
+    content: ""
+}
+
+.icofont-multimedia:before {
+    content: ""
+}
+
+.icofont-music-alt:before {
+    content: ""
+}
+
+.icofont-music-disk:before {
+    content: ""
+}
+
+.icofont-music-note:before {
+    content: ""
+}
+
+.icofont-music-notes:before {
+    content: ""
+}
+
+.icofont-music:before {
+    content: ""
+}
+
+.icofont-mute-volume:before {
+    content: ""
+}
+
+.icofont-pause:before {
+    content: ""
+}
+
+.icofont-play-alt-1:before {
+    content: ""
+}
+
+.icofont-play-alt-2:before {
+    content: ""
+}
+
+.icofont-play-alt-3:before {
+    content: ""
+}
+
+.icofont-play-pause:before {
+    content: ""
+}
+
+.icofont-play:before {
+    content: ""
+}
+
+.icofont-record:before {
+    content: ""
+}
+
+.icofont-retro-music-disk:before {
+    content: ""
+}
+
+.icofont-rewind:before {
+    content: ""
+}
+
+.icofont-song-notes:before {
+    content: ""
+}
+
+.icofont-sound-wave-alt:before {
+    content: ""
+}
+
+.icofont-sound-wave:before {
+    content: ""
+}
+
+.icofont-stop:before {
+    content: ""
+}
+
+.icofont-video-alt:before {
+    content: ""
+}
+
+.icofont-video-cam:before {
+    content: ""
+}
+
+.icofont-video-clapper:before {
+    content: ""
+}
+
+.icofont-video:before {
+    content: ""
+}
+
+.icofont-volume-bar:before {
+    content: ""
+}
+
+.icofont-volume-down:before {
+    content: ""
+}
+
+.icofont-volume-mute:before {
+    content: ""
+}
+
+.icofont-volume-off:before {
+    content: ""
+}
+
+.icofont-volume-up:before {
+    content: ""
+}
+
+.icofont-youtube-play:before {
+    content: ""
+}
+
+.icofont-2checkout-alt:before {
+    content: ""
+}
+
+.icofont-2checkout:before {
+    content: ""
+}
+
+.icofont-amazon-alt:before {
+    content: ""
+}
+
+.icofont-amazon:before {
+    content: ""
+}
+
+.icofont-american-express-alt:before {
+    content: ""
+}
+
+.icofont-american-express:before {
+    content: ""
+}
+
+.icofont-apple-pay-alt:before {
+    content: ""
+}
+
+.icofont-apple-pay:before {
+    content: ""
+}
+
+.icofont-bank-transfer-alt:before {
+    content: ""
+}
+
+.icofont-bank-transfer:before {
+    content: ""
+}
+
+.icofont-braintree-alt:before {
+    content: ""
+}
+
+.icofont-braintree:before {
+    content: ""
+}
+
+.icofont-cash-on-delivery-alt:before {
+    content: ""
+}
+
+.icofont-cash-on-delivery:before {
+    content: ""
+}
+
+.icofont-diners-club-alt-1:before {
+    content: ""
+}
+
+.icofont-diners-club-alt-2:before {
+    content: ""
+}
+
+.icofont-diners-club-alt-3:before {
+    content: ""
+}
+
+.icofont-diners-club:before {
+    content: ""
+}
+
+.icofont-discover-alt:before {
+    content: ""
+}
+
+.icofont-discover:before {
+    content: ""
+}
+
+.icofont-eway-alt:before {
+    content: ""
+}
+
+.icofont-eway:before {
+    content: ""
+}
+
+.icofont-google-wallet-alt-1:before {
+    content: ""
+}
+
+.icofont-google-wallet-alt-2:before {
+    content: ""
+}
+
+.icofont-google-wallet-alt-3:before {
+    content: ""
+}
+
+.icofont-google-wallet:before {
+    content: ""
+}
+
+.icofont-jcb-alt:before {
+    content: ""
+}
+
+.icofont-jcb:before {
+    content: ""
+}
+
+.icofont-maestro-alt:before {
+    content: ""
+}
+
+.icofont-maestro:before {
+    content: ""
+}
+
+.icofont-mastercard-alt:before {
+    content: ""
+}
+
+.icofont-mastercard:before {
+    content: ""
+}
+
+.icofont-payoneer-alt:before {
+    content: ""
+}
+
+.icofont-payoneer:before {
+    content: ""
+}
+
+.icofont-paypal-alt:before {
+    content: ""
+}
+
+.icofont-paypal:before {
+    content: ""
+}
+
+.icofont-sage-alt:before {
+    content: ""
+}
+
+.icofont-sage:before {
+    content: ""
+}
+
+.icofont-skrill-alt:before {
+    content: ""
+}
+
+.icofont-skrill:before {
+    content: ""
+}
+
+.icofont-stripe-alt:before {
+    content: ""
+}
+
+.icofont-stripe:before {
+    content: ""
+}
+
+.icofont-visa-alt:before {
+    content: ""
+}
+
+.icofont-visa-electron:before {
+    content: ""
+}
+
+.icofont-visa:before {
+    content: ""
+}
+
+.icofont-western-union-alt:before {
+    content: ""
+}
+
+.icofont-western-union:before {
+    content: ""
+}
+
+.icofont-boy:before {
+    content: ""
+}
+
+.icofont-business-man-alt-1:before {
+    content: ""
+}
+
+.icofont-business-man-alt-2:before {
+    content: ""
+}
+
+.icofont-business-man-alt-3:before {
+    content: ""
+}
+
+.icofont-business-man:before {
+    content: ""
+}
+
+.icofont-female:before {
+    content: ""
+}
+
+.icofont-funky-man:before {
+    content: ""
+}
+
+.icofont-girl-alt:before {
+    content: ""
+}
+
+.icofont-girl:before {
+    content: ""
+}
+
+.icofont-group:before {
+    content: ""
+}
+
+.icofont-hotel-boy-alt:before {
+    content: ""
+}
+
+.icofont-hotel-boy:before {
+    content: ""
+}
+
+.icofont-kid:before {
+    content: ""
+}
+
+.icofont-man-in-glasses:before {
+    content: ""
+}
+
+.icofont-people:before {
+    content: ""
+}
+
+.icofont-support:before {
+    content: ""
+}
+
+.icofont-user-alt-1:before {
+    content: ""
+}
+
+.icofont-user-alt-2:before {
+    content: ""
+}
+
+.icofont-user-alt-3:before {
+    content: ""
+}
+
+.icofont-user-alt-4:before {
+    content: ""
+}
+
+.icofont-user-alt-5:before {
+    content: ""
+}
+
+.icofont-user-alt-6:before {
+    content: ""
+}
+
+.icofont-user-alt-7:before {
+    content: ""
+}
+
+.icofont-user-female:before {
+    content: ""
+}
+
+.icofont-user-male:before {
+    content: ""
+}
+
+.icofont-user-suited:before {
+    content: ""
+}
+
+.icofont-user:before {
+    content: ""
+}
+
+.icofont-users-alt-1:before {
+    content: ""
+}
+
+.icofont-users-alt-2:before {
+    content: ""
+}
+
+.icofont-users-alt-3:before {
+    content: ""
+}
+
+.icofont-users-alt-4:before {
+    content: ""
+}
+
+.icofont-users-alt-5:before {
+    content: ""
+}
+
+.icofont-users-alt-6:before {
+    content: ""
+}
+
+.icofont-users-social:before {
+    content: ""
+}
+
+.icofont-users:before {
+    content: ""
+}
+
+.icofont-waiter-alt:before {
+    content: ""
+}
+
+.icofont-waiter:before {
+    content: ""
+}
+
+.icofont-woman-in-glasses:before {
+    content: ""
+}
+
+.icofont-search-1:before {
+    content: ""
+}
+
+.icofont-search-2:before {
+    content: ""
+}
+
+.icofont-search-document:before {
+    content: ""
+}
+
+.icofont-search-folder:before {
+    content: ""
+}
+
+.icofont-search-job:before {
+    content: ""
+}
+
+.icofont-search-map:before {
+    content: ""
+}
+
+.icofont-search-property:before {
+    content: ""
+}
+
+.icofont-search-restaurant:before {
+    content: ""
+}
+
+.icofont-search-stock:before {
+    content: ""
+}
+
+.icofont-search-user:before {
+    content: ""
+}
+
+.icofont-search:before {
+    content: ""
+}
+
+.icofont-500px:before {
+    content: ""
+}
+
+.icofont-aim:before {
+    content: ""
+}
+
+.icofont-badoo:before {
+    content: ""
+}
+
+.icofont-baidu-tieba:before {
+    content: ""
+}
+
+.icofont-bbm-messenger:before {
+    content: ""
+}
+
+.icofont-bebo:before {
+    content: ""
+}
+
+.icofont-behance:before {
+    content: ""
+}
+
+.icofont-blogger:before {
+    content: ""
+}
+
+.icofont-bootstrap:before {
+    content: ""
+}
+
+.icofont-brightkite:before {
+    content: ""
+}
+
+.icofont-cloudapp:before {
+    content: ""
+}
+
+.icofont-concrete5:before {
+    content: ""
+}
+
+.icofont-delicious:before {
+    content: ""
+}
+
+.icofont-designbump:before {
+    content: ""
+}
+
+.icofont-designfloat:before {
+    content: ""
+}
+
+.icofont-deviantart:before {
+    content: ""
+}
+
+.icofont-digg:before {
+    content: ""
+}
+
+.icofont-dotcms:before {
+    content: ""
+}
+
+.icofont-dribbble:before {
+    content: ""
+}
+
+.icofont-dribble:before {
+    content: ""
+}
+
+.icofont-dropbox:before {
+    content: ""
+}
+
+.icofont-ebuddy:before {
+    content: ""
+}
+
+.icofont-ello:before {
+    content: ""
+}
+
+.icofont-ember:before {
+    content: ""
+}
+
+.icofont-envato:before {
+    content: ""
+}
+
+.icofont-evernote:before {
+    content: ""
+}
+
+.icofont-facebook-messenger:before {
+    content: ""
+}
+
+.icofont-facebook:before {
+    content: ""
+}
+
+.icofont-feedburner:before {
+    content: ""
+}
+
+.icofont-flikr:before {
+    content: ""
+}
+
+.icofont-folkd:before {
+    content: ""
+}
+
+.icofont-foursquare:before {
+    content: ""
+}
+
+.icofont-friendfeed:before {
+    content: ""
+}
+
+.icofont-ghost:before {
+    content: ""
+}
+
+.icofont-github:before {
+    content: ""
+}
+
+.icofont-gnome:before {
+    content: ""
+}
+
+.icofont-google-buzz:before {
+    content: ""
+}
+
+.icofont-google-hangouts:before {
+    content: ""
+}
+
+.icofont-google-map:before {
+    content: ""
+}
+
+.icofont-google-plus:before {
+    content: ""
+}
+
+.icofont-google-talk:before {
+    content: ""
+}
+
+.icofont-hype-machine:before {
+    content: ""
+}
+
+.icofont-instagram:before {
+    content: ""
+}
+
+.icofont-kakaotalk:before {
+    content: ""
+}
+
+.icofont-kickstarter:before {
+    content: ""
+}
+
+.icofont-kik:before {
+    content: ""
+}
+
+.icofont-kiwibox:before {
+    content: ""
+}
+
+.icofont-line-messenger:before {
+    content: ""
+}
+
+.icofont-line:before {
+    content: ""
+}
+
+.icofont-linkedin:before {
+    content: ""
+}
+
+.icofont-linux-mint:before {
+    content: ""
+}
+
+.icofont-live-messenger:before {
+    content: ""
+}
+
+.icofont-livejournal:before {
+    content: ""
+}
+
+.icofont-magento:before {
+    content: ""
+}
+
+.icofont-meetme:before {
+    content: ""
+}
+
+.icofont-meetup:before {
+    content: ""
+}
+
+.icofont-mixx:before {
+    content: ""
+}
+
+.icofont-newsvine:before {
+    content: ""
+}
+
+.icofont-nimbuss:before {
+    content: ""
+}
+
+.icofont-odnoklassniki:before {
+    content: ""
+}
+
+.icofont-opencart:before {
+    content: ""
+}
+
+.icofont-oscommerce:before {
+    content: ""
+}
+
+.icofont-pandora:before {
+    content: ""
+}
+
+.icofont-photobucket:before {
+    content: ""
+}
+
+.icofont-picasa:before {
+    content: ""
+}
+
+.icofont-pinterest:before {
+    content: ""
+}
+
+.icofont-prestashop:before {
+    content: ""
+}
+
+.icofont-qik:before {
+    content: ""
+}
+
+.icofont-qq:before {
+    content: ""
+}
+
+.icofont-readernaut:before {
+    content: ""
+}
+
+.icofont-reddit:before {
+    content: ""
+}
+
+.icofont-renren:before {
+    content: ""
+}
+
+.icofont-rss:before {
+    content: ""
+}
+
+.icofont-shopify:before {
+    content: ""
+}
+
+.icofont-silverstripe:before {
+    content: ""
+}
+
+.icofont-skype:before {
+    content: ""
+}
+
+.icofont-slack:before {
+    content: ""
+}
+
+.icofont-slashdot:before {
+    content: ""
+}
+
+.icofont-slidshare:before {
+    content: ""
+}
+
+.icofont-smugmug:before {
+    content: ""
+}
+
+.icofont-snapchat:before {
+    content: ""
+}
+
+.icofont-soundcloud:before {
+    content: ""
+}
+
+.icofont-spotify:before {
+    content: ""
+}
+
+.icofont-stack-exchange:before {
+    content: ""
+}
+
+.icofont-stack-overflow:before {
+    content: ""
+}
+
+.icofont-steam:before {
+    content: ""
+}
+
+.icofont-stumbleupon:before {
+    content: ""
+}
+
+.icofont-tagged:before {
+    content: ""
+}
+
+.icofont-technorati:before {
+    content: ""
+}
+
+.icofont-telegram:before {
+    content: ""
+}
+
+.icofont-tinder:before {
+    content: ""
+}
+
+.icofont-trello:before {
+    content: ""
+}
+
+.icofont-tumblr:before {
+    content: ""
+}
+
+.icofont-twitch:before {
+    content: ""
+}
+
+.icofont-twitter:before {
+    content: ""
+}
+
+.icofont-typo3:before {
+    content: ""
+}
+
+.icofont-ubercart:before {
+    content: ""
+}
+
+.icofont-viber:before {
+    content: ""
+}
+
+.icofont-viddler:before {
+    content: ""
+}
+
+.icofont-vimeo:before {
+    content: ""
+}
+
+.icofont-vine:before {
+    content: ""
+}
+
+.icofont-virb:before {
+    content: ""
+}
+
+.icofont-virtuemart:before {
+    content: ""
+}
+
+.icofont-vk:before {
+    content: ""
+}
+
+.icofont-wechat:before {
+    content: ""
+}
+
+.icofont-weibo:before {
+    content: ""
+}
+
+.icofont-whatsapp:before {
+    content: ""
+}
+
+.icofont-xing:before {
+    content: ""
+}
+
+.icofont-yahoo:before {
+    content: ""
+}
+
+.icofont-yelp:before {
+    content: ""
+}
+
+.icofont-youku:before {
+    content: ""
+}
+
+.icofont-youtube:before {
+    content: ""
+}
+
+.icofont-zencart:before {
+    content: ""
+}
+
+.icofont-badminton-birdie:before {
+    content: ""
+}
+
+.icofont-baseball:before {
+    content: ""
+}
+
+.icofont-baseballer:before {
+    content: ""
+}
+
+.icofont-basketball-hoop:before {
+    content: ""
+}
+
+.icofont-basketball:before {
+    content: ""
+}
+
+.icofont-billiard-ball:before {
+    content: ""
+}
+
+.icofont-boot-alt-1:before {
+    content: ""
+}
+
+.icofont-boot-alt-2:before {
+    content: ""
+}
+
+.icofont-boot:before {
+    content: ""
+}
+
+.icofont-bowling-alt:before {
+    content: ""
+}
+
+.icofont-bowling:before {
+    content: ""
+}
+
+.icofont-canoe:before {
+    content: ""
+}
+
+.icofont-cheer-leader:before {
+    content: ""
+}
+
+.icofont-climbing:before {
+    content: ""
+}
+
+.icofont-corner:before {
+    content: ""
+}
+
+.icofont-field-alt:before {
+    content: ""
+}
+
+.icofont-field:before {
+    content: ""
+}
+
+.icofont-football-alt:before {
+    content: ""
+}
+
+.icofont-football-american:before {
+    content: ""
+}
+
+.icofont-football:before {
+    content: ""
+}
+
+.icofont-foul:before {
+    content: ""
+}
+
+.icofont-goal-keeper:before {
+    content: ""
+}
+
+.icofont-goal:before {
+    content: ""
+}
+
+.icofont-golf-alt:before {
+    content: ""
+}
+
+.icofont-golf-bag:before {
+    content: ""
+}
+
+.icofont-golf-cart:before {
+    content: ""
+}
+
+.icofont-golf-field:before {
+    content: ""
+}
+
+.icofont-golf:before {
+    content: ""
+}
+
+.icofont-golfer:before {
+    content: ""
+}
+
+.icofont-helmet:before {
+    content: ""
+}
+
+.icofont-hockey-alt:before {
+    content: ""
+}
+
+.icofont-hockey:before {
+    content: ""
+}
+
+.icofont-ice-skate:before {
+    content: ""
+}
+
+.icofont-jersey-alt:before {
+    content: ""
+}
+
+.icofont-jersey:before {
+    content: ""
+}
+
+.icofont-jumping:before {
+    content: ""
+}
+
+.icofont-kick:before {
+    content: ""
+}
+
+.icofont-leg:before {
+    content: ""
+}
+
+.icofont-match-review:before {
+    content: ""
+}
+
+.icofont-medal-sport:before {
+    content: ""
+}
+
+.icofont-offside:before {
+    content: ""
+}
+
+.icofont-olympic-logo:before {
+    content: ""
+}
+
+.icofont-olympic:before {
+    content: ""
+}
+
+.icofont-padding:before {
+    content: ""
+}
+
+.icofont-penalty-card:before {
+    content: ""
+}
+
+.icofont-racer:before {
+    content: ""
+}
+
+.icofont-racing-car:before {
+    content: ""
+}
+
+.icofont-racing-flag-alt:before {
+    content: ""
+}
+
+.icofont-racing-flag:before {
+    content: ""
+}
+
+.icofont-racings-wheel:before {
+    content: ""
+}
+
+.icofont-referee:before {
+    content: ""
+}
+
+.icofont-refree-jersey:before {
+    content: ""
+}
+
+.icofont-result-sport:before {
+    content: ""
+}
+
+.icofont-rugby-ball:before {
+    content: ""
+}
+
+.icofont-rugby-player:before {
+    content: ""
+}
+
+.icofont-rugby:before {
+    content: ""
+}
+
+.icofont-runner-alt-1:before {
+    content: ""
+}
+
+.icofont-runner-alt-2:before {
+    content: ""
+}
+
+.icofont-runner:before {
+    content: ""
+}
+
+.icofont-score-board:before {
+    content: ""
+}
+
+.icofont-skiing-man:before {
+    content: ""
+}
+
+.icofont-skydiving-goggles:before {
+    content: ""
+}
+
+.icofont-snow-mobile:before {
+    content: ""
+}
+
+.icofont-steering:before {
+    content: ""
+}
+
+.icofont-stopwatch:before {
+    content: ""
+}
+
+.icofont-substitute:before {
+    content: ""
+}
+
+.icofont-swimmer:before {
+    content: ""
+}
+
+.icofont-table-tennis:before {
+    content: ""
+}
+
+.icofont-team-alt:before {
+    content: ""
+}
+
+.icofont-team:before {
+    content: ""
+}
+
+.icofont-tennis-player:before {
+    content: ""
+}
+
+.icofont-tennis:before {
+    content: ""
+}
+
+.icofont-tracking:before {
+    content: ""
+}
+
+.icofont-trophy-alt:before {
+    content: ""
+}
+
+.icofont-trophy:before {
+    content: ""
+}
+
+.icofont-volleyball-alt:before {
+    content: ""
+}
+
+.icofont-volleyball-fire:before {
+    content: ""
+}
+
+.icofont-volleyball:before {
+    content: ""
+}
+
+.icofont-water-bottle:before {
+    content: ""
+}
+
+.icofont-whistle-alt:before {
+    content: ""
+}
+
+.icofont-whistle:before {
+    content: ""
+}
+
+.icofont-win-trophy:before {
+    content: ""
+}
+
+.icofont-align-center:before {
+    content: ""
+}
+
+.icofont-align-left:before {
+    content: ""
+}
+
+.icofont-align-right:before {
+    content: ""
+}
+
+.icofont-all-caps:before {
+    content: ""
+}
+
+.icofont-bold:before {
+    content: ""
+}
+
+.icofont-brush:before {
+    content: ""
+}
+
+.icofont-clip-board:before {
+    content: ""
+}
+
+.icofont-code-alt:before {
+    content: ""
+}
+
+.icofont-color-bucket:before {
+    content: ""
+}
+
+.icofont-color-picker:before {
+    content: ""
+}
+
+.icofont-copy-invert:before {
+    content: ""
+}
+
+.icofont-copy:before {
+    content: ""
+}
+
+.icofont-cut:before {
+    content: ""
+}
+
+.icofont-delete-alt:before {
+    content: ""
+}
+
+.icofont-edit-alt:before {
+    content: ""
+}
+
+.icofont-eraser-alt:before {
+    content: ""
+}
+
+.icofont-font:before {
+    content: ""
+}
+
+.icofont-heading:before {
+    content: ""
+}
+
+.icofont-indent:before {
+    content: ""
+}
+
+.icofont-italic-alt:before {
+    content: ""
+}
+
+.icofont-italic:before {
+    content: ""
+}
+
+.icofont-justify-all:before {
+    content: ""
+}
+
+.icofont-justify-center:before {
+    content: ""
+}
+
+.icofont-justify-left:before {
+    content: ""
+}
+
+.icofont-justify-right:before {
+    content: ""
+}
+
+.icofont-link-broken:before {
+    content: ""
+}
+
+.icofont-outdent:before {
+    content: ""
+}
+
+.icofont-paper-clip:before {
+    content: ""
+}
+
+.icofont-paragraph:before {
+    content: ""
+}
+
+.icofont-pin:before {
+    content: ""
+}
+
+.icofont-printer:before {
+    content: ""
+}
+
+.icofont-redo:before {
+    content: ""
+}
+
+.icofont-rotation:before {
+    content: ""
+}
+
+.icofont-save:before {
+    content: ""
+}
+
+.icofont-small-cap:before {
+    content: ""
+}
+
+.icofont-strike-through:before {
+    content: ""
+}
+
+.icofont-sub-listing:before {
+    content: ""
+}
+
+.icofont-subscript:before {
+    content: ""
+}
+
+.icofont-superscript:before {
+    content: ""
+}
+
+.icofont-table:before {
+    content: ""
+}
+
+.icofont-text-height:before {
+    content: ""
+}
+
+.icofont-text-width:before {
+    content: ""
+}
+
+.icofont-trash:before {
+    content: ""
+}
+
+.icofont-underline:before {
+    content: ""
+}
+
+.icofont-undo:before {
+    content: ""
+}
+
+.icofont-air-balloon:before {
+    content: ""
+}
+
+.icofont-airplane-alt:before {
+    content: ""
+}
+
+.icofont-airplane:before {
+    content: ""
+}
+
+.icofont-articulated-truck:before {
+    content: ""
+}
+
+.icofont-auto-mobile:before {
+    content: ""
+}
+
+.icofont-auto-rickshaw:before {
+    content: ""
+}
+
+.icofont-bicycle-alt-1:before {
+    content: ""
+}
+
+.icofont-bicycle-alt-2:before {
+    content: ""
+}
+
+.icofont-bicycle:before {
+    content: ""
+}
+
+.icofont-bus-alt-1:before {
+    content: ""
+}
+
+.icofont-bus-alt-2:before {
+    content: ""
+}
+
+.icofont-bus-alt-3:before {
+    content: ""
+}
+
+.icofont-bus:before {
+    content: ""
+}
+
+.icofont-cab:before {
+    content: ""
+}
+
+.icofont-cable-car:before {
+    content: ""
+}
+
+.icofont-car-alt-1:before {
+    content: ""
+}
+
+.icofont-car-alt-2:before {
+    content: ""
+}
+
+.icofont-car-alt-3:before {
+    content: ""
+}
+
+.icofont-car-alt-4:before {
+    content: ""
+}
+
+.icofont-car:before {
+    content: ""
+}
+
+.icofont-delivery-time:before {
+    content: ""
+}
+
+.icofont-fast-delivery:before {
+    content: ""
+}
+
+.icofont-fire-truck-alt:before {
+    content: ""
+}
+
+.icofont-fire-truck:before {
+    content: ""
+}
+
+.icofont-free-delivery:before {
+    content: ""
+}
+
+.icofont-helicopter:before {
+    content: ""
+}
+
+.icofont-motor-bike-alt:before {
+    content: ""
+}
+
+.icofont-motor-bike:before {
+    content: ""
+}
+
+.icofont-motor-biker:before {
+    content: ""
+}
+
+.icofont-oil-truck:before {
+    content: ""
+}
+
+.icofont-rickshaw:before {
+    content: ""
+}
+
+.icofont-rocket-alt-1:before {
+    content: ""
+}
+
+.icofont-rocket-alt-2:before {
+    content: ""
+}
+
+.icofont-rocket:before {
+    content: ""
+}
+
+.icofont-sail-boat-alt-1:before {
+    content: ""
+}
+
+.icofont-sail-boat-alt-2:before {
+    content: ""
+}
+
+.icofont-sail-boat:before {
+    content: ""
+}
+
+.icofont-scooter:before {
+    content: ""
+}
+
+.icofont-sea-plane:before {
+    content: ""
+}
+
+.icofont-ship-alt:before {
+    content: ""
+}
+
+.icofont-ship:before {
+    content: ""
+}
+
+.icofont-speed-boat:before {
+    content: ""
+}
+
+.icofont-taxi:before {
+    content: ""
+}
+
+.icofont-tractor:before {
+    content: ""
+}
+
+.icofont-train-line:before {
+    content: ""
+}
+
+.icofont-train-steam:before {
+    content: ""
+}
+
+.icofont-tram:before {
+    content: ""
+}
+
+.icofont-truck-alt:before {
+    content: ""
+}
+
+.icofont-truck-loaded:before {
+    content: ""
+}
+
+.icofont-truck:before {
+    content: ""
+}
+
+.icofont-van-alt:before {
+    content: ""
+}
+
+.icofont-van:before {
+    content: ""
+}
+
+.icofont-yacht:before {
+    content: ""
+}
+
+.icofont-5-star-hotel:before {
+    content: ""
+}
+
+.icofont-air-ticket:before {
+    content: ""
+}
+
+.icofont-beach-bed:before {
+    content: ""
+}
+
+.icofont-beach:before {
+    content: ""
+}
+
+.icofont-camping-vest:before {
+    content: ""
+}
+
+.icofont-direction-sign:before {
+    content: ""
+}
+
+.icofont-hill-side:before {
+    content: ""
+}
+
+.icofont-hill:before {
+    content: ""
+}
+
+.icofont-hotel:before {
+    content: ""
+}
+
+.icofont-island-alt:before {
+    content: ""
+}
+
+.icofont-island:before {
+    content: ""
+}
+
+.icofont-sandals-female:before {
+    content: ""
+}
+
+.icofont-sandals-male:before {
+    content: ""
+}
+
+.icofont-travelling:before {
+    content: ""
+}
+
+.icofont-breakdown:before {
+    content: ""
+}
+
+.icofont-celsius:before {
+    content: ""
+}
+
+.icofont-clouds:before {
+    content: ""
+}
+
+.icofont-cloudy:before {
+    content: ""
+}
+
+.icofont-dust:before {
+    content: ""
+}
+
+.icofont-eclipse:before {
+    content: ""
+}
+
+.icofont-fahrenheit:before {
+    content: ""
+}
+
+.icofont-forest-fire:before {
+    content: ""
+}
+
+.icofont-full-night:before {
+    content: ""
+}
+
+.icofont-full-sunny:before {
+    content: ""
+}
+
+.icofont-hail-night:before {
+    content: ""
+}
+
+.icofont-hail-rainy-night:before {
+    content: ""
+}
+
+.icofont-hail-rainy-sunny:before {
+    content: ""
+}
+
+.icofont-hail-rainy:before {
+    content: ""
+}
+
+.icofont-hail-sunny:before {
+    content: ""
+}
+
+.icofont-hail-thunder-night:before {
+    content: ""
+}
+
+.icofont-hail-thunder-sunny:before {
+    content: ""
+}
+
+.icofont-hail-thunder:before {
+    content: ""
+}
+
+.icofont-hail:before {
+    content: ""
+}
+
+.icofont-hill-night:before {
+    content: ""
+}
+
+.icofont-hill-sunny:before {
+    content: ""
+}
+
+.icofont-hurricane:before {
+    content: ""
+}
+
+.icofont-meteor:before {
+    content: ""
+}
+
+.icofont-night:before {
+    content: ""
+}
+
+.icofont-rainy-night:before {
+    content: ""
+}
+
+.icofont-rainy-sunny:before {
+    content: ""
+}
+
+.icofont-rainy-thunder:before {
+    content: ""
+}
+
+.icofont-rainy:before {
+    content: ""
+}
+
+.icofont-snow-alt:before {
+    content: ""
+}
+
+.icofont-snow-flake:before {
+    content: ""
+}
+
+.icofont-snow-temp:before {
+    content: ""
+}
+
+.icofont-snow:before {
+    content: ""
+}
+
+.icofont-snowy-hail:before {
+    content: ""
+}
+
+.icofont-snowy-night-hail:before {
+    content: ""
+}
+
+.icofont-snowy-night-rainy:before {
+    content: ""
+}
+
+.icofont-snowy-night:before {
+    content: ""
+}
+
+.icofont-snowy-rainy:before {
+    content: ""
+}
+
+.icofont-snowy-sunny-hail:before {
+    content: ""
+}
+
+.icofont-snowy-sunny-rainy:before {
+    content: ""
+}
+
+.icofont-snowy-sunny:before {
+    content: ""
+}
+
+.icofont-snowy-thunder-night:before {
+    content: ""
+}
+
+.icofont-snowy-thunder-sunny:before {
+    content: ""
+}
+
+.icofont-snowy-thunder:before {
+    content: ""
+}
+
+.icofont-snowy-windy-night:before {
+    content: ""
+}
+
+.icofont-snowy-windy-sunny:before {
+    content: ""
+}
+
+.icofont-snowy-windy:before {
+    content: ""
+}
+
+.icofont-snowy:before {
+    content: ""
+}
+
+.icofont-sun-alt:before {
+    content: ""
+}
+
+.icofont-sun-rise:before {
+    content: ""
+}
+
+.icofont-sun-set:before {
+    content: ""
+}
+
+.icofont-sun:before {
+    content: ""
+}
+
+.icofont-sunny-day-temp:before {
+    content: ""
+}
+
+.icofont-sunny:before {
+    content: ""
+}
+
+.icofont-thunder-light:before {
+    content: ""
+}
+
+.icofont-tornado:before {
+    content: ""
+}
+
+.icofont-umbrella-alt:before {
+    content: ""
+}
+
+.icofont-umbrella:before {
+    content: ""
+}
+
+.icofont-volcano:before {
+    content: ""
+}
+
+.icofont-wave:before {
+    content: ""
+}
+
+.icofont-wind-scale-0:before {
+    content: ""
+}
+
+.icofont-wind-scale-1:before {
+    content: ""
+}
+
+.icofont-wind-scale-10:before {
+    content: ""
+}
+
+.icofont-wind-scale-11:before {
+    content: ""
+}
+
+.icofont-wind-scale-12:before {
+    content: ""
+}
+
+.icofont-wind-scale-2:before {
+    content: ""
+}
+
+.icofont-wind-scale-3:before {
+    content: ""
+}
+
+.icofont-wind-scale-4:before {
+    content: ""
+}
+
+.icofont-wind-scale-5:before {
+    content: ""
+}
+
+.icofont-wind-scale-6:before {
+    content: ""
+}
+
+.icofont-wind-scale-7:before {
+    content: ""
+}
+
+.icofont-wind-scale-8:before {
+    content: ""
+}
+
+.icofont-wind-scale-9:before {
+    content: ""
+}
+
+.icofont-wind-waves:before {
+    content: ""
+}
+
+.icofont-wind:before {
+    content: ""
+}
+
+.icofont-windy-hail:before {
+    content: ""
+}
+
+.icofont-windy-night:before {
+    content: ""
+}
+
+.icofont-windy-raining:before {
+    content: ""
+}
+
+.icofont-windy-sunny:before {
+    content: ""
+}
+
+.icofont-windy-thunder-raining:before {
+    content: ""
+}
+
+.icofont-windy-thunder:before {
+    content: ""
+}
+
+.icofont-windy:before {
+    content: ""
+}
+
+.icofont-addons:before {
+    content: ""
+}
+
+.icofont-address-book:before {
+    content: ""
+}
+
+.icofont-adjust:before {
+    content: ""
+}
+
+.icofont-alarm:before {
+    content: ""
+}
+
+.icofont-anchor:before {
+    content: ""
+}
+
+.icofont-archive:before {
+    content: ""
+}
+
+.icofont-at:before {
+    content: ""
+}
+
+.icofont-attachment:before {
+    content: ""
+}
+
+.icofont-audio:before {
+    content: ""
+}
+
+.icofont-automation:before {
+    content: ""
+}
+
+.icofont-badge:before {
+    content: ""
+}
+
+.icofont-bag-alt:before {
+    content: ""
+}
+
+.icofont-bag:before {
+    content: ""
+}
+
+.icofont-ban:before {
+    content: ""
+}
+
+.icofont-bar-code:before {
+    content: ""
+}
+
+.icofont-bars:before {
+    content: ""
+}
+
+.icofont-basket:before {
+    content: ""
+}
+
+.icofont-battery-empty:before {
+    content: ""
+}
+
+.icofont-battery-full:before {
+    content: ""
+}
+
+.icofont-battery-half:before {
+    content: ""
+}
+
+.icofont-battery-low:before {
+    content: ""
+}
+
+.icofont-beaker:before {
+    content: ""
+}
+
+.icofont-beard:before {
+    content: ""
+}
+
+.icofont-bed:before {
+    content: ""
+}
+
+.icofont-bell:before {
+    content: ""
+}
+
+.icofont-beverage:before {
+    content: ""
+}
+
+.icofont-bill:before {
+    content: ""
+}
+
+.icofont-bin:before {
+    content: ""
+}
+
+.icofont-binary:before {
+    content: ""
+}
+
+.icofont-binoculars:before {
+    content: ""
+}
+
+.icofont-bluetooth:before {
+    content: ""
+}
+
+.icofont-bomb:before {
+    content: ""
+}
+
+.icofont-book-mark:before {
+    content: ""
+}
+
+.icofont-box:before {
+    content: ""
+}
+
+.icofont-briefcase:before {
+    content: ""
+}
+
+.icofont-broken:before {
+    content: ""
+}
+
+.icofont-bucket:before {
+    content: ""
+}
+
+.icofont-bucket1:before {
+    content: ""
+}
+
+.icofont-bucket2:before {
+    content: ""
+}
+
+.icofont-bug:before {
+    content: ""
+}
+
+.icofont-building:before {
+    content: ""
+}
+
+.icofont-bulb-alt:before {
+    content: ""
+}
+
+.icofont-bullet:before {
+    content: ""
+}
+
+.icofont-bullhorn:before {
+    content: ""
+}
+
+.icofont-bullseye:before {
+    content: ""
+}
+
+.icofont-calendar:before {
+    content: ""
+}
+
+.icofont-camera-alt:before {
+    content: ""
+}
+
+.icofont-camera:before {
+    content: ""
+}
+
+.icofont-card:before {
+    content: ""
+}
+
+.icofont-cart-alt:before {
+    content: ""
+}
+
+.icofont-cart:before {
+    content: ""
+}
+
+.icofont-cc:before {
+    content: ""
+}
+
+.icofont-charging:before {
+    content: ""
+}
+
+.icofont-chat:before {
+    content: ""
+}
+
+.icofont-check-alt:before {
+    content: ""
+}
+
+.icofont-check-circled:before {
+    content: ""
+}
+
+.icofont-check:before {
+    content: ""
+}
+
+.icofont-checked:before {
+    content: ""
+}
+
+.icofont-children-care:before {
+    content: ""
+}
+
+.icofont-clip:before {
+    content: ""
+}
+
+.icofont-clock-time:before {
+    content: ""
+}
+
+.icofont-close-circled:before {
+    content: ""
+}
+
+.icofont-close-line-circled:before {
+    content: ""
+}
+
+.icofont-close-line-squared-alt:before {
+    content: ""
+}
+
+.icofont-close-line-squared:before {
+    content: ""
+}
+
+.icofont-close-line:before {
+    content: ""
+}
+
+.icofont-close-squared-alt:before {
+    content: ""
+}
+
+.icofont-close-squared:before {
+    content: ""
+}
+
+.icofont-close:before {
+    content: ""
+}
+
+.icofont-cloud-download:before {
+    content: ""
+}
+
+.icofont-cloud-refresh:before {
+    content: ""
+}
+
+.icofont-cloud-upload:before {
+    content: ""
+}
+
+.icofont-cloud:before {
+    content: ""
+}
+
+.icofont-code-not-allowed:before {
+    content: ""
+}
+
+.icofont-code:before {
+    content: ""
+}
+
+.icofont-comment:before {
+    content: ""
+}
+
+.icofont-compass-alt:before {
+    content: ""
+}
+
+.icofont-compass:before {
+    content: ""
+}
+
+.icofont-computer:before {
+    content: ""
+}
+
+.icofont-connection:before {
+    content: ""
+}
+
+.icofont-console:before {
+    content: ""
+}
+
+.icofont-contacts:before {
+    content: ""
+}
+
+.icofont-contrast:before {
+    content: ""
+}
+
+.icofont-copyright:before {
+    content: ""
+}
+
+.icofont-credit-card:before {
+    content: ""
+}
+
+.icofont-crop:before {
+    content: ""
+}
+
+.icofont-crown:before {
+    content: ""
+}
+
+.icofont-cube:before {
+    content: ""
+}
+
+.icofont-cubes:before {
+    content: ""
+}
+
+.icofont-dashboard-web:before {
+    content: ""
+}
+
+.icofont-dashboard:before {
+    content: ""
+}
+
+.icofont-data:before {
+    content: ""
+}
+
+.icofont-database-add:before {
+    content: ""
+}
+
+.icofont-database-locked:before {
+    content: ""
+}
+
+.icofont-database-remove:before {
+    content: ""
+}
+
+.icofont-database:before {
+    content: ""
+}
+
+.icofont-delete:before {
+    content: ""
+}
+
+.icofont-diamond:before {
+    content: ""
+}
+
+.icofont-dice-multiple:before {
+    content: ""
+}
+
+.icofont-dice:before {
+    content: ""
+}
+
+.icofont-disc:before {
+    content: ""
+}
+
+.icofont-diskette:before {
+    content: ""
+}
+
+.icofont-document-folder:before {
+    content: ""
+}
+
+.icofont-download-alt:before {
+    content: ""
+}
+
+.icofont-download:before {
+    content: ""
+}
+
+.icofont-downloaded:before {
+    content: ""
+}
+
+.icofont-drag:before {
+    content: ""
+}
+
+.icofont-drag1:before {
+    content: ""
+}
+
+.icofont-drag2:before {
+    content: ""
+}
+
+.icofont-drag3:before {
+    content: ""
+}
+
+.icofont-earth:before {
+    content: ""
+}
+
+.icofont-ebook:before {
+    content: ""
+}
+
+.icofont-edit:before {
+    content: ""
+}
+
+.icofont-eject:before {
+    content: ""
+}
+
+.icofont-email:before {
+    content: ""
+}
+
+.icofont-envelope-open:before {
+    content: ""
+}
+
+.icofont-envelope:before {
+    content: ""
+}
+
+.icofont-eraser:before {
+    content: ""
+}
+
+.icofont-error:before {
+    content: ""
+}
+
+.icofont-excavator:before {
+    content: ""
+}
+
+.icofont-exchange:before {
+    content: ""
+}
+
+.icofont-exclamation-circle:before {
+    content: ""
+}
+
+.icofont-exclamation-square:before {
+    content: ""
+}
+
+.icofont-exclamation-tringle:before {
+    content: ""
+}
+
+.icofont-exclamation:before {
+    content: ""
+}
+
+.icofont-exit:before {
+    content: ""
+}
+
+.icofont-expand:before {
+    content: ""
+}
+
+.icofont-external-link:before {
+    content: ""
+}
+
+.icofont-external:before {
+    content: ""
+}
+
+.icofont-eye-alt:before {
+    content: ""
+}
+
+.icofont-eye-blocked:before {
+    content: ""
+}
+
+.icofont-eye-dropper:before {
+    content: ""
+}
+
+.icofont-eye:before {
+    content: ""
+}
+
+.icofont-favourite:before {
+    content: ""
+}
+
+.icofont-fax:before {
+    content: ""
+}
+
+.icofont-file-fill:before {
+    content: ""
+}
+
+.icofont-film:before {
+    content: ""
+}
+
+.icofont-filter:before {
+    content: ""
+}
+
+.icofont-fire-alt:before {
+    content: ""
+}
+
+.icofont-fire-burn:before {
+    content: ""
+}
+
+.icofont-fire:before {
+    content: ""
+}
+
+.icofont-flag-alt-1:before {
+    content: ""
+}
+
+.icofont-flag-alt-2:before {
+    content: ""
+}
+
+.icofont-flag:before {
+    content: ""
+}
+
+.icofont-flame-torch:before {
+    content: ""
+}
+
+.icofont-flash-light:before {
+    content: ""
+}
+
+.icofont-flash:before {
+    content: ""
+}
+
+.icofont-flask:before {
+    content: ""
+}
+
+.icofont-focus:before {
+    content: ""
+}
+
+.icofont-folder-open:before {
+    content: ""
+}
+
+.icofont-folder:before {
+    content: ""
+}
+
+.icofont-foot-print:before {
+    content: ""
+}
+
+.icofont-garbage:before {
+    content: ""
+}
+
+.icofont-gear-alt:before {
+    content: ""
+}
+
+.icofont-gear:before {
+    content: ""
+}
+
+.icofont-gears:before {
+    content: ""
+}
+
+.icofont-gift:before {
+    content: ""
+}
+
+.icofont-glass:before {
+    content: ""
+}
+
+.icofont-globe:before {
+    content: ""
+}
+
+.icofont-graffiti:before {
+    content: ""
+}
+
+.icofont-grocery:before {
+    content: ""
+}
+
+.icofont-hand:before {
+    content: ""
+}
+
+.icofont-hanger:before {
+    content: ""
+}
+
+.icofont-hard-disk:before {
+    content: ""
+}
+
+.icofont-heart-alt:before {
+    content: ""
+}
+
+.icofont-heart:before {
+    content: ""
+}
+
+.icofont-history:before {
+    content: ""
+}
+
+.icofont-home:before {
+    content: ""
+}
+
+.icofont-horn:before {
+    content: ""
+}
+
+.icofont-hour-glass:before {
+    content: ""
+}
+
+.icofont-id:before {
+    content: ""
+}
+
+.icofont-image:before {
+    content: ""
+}
+
+.icofont-inbox:before {
+    content: ""
+}
+
+.icofont-infinite:before {
+    content: ""
+}
+
+.icofont-info-circle:before {
+    content: ""
+}
+
+.icofont-info-square:before {
+    content: ""
+}
+
+.icofont-info:before {
+    content: ""
+}
+
+.icofont-institution:before {
+    content: ""
+}
+
+.icofont-interface:before {
+    content: ""
+}
+
+.icofont-invisible:before {
+    content: ""
+}
+
+.icofont-jacket:before {
+    content: ""
+}
+
+.icofont-jar:before {
+    content: ""
+}
+
+.icofont-jewlery:before {
+    content: ""
+}
+
+.icofont-karate:before {
+    content: ""
+}
+
+.icofont-key-hole:before {
+    content: ""
+}
+
+.icofont-key:before {
+    content: ""
+}
+
+.icofont-label:before {
+    content: ""
+}
+
+.icofont-lamp:before {
+    content: ""
+}
+
+.icofont-layers:before {
+    content: ""
+}
+
+.icofont-layout:before {
+    content: ""
+}
+
+.icofont-leaf:before {
+    content: ""
+}
+
+.icofont-leaflet:before {
+    content: ""
+}
+
+.icofont-learn:before {
+    content: ""
+}
+
+.icofont-lego:before {
+    content: ""
+}
+
+.icofont-lens:before {
+    content: ""
+}
+
+.icofont-letter:before {
+    content: ""
+}
+
+.icofont-letterbox:before {
+    content: ""
+}
+
+.icofont-library:before {
+    content: ""
+}
+
+.icofont-license:before {
+    content: ""
+}
+
+.icofont-life-bouy:before {
+    content: ""
+}
+
+.icofont-life-buoy:before {
+    content: ""
+}
+
+.icofont-life-jacket:before {
+    content: ""
+}
+
+.icofont-life-ring:before {
+    content: ""
+}
+
+.icofont-light-bulb:before {
+    content: ""
+}
+
+.icofont-lighter:before {
+    content: ""
+}
+
+.icofont-lightning-ray:before {
+    content: ""
+}
+
+.icofont-like:before {
+    content: ""
+}
+
+.icofont-line-height:before {
+    content: ""
+}
+
+.icofont-link-alt:before {
+    content: ""
+}
+
+.icofont-link:before {
+    content: ""
+}
+
+.icofont-list:before {
+    content: ""
+}
+
+.icofont-listening:before {
+    content: ""
+}
+
+.icofont-listine-dots:before {
+    content: ""
+}
+
+.icofont-listing-box:before {
+    content: ""
+}
+
+.icofont-listing-number:before {
+    content: ""
+}
+
+.icofont-live-support:before {
+    content: ""
+}
+
+.icofont-location-arrow:before {
+    content: ""
+}
+
+.icofont-location-pin:before {
+    content: ""
+}
+
+.icofont-lock:before {
+    content: ""
+}
+
+.icofont-login:before {
+    content: ""
+}
+
+.icofont-logout:before {
+    content: ""
+}
+
+.icofont-lollipop:before {
+    content: ""
+}
+
+.icofont-long-drive:before {
+    content: ""
+}
+
+.icofont-look:before {
+    content: ""
+}
+
+.icofont-loop:before {
+    content: ""
+}
+
+.icofont-luggage:before {
+    content: ""
+}
+
+.icofont-lunch:before {
+    content: ""
+}
+
+.icofont-lungs:before {
+    content: ""
+}
+
+.icofont-magic-alt:before {
+    content: ""
+}
+
+.icofont-magic:before {
+    content: ""
+}
+
+.icofont-magnet:before {
+    content: ""
+}
+
+.icofont-mail-box:before {
+    content: ""
+}
+
+.icofont-mail:before {
+    content: ""
+}
+
+.icofont-male:before {
+    content: ""
+}
+
+.icofont-map-pins:before {
+    content: ""
+}
+
+.icofont-map:before {
+    content: ""
+}
+
+.icofont-maximize:before {
+    content: ""
+}
+
+.icofont-measure:before {
+    content: ""
+}
+
+.icofont-medicine:before {
+    content: ""
+}
+
+.icofont-mega-phone:before {
+    content: ""
+}
+
+.icofont-megaphone-alt:before {
+    content: ""
+}
+
+.icofont-megaphone:before {
+    content: ""
+}
+
+.icofont-memorial:before {
+    content: ""
+}
+
+.icofont-memory-card:before {
+    content: ""
+}
+
+.icofont-mic-mute:before {
+    content: ""
+}
+
+.icofont-mic:before {
+    content: ""
+}
+
+.icofont-military:before {
+    content: ""
+}
+
+.icofont-mill:before {
+    content: ""
+}
+
+.icofont-minus-circle:before {
+    content: ""
+}
+
+.icofont-minus-square:before {
+    content: ""
+}
+
+.icofont-minus:before {
+    content: ""
+}
+
+.icofont-mobile-phone:before {
+    content: ""
+}
+
+.icofont-molecule:before {
+    content: ""
+}
+
+.icofont-money:before {
+    content: ""
+}
+
+.icofont-moon:before {
+    content: ""
+}
+
+.icofont-mop:before {
+    content: ""
+}
+
+.icofont-muffin:before {
+    content: ""
+}
+
+.icofont-mustache:before {
+    content: ""
+}
+
+.icofont-navigation-menu:before {
+    content: ""
+}
+
+.icofont-navigation:before {
+    content: ""
+}
+
+.icofont-network-tower:before {
+    content: ""
+}
+
+.icofont-network:before {
+    content: ""
+}
+
+.icofont-news:before {
+    content: ""
+}
+
+.icofont-newspaper:before {
+    content: ""
+}
+
+.icofont-no-smoking:before {
+    content: ""
+}
+
+.icofont-not-allowed:before {
+    content: ""
+}
+
+.icofont-notebook:before {
+    content: ""
+}
+
+.icofont-notepad:before {
+    content: ""
+}
+
+.icofont-notification:before {
+    content: ""
+}
+
+.icofont-numbered:before {
+    content: ""
+}
+
+.icofont-opposite:before {
+    content: ""
+}
+
+.icofont-optic:before {
+    content: ""
+}
+
+.icofont-options:before {
+    content: ""
+}
+
+.icofont-package:before {
+    content: ""
+}
+
+.icofont-page:before {
+    content: ""
+}
+
+.icofont-paint:before {
+    content: ""
+}
+
+.icofont-paper-plane:before {
+    content: ""
+}
+
+.icofont-paperclip:before {
+    content: ""
+}
+
+.icofont-papers:before {
+    content: ""
+}
+
+.icofont-pay:before {
+    content: ""
+}
+
+.icofont-penguin-linux:before {
+    content: ""
+}
+
+.icofont-pestle:before {
+    content: ""
+}
+
+.icofont-phone-circle:before {
+    content: ""
+}
+
+.icofont-phone:before {
+    content: ""
+}
+
+.icofont-picture:before {
+    content: ""
+}
+
+.icofont-pine:before {
+    content: ""
+}
+
+.icofont-pixels:before {
+    content: ""
+}
+
+.icofont-plugin:before {
+    content: ""
+}
+
+.icofont-plus-circle:before {
+    content: ""
+}
+
+.icofont-plus-square:before {
+    content: ""
+}
+
+.icofont-plus:before {
+    content: ""
+}
+
+.icofont-polygonal:before {
+    content: ""
+}
+
+.icofont-power:before {
+    content: ""
+}
+
+.icofont-price:before {
+    content: ""
+}
+
+.icofont-print:before {
+    content: ""
+}
+
+.icofont-puzzle:before {
+    content: ""
+}
+
+.icofont-qr-code:before {
+    content: ""
+}
+
+.icofont-queen:before {
+    content: ""
+}
+
+.icofont-question-circle:before {
+    content: ""
+}
+
+.icofont-question-square:before {
+    content: ""
+}
+
+.icofont-question:before {
+    content: ""
+}
+
+.icofont-quote-left:before {
+    content: ""
+}
+
+.icofont-quote-right:before {
+    content: ""
+}
+
+.icofont-random:before {
+    content: ""
+}
+
+.icofont-recycle:before {
+    content: ""
+}
+
+.icofont-refresh:before {
+    content: ""
+}
+
+.icofont-repair:before {
+    content: ""
+}
+
+.icofont-reply-all:before {
+    content: ""
+}
+
+.icofont-reply:before {
+    content: ""
+}
+
+.icofont-resize:before {
+    content: ""
+}
+
+.icofont-responsive:before {
+    content: ""
+}
+
+.icofont-retweet:before {
+    content: ""
+}
+
+.icofont-road:before {
+    content: ""
+}
+
+.icofont-robot:before {
+    content: ""
+}
+
+.icofont-royal:before {
+    content: ""
+}
+
+.icofont-rss-feed:before {
+    content: ""
+}
+
+.icofont-safety:before {
+    content: ""
+}
+
+.icofont-sale-discount:before {
+    content: ""
+}
+
+.icofont-satellite:before {
+    content: ""
+}
+
+.icofont-send-mail:before {
+    content: ""
+}
+
+.icofont-server:before {
+    content: ""
+}
+
+.icofont-settings-alt:before {
+    content: ""
+}
+
+.icofont-settings:before {
+    content: ""
+}
+
+.icofont-share-alt:before {
+    content: ""
+}
+
+.icofont-share-boxed:before {
+    content: ""
+}
+
+.icofont-share:before {
+    content: ""
+}
+
+.icofont-shield:before {
+    content: ""
+}
+
+.icofont-shopping-cart:before {
+    content: ""
+}
+
+.icofont-sign-in:before {
+    content: ""
+}
+
+.icofont-sign-out:before {
+    content: ""
+}
+
+.icofont-signal:before {
+    content: ""
+}
+
+.icofont-site-map:before {
+    content: ""
+}
+
+.icofont-smart-phone:before {
+    content: ""
+}
+
+.icofont-soccer:before {
+    content: ""
+}
+
+.icofont-sort-alt:before {
+    content: ""
+}
+
+.icofont-sort:before {
+    content: ""
+}
+
+.icofont-space:before {
+    content: ""
+}
+
+.icofont-spanner:before {
+    content: ""
+}
+
+.icofont-speech-comments:before {
+    content: ""
+}
+
+.icofont-speed-meter:before {
+    content: ""
+}
+
+.icofont-spinner-alt-1:before {
+    content: ""
+}
+
+.icofont-spinner-alt-2:before {
+    content: ""
+}
+
+.icofont-spinner-alt-3:before {
+    content: ""
+}
+
+.icofont-spinner-alt-4:before {
+    content: ""
+}
+
+.icofont-spinner-alt-5:before {
+    content: ""
+}
+
+.icofont-spinner-alt-6:before {
+    content: ""
+}
+
+.icofont-spinner:before {
+    content: ""
+}
+
+.icofont-spreadsheet:before {
+    content: ""
+}
+
+.icofont-square:before {
+    content: ""
+}
+
+.icofont-ssl-security:before {
+    content: ""
+}
+
+.icofont-star-alt-1:before {
+    content: ""
+}
+
+.icofont-star-alt-2:before {
+    content: ""
+}
+
+.icofont-star:before {
+    content: ""
+}
+
+.icofont-street-view:before {
+    content: ""
+}
+
+.icofont-support-faq:before {
+    content: ""
+}
+
+.icofont-tack-pin:before {
+    content: ""
+}
+
+.icofont-tag:before {
+    content: ""
+}
+
+.icofont-tags:before {
+    content: ""
+}
+
+.icofont-tasks-alt:before {
+    content: ""
+}
+
+.icofont-tasks:before {
+    content: ""
+}
+
+.icofont-telephone:before {
+    content: ""
+}
+
+.icofont-telescope:before {
+    content: ""
+}
+
+.icofont-terminal:before {
+    content: ""
+}
+
+.icofont-thumbs-down:before {
+    content: ""
+}
+
+.icofont-thumbs-up:before {
+    content: ""
+}
+
+.icofont-tick-boxed:before {
+    content: ""
+}
+
+.icofont-tick-mark:before {
+    content: ""
+}
+
+.icofont-ticket:before {
+    content: ""
+}
+
+.icofont-tie:before {
+    content: ""
+}
+
+.icofont-toggle-off:before {
+    content: ""
+}
+
+.icofont-toggle-on:before {
+    content: ""
+}
+
+.icofont-tools-alt-2:before {
+    content: ""
+}
+
+.icofont-tools:before {
+    content: ""
+}
+
+.icofont-touch:before {
+    content: ""
+}
+
+.icofont-traffic-light:before {
+    content: ""
+}
+
+.icofont-transparent:before {
+    content: ""
+}
+
+.icofont-tree:before {
+    content: ""
+}
+
+.icofont-unique-idea:before {
+    content: ""
+}
+
+.icofont-unlock:before {
+    content: ""
+}
+
+.icofont-unlocked:before {
+    content: ""
+}
+
+.icofont-upload-alt:before {
+    content: ""
+}
+
+.icofont-upload:before {
+    content: ""
+}
+
+.icofont-usb-drive:before {
+    content: ""
+}
+
+.icofont-usb:before {
+    content: ""
+}
+
+.icofont-vector-path:before {
+    content: ""
+}
+
+.icofont-verification-check:before {
+    content: ""
+}
+
+.icofont-wall-clock:before {
+    content: ""
+}
+
+.icofont-wall:before {
+    content: ""
+}
+
+.icofont-wallet:before {
+    content: ""
+}
+
+.icofont-warning-alt:before {
+    content: ""
+}
+
+.icofont-warning:before {
+    content: ""
+}
+
+.icofont-water-drop:before {
+    content: ""
+}
+
+.icofont-web:before {
+    content: ""
+}
+
+.icofont-wheelchair:before {
+    content: ""
+}
+
+.icofont-wifi-alt:before {
+    content: ""
+}
+
+.icofont-wifi:before {
+    content: ""
+}
+
+.icofont-world:before {
+    content: ""
+}
+
+.icofont-zigzag:before {
+    content: ""
+}
+
+.icofont-zipped:before {
+    content: ""
+}
+
+.icofont-xs {
+    font-size: .5em
+}
+
+.icofont-sm {
+    font-size: .75em
+}
+
+.icofont-md {
+    font-size: 1.25em
+}
+
+.icofont-lg {
+    font-size: 1.5em
+}
+
+.icofont-1x {
+    font-size: 1em
+}
+
+.icofont-2x {
+    font-size: 2em
+}
+
+.icofont-3x {
+    font-size: 3em
+}
+
+.icofont-4x {
+    font-size: 4em
+}
+
+.icofont-5x {
+    font-size: 5em
+}
+
+.icofont-6x {
+    font-size: 6em
+}
+
+.icofont-7x {
+    font-size: 7em
+}
+
+.icofont-8x {
+    font-size: 8em
+}
+
+.icofont-9x {
+    font-size: 9em
+}
+
+.icofont-10x {
+    font-size: 10em
+}
+
+.icofont-fw {
+    text-align: center;
+    width: 1.25em
+}
+
+.icofont-ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-left: 0
+}
+
+.icofont-ul>li {
+    position: relative;
+    line-height: 2em
+}
+
+.icofont-ul>li .icofont {
+    display: inline-block;
+    vertical-align: middle
+}
+
+.icofont-border {
+    border: solid .08em #f1f1f1;
+    border-radius: .1em;
+    padding: .2em .25em .15em
+}
+
+.icofont-pull-left {
+    float: left
+}
+
+.icofont-pull-right {
+    float: right
+}
+
+.icofont.icofont-pull-left {
+    margin-right: .3em
+}
+
+.icofont.icofont-pull-right {
+    margin-left: .3em
+}
+
+.icofont-spin {
+    animation: icofont-spin 2s infinite linear;
+    display: inline-block
+}
+
+.icofont-pulse {
+    animation: icofont-spin 1s infinite steps(8);
+    display: inline-block
+}
+
+@keyframes icofont-spin {
+    0% {
+        transform: rotate(0)
+    }
+
+    to {
+        transform: rotate(360deg)
+    }
+}
+
+.icofont-rotate-90 {
+    -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=1)";
+    transform: rotate(90deg)
+}
+
+.icofont-rotate-180 {
+    -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2)";
+    transform: rotate(180deg)
+}
+
+.icofont-rotate-270 {
+    -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)";
+    transform: rotate(270deg)
+}
+
+.icofont-flip-horizontal {
+    -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1)";
+    transform: scaleX(-1)
+}
+
+.icofont-flip-vertical {
+    -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
+    transform: scaleY(-1)
+}
+
+.icofont-flip-horizontal.icofont-flip-vertical {
+    -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
+    transform: scale(-1)
+}
+
+:root .icofont-rotate-90,:root .icofont-rotate-180,:root .icofont-rotate-270,:root .icofont-flip-horizontal,:root .icofont-flip-vertical {
+    filter: none;
+    display: inline-block
+}
+
+.icofont-inverse {
+    color: #fff
+}
+
+
+
+/* .sidebar{
+    background-color: #2868e8 !important;
+} */
+
+
+
+
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9fafb;
+    color: #333;
+  }
+
+  .content-wrapper {
+    margin-left: 250px;
+    /* Leave space for fixed sidebar */
+    /* background: #fff; */
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+    padding: 20px;
+  }
+
+  h1,
+  h3 {
+    color: #222;
+  }
+
+  .form-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+  }
+
+  #search {
+    flex-grow: 1;
+    min-width: 250px;
+    max-width: 400px;
+    padding: 10px 15px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    transition: border-color 0.2s ease-in-out;
+  }
+
+  #search:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+
+  .total_recharge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2c3e50;
+  }
+
+  #total_recharge_count {
+    color: #555;
+    font-weight: normal;
+    font-size: 1rem;
+  }
+
+  #date_picker {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    transition: border-color 0.2s ease-in-out;
+    cursor: pointer;
+  }
+
+  #date_picker:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+
+  .card {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+  }
+
+  .card-header {
+    background-color: #007bff;
+    color: #fff;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    padding: 12px 20px;
+    font-weight: 600;
+    font-size: 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .card-tools button {
+    color: #fff;
+    font-size: 1.1rem;
+    transition: color 0.3s;
+  }
+
+  .card-tools button:hover {
+    color: #d1e7ff;
+  }
+
+  table#table1 {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+  }
+
+  table#table1 thead th {
+    background-color: #f1f3f5;
+    color: #495057;
+    font-weight: 600;
+    text-align: center;
+    padding: 12px;
+    border-radius: 6px;
+  }
+
+  table#table1 tbody tr {
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgb(0 0 0 / 0.05);
+    transition: background-color 0.2s ease;
+  }
+
+  table#table1 tbody tr:hover {
+    background-color: #f8f9fa;
+  }
+
+  table#table1 tbody td {
+    padding: 10px 12px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 0.95rem;
+  }
+
+  .badge-success {
+    background-color: #28a745;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+  }
+
+  .badge-danger {
+    background-color: #dc3545;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+  }
+
+  nav.pagination {
+    margin-top: 20px;
+  }
+
+  ul.pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding-left: 0;
+  }
+
+  ul.pagination li.page-item {
+    margin: 0 5px;
+  }
+
+  ul.pagination li.page-item a.page-link {
+    color: #101010;
+    border: 1px solid #dee2e6;
+    padding: 7px 14px;
+    border-radius: 5px;
+    font-weight: 500;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  ul.pagination li.page-item a.page-link:hover {
+    background-color: #007bff;
+    color: white;
+  }
+
+  ul.pagination li.page-item a.page-link.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+  }
+
+  ul.pagination li.page-item.disabled a.page-link {
+    color: #6c757d;
+    pointer-events: none;
+    cursor: default;
+    background-color: #fff;
+  }
+
+  #toast {
+    visibility: hidden;
+    min-width: auto;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    padding: 16px 20px;
+    position: fixed;
+    z-index: 9999;
+    top: 20px;
+    right: 20px;
+    transform: translateY(-100%);
+    font-size: 16px;
+    transition: all 0.4s ease-in-out;
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  #toast.show {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0%);
+  }
+
+  #toast span#toast-close {
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0.7;
+  }
+
+
+  /* dashboard-css */
+/* body {
+    background: linear-gradient(180deg, #0a0f2c, #001a3d);
+} */
+body.bg-light {
+    /* background: linear-gradient(180deg, #0a0f2c, #001a3d); */
+    background: #001a3d !important;
+}
+
+
+
+  @media (max-width: 768px) {
+    .content-wrapper {
+      margin-left: 0;
+      padding: 15px;
+    }
+
+    .form-group {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    #search {
+      max-width: 100%;
+      margin-bottom: 15px;
+    }
+
+    .total_recharge {
+      justify-content: center;
+      font-size: 1rem;
+    }
+
+    #date_picker {
+      max-width: 100%;
+      margin: 0 auto;
+    }
+
+    table#table1 tbody td {
+      font-size: 0.85rem;
+      padding: 8px 6px;
+    }
+  }
+

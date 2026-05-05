@@ -1,0 +1,852 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.1/axios.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<style>
+/* ---------- Modal visuals ---------- */
+.cv-modal { position: fixed; inset: 0; z-index: 99999; display: none; align-items: center; justify-content: center; font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial; }
+.cv-modal-backdrop { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(6,10,20,0.48), rgba(6,10,20,0.6)); backdrop-filter: blur(6px); transition: opacity .18s ease; }
+
+/* panel */
+.cv-modal-panel { position: relative; width: 94%; max-width: 520px; border-radius: 16px; background: linear-gradient(180deg, #ffffff, #f7fbff); box-shadow: 0 30px 70px rgba(2,6,23,0.18); overflow: hidden; z-index: 2; padding: 0; transform: translateY(12px) scale(.995); opacity:0; transition: transform .26s cubic-bezier(.2,.9,.2,1), opacity .20s ease; }
+
+/* open state (use requestAnimationFrame in JS to add class) */
+.cv-modal.cv-open .cv-modal-panel { transform: translateY(0) scale(1); opacity:1; }
+
+/* header */
+.cv-modal-top {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:18px 18px;
+  background: linear-gradient(90deg, rgba(0,170,255,0.12), rgba(0,192,255,0.06));
+  border-bottom: 1px solid rgba(2,6,23,0.03);
+}
+.cv-modal-badge {
+  min-width:52px;
+  height:52px;
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  background: linear-gradient(135deg,#00aaff,#0078b5);
+  color:white;
+  font-weight:800;
+  font-size:18px;
+  box-shadow: 0 8px 26px rgba(0,170,255,0.12);
+}
+.cv-modal-title-wrap { flex:1; display:flex; flex-direction:column; gap:2px; }
+.cv-modal-title { margin:0; font-size:18px; font-weight:800; color:#052033; letter-spacing: -0.2px; }
+.cv-modal-sub { font-size:13px; color:#4b5563; }
+
+/* close */
+.cv-modal-close { background:transparent; border:0; font-size:20px; line-height:1; cursor:pointer; color:#0f172a; opacity:.7; }
+
+/* body */
+.cv-modal-body { padding:16px 18px 12px 18px; display:block; }
+.cv-plan-meta { font-size:13px; color:#334155; margin-bottom:10px; font-weight:600; display:flex; gap:8px; align-items:center; }
+.cv-plan-pill { background: rgba(2,120,185,0.08); color:#036280; padding:6px 10px; border-radius:999px; font-weight:700; font-size:13px; border:1px solid rgba(2,120,185,0.06); }
+
+/* input row with currency prefix */
+.cv-input-row { display:flex; gap:10px; align-items:center; margin-top:6px; }
+.cv-currency {
+  display:inline-flex; align-items:center; gap:8px; padding:10px 12px; border-radius:10px; background: linear-gradient(180deg,#fbfeff,#ffffff); border:1px solid rgba(2,6,23,0.05);
+  font-weight:700; color:#0f172a; min-width:86px; justify-content:center;
+}
+#cvAmountInput { flex:1; padding:12px 12px; border-radius:10px; border:1px solid rgba(2,6,23,0.06); font-size:15px; outline:none; box-shadow:none; }
+#cvAmountInput:focus { box-shadow: 0 10px 30px rgba(0,170,255,0.06); border-color: rgba(0,170,255,0.14); }
+
+/* presets */
+.cv-presets { display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+.cv-chip { background: linear-gradient(180deg,#f0fbff,#ecfaff); border:1px solid rgba(0,170,255,0.08); padding:8px 12px; border-radius:12px; cursor:pointer; font-weight:800; color:#036; box-shadow: 0 6px 18px rgba(0,170,255,0.06); transition: transform .12s ease; }
+.cv-chip:active { transform: translateY(1px); }
+
+/* validation message */
+.cv-validation { color:#b45309; margin-top:8px; font-size:13px; min-height:18px; }
+
+/* footer */
+.cv-modal-footer { display:flex; gap:10px; justify-content:flex-end; padding:12px 18px 18px 18px; border-top:1px solid rgba(2,6,23,0.03); }
+.cv-btn { padding:10px 14px; border-radius:10px; cursor:pointer; font-weight:800; border:0; font-size:14px; }
+.cv-btn-ghost { background:transparent; border:1px solid rgba(6,10,20,0.06); color:#334155; }
+.cv-btn-primary { background: linear-gradient(90deg,#00aaff,#00c0ff); color:white; box-shadow: 0 12px 34px rgba(0,170,255,0.12); }
+
+/* toast fallback */
+.cv-toast { position: fixed; right: 20px; top: 20px; z-index: 100000; background: rgba(6,10,20,0.9); color:#fff; padding:10px 14px; border-radius:10px; box-shadow: 0 10px 30px rgba(2,6,23,0.22); font-weight:800; display:none; }
+
+/* responsiveness */
+@media (max-width:420px) {
+  .cv-modal-panel { width: 96%; }
+  .cv-modal-top { padding:12px; }
+  .cv-modal-badge { min-width:44px; height:44px; font-size:16px; }
+}
+</style>
+
+<%- include('../partials/supportFloat') %>
+
+<div class="main px-lg-4 px-md-4 stacking-main-outer">
+  <%- include('../partials/header') %>
+  <div class="body d-flex py-3">
+    <div class="container-xxl">
+      <div data-v-d9010b09="" class="row align-items-center">
+        <div data-v-d9010b09="" class="border-0 mb-4">
+          <div data-v-d9010b09="" class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
+            <h3 data-v-d9010b09="" class="fw-bold mb-0">Mining</h3>
+          </div>
+        </div>
+      </div>
+      <div data-v-d9010b09="" class="row">
+        <div data-v-d9010b09="" class="col-xl-12">
+          <div data-v-d9010b09="" class="card p-4 bg-blue">
+            <div data-v-d9010b09="" class="card-body">
+              <div data-v-d9010b09="" class="tab-content">
+                <div data-v-d9010b09="" id="Borrow" class="tab-pane fade show active">
+                  <div data-v-d9010b09="" class="row g-3">
+
+                    <!-- <div data-v-d9010b09="" class="col-xl-6">
+                      <form data-v-d9010b09=""><label data-v-d9010b09="" class="form-label">I
+                          want
+                          to Mining</label>
+                        <div data-v-d9010b09="" class="input-group mb-3">
+                          <input type="number" id="amountInput" class="form-control" placeholder="Enter amount in USD" min="1" required />
+                        </div>
+                        <div data-v-d9010b09="" class="row p-0 mx-0">
+
+                          <div data-v-d9010b09="" class="col-12 col-md-6 bg-lightyellow mx-auto rounded mx-2 text-center mb-2">
+                            <p data-v-d9010b09="" class="mt-2">Available <b data-v-d9010b09="">USD</b></p>
+                            <h6 data-v-d9010b09="" id="deposit-balance"></h6>
+                          </div>
+                        </div>
+                     
+                        <button data-v-d9010b09="" disabled="" id="startStakingBtn" class="btn flex-fill btn-warning py-2 fs-5 text-uppercase px-5 mt-4" data-bs-target="#Disclaimer" data-bs-toggle="modal" type="button">
+                          Start Mining Now
+                        </button>
+                      </form>
+                    </div> -->
+                   
+
+
+                    <!-- sourav -->
+                   
+                   
+                   <!-- <div data-v-d9010b09="" id="plans-container" class="col-xl-6">
+                      <div data-v-d9010b09="" class="color-bg-100 p-2 p-lg-4 mt-4">
+                        <h4 data-v-d9010b09="">Mining <span data-v-d9010b09="" class="small">(
+                            Benefits)</span></h4>
+                        <h5 data-v-d9010b09="" class="color-price-up"></h5>
+                        <div data-v-d9010b09="" class="d-flex justify-content-between flex-wrap my-3">
+                          <div data-v-d9010b09="">
+                            <div data-v-d9010b09="" class="truncated"></div>
+                            <div data-v-d9010b09="" class="text-muted truncated"></div>
+                          </div>
+                          <div data-v-d9010b09="">
+                            <div data-v-d9010b09="" class="truncated">12 Month APY</div>
+                            <div data-v-d9010b09="" class="text-muted truncated"></div>
+                          </div>
+                        </div>
+                        <div data-v-d9010b09="" class="d-flex justify-content-between flex-wrap">
+                          <div data-v-d9010b09="">
+                            <div data-v-d9010b09="" class="truncated"></div>
+                            <div data-v-d9010b09="" class="text-muted truncated"></div>
+                          </div>
+                          <div data-v-d9010b09="">
+                            <div data-v-d9010b09="" class="truncated">Mining Reward
+                            </div>
+                            <div data-v-d9010b09="" class="text-muted truncated">Daily
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div> -->
+
+<div data-v-d9010b09="" id="plans-container">
+  <!-- Collection-style cards (will be rendered by loadCryptoPlans) -->
+  <div id="plans-list" class="plans-list">
+    <!-- JS will inject plan cards here -->
+  </div>
+</div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-v-d9010b09="" id="disclaimerModal" aria-hidden="true" class="modal fade" role="dialog" tabindex="-1">
+        <div data-v-d9010b09="" class="modal-dialog modal-dialog-centered modal-lg">
+          <div data-v-d9010b09="" class="modal-content">
+            <div data-v-d9010b09="" class="modal-header d-block">
+              <h2 data-v-d9010b09="" class="mb-1 text-center"><span data-v-d9010b09="" class="text-gradient">Disclaimer</span></h2>
+              <p data-v-d9010b09="" class="text-secondary small text-center"> Read the following
+                details
+                carefully and proceed further. </p>
+            </div>
+            <div data-v-d9010b09="" class="modal-body d-block p-4">
+              <div data-v-d9010b09="" class="row align-items-center mb-1">
+                <div data-v-d9010b09="" class="col rounded">
+                  <h5 data-v-d9010b09=""> Please read the following disclaimer carefully before
+                    making
+                    any decisions regarding mining offered by Magix.exchange at various monthly
+                    APY
+                    Options. This disclaimer outlines important information, risks, and
+                    limitations
+                    associated
+                    with the programme. </h5>
+                  <div data-v-d9010b09="" class="text-justify">
+                    <p data-v-d9010b09=""> 1. Market Risks:: Mining involves exposure to market
+                      risks. The value of cryptocurrencies can be highly volatile, and the
+                      rewards
+                      earned through mining may vary based on market conditions. Participants
+                      should be aware
+                      that the value of Mining assets can fluctuate, and there is a
+                      possibility of
+                      loss. </p>
+                    <p data-v-d9010b09=""> 2. Smart Contract Risks:Mining typically relies on
+                      smart
+                      contracts, and while efforts are made to ensure the security and
+                      integrity
+                      of these contracts, they are not immune to vulnerabilities or bugs.
+                      Participants should
+                      understand the risks associated with smart contracts and be cautious
+                      when
+                      mining assets. </p>
+                    <p data-v-d9010b09=""> 3. Rewards and Returns:Mining rewards are not
+                      guaranteed
+                      and may vary based on network conditions, protocol changes, and other
+                      factors. Past performance of mining rewards is not indicative of future
+                      results. Participants
+                      should carefully evaluate potential returns and consider the inherent
+                      uncertainties. </p>
+                    <p data-v-d9010b09=""> 4. Regulatory Risks: The regulatory landscape for
+                      cryptocurrencies and mining activities is evolving. Participants should
+                      be
+                      aware of and comply with relevant regulations in their jurisdiction.
+                      Changes
+                      in regulatory frameworks
+                      may impact the legality and feasibility of mining activities. </p>
+                    <p data-v-d9010b09=""> 5. Technology and Network Risks: Mining involves
+                      interaction with blockchain networks, and technological issues, network
+                      upgrades, or other events may impact the mining process. Participants
+                      should stay informed about
+                      network developments and be prepared for potential disruptions. </p>
+                    <p data-v-d9010b09=""> 6. Liquidity Risks: Mining assets are typically
+                      locked
+                      for a specified period, and participants may not have immediate access
+                      to
+                      their funds. This lack of liquidity could pose challenges, especially in
+                      urgent situations
+                      requiring access to funds. </p>
+                    <p data-v-d9010b09=""> 7. Due Diligence:Participants are encouraged to
+                      conduct
+                      thorough research and due diligence before engaging in mining
+                      activities on
+                      Magix.Exchange. This includes understanding the mining protocol,
+                      associated
+                      risks, and
+                      any terms and conditions imposed by Magix.Exchange. </p>
+                    <p data-v-d9010b09=""> By choosing to mining on Magix.Exchange, participants
+                      acknowledge and accept these risks. Magix Exchange is not liable for any
+                      financial losses or damages incurred as a result of mining activities
+                      on
+                      the platform. Participants
+                      should seek advice from financial professionals and carefully assess
+                      their
+                      risk tolerance before participating in mining. </p>
+                  </div>
+                </div>
+              </div>
+              <div data-v-d9010b09="" class="row gx-0 align-items-center mb-4">
+                <div data-v-d9010b09="" class="col bg-light-theme p-3 h4 rounded"><input data-v-d9010b09="" id="iAgree" class="mx-4 p-4" type="checkbox"><label data-v-d9010b09="" class="" for="iAgree">I agree to the Magix
+                    T&amp;C</label>
+                </div>
+              </div>
+              <div data-v-d9010b09="" class="row mt-4">
+                <div data-v-d9010b09="" class="col"><button data-v-d9010b09="" aria-label="Close" class="btn btn-secondary" data-bs-dismiss="modal" type="button"> Cancel
+                  </button></div>
+                <div data-v-d9010b09="" class="col-auto"><button data-v-d9010b09="" disabled="" class="btn btn-primary" type="button"><i data-v-d9010b09="" class="bi bi-check me-2"></i> CONTINUE </button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <%- include('../partials/footer') %>
+</div>
+
+<div id="investModal" class="cv-modal" aria-hidden="true" role="dialog" aria-labelledby="investModalTitle">
+  <div class="cv-modal-backdrop" id="cvModalBackdrop"></div>
+
+  <div class="cv-modal-panel" role="document" tabindex="-1">
+    <div class="cv-modal-top">
+      <!-- badge: you can show currency symbol or plan initial -->
+      <div class="cv-modal-badge" id="cvBadge">⚡</div>
+
+      <div class="cv-modal-title-wrap">
+        <div class="cv-modal-title" id="investModalTitle">Invest in Plan</div>
+        <div class="cv-modal-sub" id="investModalSub">Secure daily returns — fast & safe</div>
+      </div>
+
+      <button id="cvModalClose" class="cv-modal-close" aria-label="Close">&times;</button>
+    </div>
+
+    <div class="cv-modal-body">
+      <div class="cv-plan-meta" id="cvPlanMeta">
+        <div class="cv-plan-pill" id="cvPlanLabel">Plan</div>
+        <div style="color:#64748b;font-size:13px" id="cvPlanRange">Min — Max</div>
+      </div>
+
+      <label class="cv-label" for="cvAmountInput">Amount (USD)</label>
+      <div class="cv-input-row">
+        <div class="cv-currency">$</div>
+        <input id="cvAmountInput" inputmode="numeric" pattern="[0-9]*" placeholder="Enter amount (e.g. 100)" />
+      </div>
+
+      <div class="cv-presets" aria-hidden="false">
+        <button class="cv-chip" data-val="50">$50</button>
+        <button class="cv-chip" data-val="100">$100</button>
+        <button class="cv-chip" data-val="500">$500</button>
+      </div>
+
+      <div id="cvValidationMsg" class="cv-validation tiny"></div>
+    </div>
+
+    <div class="cv-modal-footer">
+      <button id="cvCancelBtn" class="cv-btn cv-btn-ghost">Cancel</button>
+      <button id="cvConfirmBtn" class="cv-btn cv-btn-primary">Invest</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast container (used if showToast not present) -->
+<div id="cvToast" class="cv-toast" aria-live="polite" aria-atomic="true"></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+<script> 
+
+async function loadCryptoPlans() {
+  try {
+    const response = await fetch('/api/plans');
+    const result = await response.json();
+
+    if (!result.success) {
+      console.error("Failed to load plans");
+      document.getElementById('plans-list').innerHTML = '<p class="text-muted">No plans available.</p>';
+      return;
+    }
+
+    const plans = result.data || [];
+    const container = document.getElementById('plans-list');
+    container.innerHTML = '';
+
+    if (!plans.length) {
+      container.innerHTML = '<p class="text-muted">No plans available.</p>';
+      return;
+    }
+
+    // Sort by min (numeric; null treated as Infinity so comes last)
+    plans.sort((a, b) => {
+      const am = a.min === null ? Infinity : Number(a.min);
+      const bm = b.min === null ? Infinity : Number(b.min);
+      return am - bm;
+    });
+
+    // Build cards using the Collection UI style
+    const fragment = document.createDocumentFragment();
+    plans.forEach(plan => {
+      const minText = plan.min === null ? 'Any' : plan.min;
+      const maxText = plan.max === null ? 'Unlimited' : plan.max;
+      const daily = plan.daily_percent;
+
+      const card = document.createElement('div');
+      card.className = 'canvas-box';
+      card.innerHTML = `
+        <div class="cnvas-top-img-wrp">
+          <img src="/assets/images/collection-tab-img-1.png" alt="image">
+          <div class="blue-right-corner-wrp">
+            <span><img src="/assets/images/collection-tab-right-icon.svg" alt="icon"></span>
+            <span>${daily}%</span>
+          </div>
+        </div>
+
+        <div class="canvas-bottom-cnt-wrp">
+          <h4>${escapeHtml(plan.name || 'Plan')}</h4>
+
+          <div class="amount-canvas-wrp">
+            <div class="amount-1st">
+              <span>Amount</span>
+              <span class="green-amount">${minText} - ${maxText}</span>
+            </div>
+
+            <div class="amount-1st">
+              <span>Daily income</span>
+              <span class="card-rate-daily-income">${daily}%</span>
+            </div>
+
+            <div class="amount-1st">
+              <span>Fees</span>
+              <span class="card-rate-daily-income">0%</span>
+            </div>
+          </div>
+
+          <div class="canvas-days-wrp">
+            <div class="days-ten-outer">
+              <span>Time</span>
+              <span class="days-ten-highilited">${plan.months} months</span>
+            </div>
+            <div class="level-canvas-div">
+              <span>Level:</span>
+              <span class="green">Lv1 ~ Lv6</span>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:8px;align-items:center;margin-top:10px">
+            <button class="btn btn-sm btn-primary mine-btn" 
+                    data-plan-id="${plan.id}" 
+                    data-min="${plan.min === null ? '' : plan.min}" 
+                    data-max="${plan.max === null ? '' : plan.max}">
+              Mine
+            </button>
+            <button class="btn btn-sm btn-outline-secondary details-btn" data-plan-id="${plan.id}">Details</button>
+          </div>
+        </div>
+      `;
+
+      fragment.appendChild(card);
+    });
+
+    container.appendChild(fragment);
+
+    // (Optional) Details button handler — keeps original details behavior if you want to implement later
+    document.querySelectorAll('.details-btn').forEach(dbtn => {
+      dbtn.addEventListener('click', function () {
+        const planId = this.getAttribute('data-plan-id');
+        // if you had a details modal you can open it here.
+        // For now just console log (no change to existing flow)
+        console.log('Details requested for plan', planId);
+      });
+    });
+
+  } catch (error) {
+    console.error("Error loading plans:", error);
+  }
+}
+
+// small helper to avoid injection in card titles
+function escapeHtml(text) {
+  if (text === null || text === undefined) return '';
+  return String(text)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+loadCryptoPlans();
+
+
+
+  function deleteAllCookies() {
+    document.cookie.split(";").forEach((cookie) => {
+      const eqPos = cookie.indexOf("=");
+      const name = eqPos > -1 ? cookie.substring(0, eqPos) : cookie;
+      document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    const signoutBtn = document.getElementById("signoutBtn");
+
+    if (signoutBtn) {
+      signoutBtn.addEventListener("click", function(e) {
+        e.preventDefault();
+        deleteAllCookies();
+        localStorage.clear();
+        window.location.href = "/login";
+      });
+    }
+  });
+
+  let selectedAmount = null;
+
+  function validateForm() {
+    const canStart = selectedAmount !== null && selectedAmount >= 50;
+    $("#startStakingBtn").prop("disabled", !canStart);
+  }
+
+  // Handle user typing in the amount
+  $(document).on("input", "#amountInput", function() {
+    const val = Number($(this).val().trim());
+    selectedAmount = !isNaN(val) && val > 0 ? val : null;
+
+    if (selectedAmount !== null && selectedAmount < 50) {
+      showToast(false, "Minimum amount is $50.");
+      selectedAmount = null;
+    }
+
+    validateForm();
+  });
+
+  // On start mining button click
+  $(document).on("click", "#startStakingBtn", function() {
+    if (!selectedAmount) {
+      showToast(false, "Please enter a valid amount before proceeding!");
+      return;
+    }
+
+    const payload = {
+      amount: selectedAmount 
+    };
+
+    console.log("Sending Payload:", payload);
+
+
+
+(function () {
+  // helper: safe show toast
+  function safeToast(ok, msg) {
+    try {
+      if (typeof showToast === "function") {
+        showToast(ok, msg);
+        return;
+      }
+    } catch (e) {}
+    alert(msg);
+  }
+
+  // attach listeners when plan rows are present in DOM (they are added async)
+  function attachPlanClickHandlers() {
+    // plan rows markup created by loadCryptoPlans() uses `.d-flex.justify-content-between.my-2`
+    const rows = Array.from(document.querySelectorAll('#plans-container .d-flex.justify-content-between.my-2'));
+
+    if (!rows.length) return false;
+
+    rows.forEach((row) => {
+      // avoid double-binding
+      if (row.__mineBound) return;
+      row.__mineBound = true;
+
+      // read the min value from the left part's text. Example text format generated:
+      // "• 50 USDT – 100 USDT"  or "• 50 USDT & above"
+      const leftText = row.children[0]?.textContent?.trim() || '';
+      let min = 50; // safe default
+      const m = leftText.match(/(\d+(\.\d+)?)/);
+      if (m) min = Math.max(min, Number(m[1])); // ensure at least 50
+
+      // Make row look clickable
+      row.style.cursor = 'pointer';
+      row.title = `Click to invest (min ${min})`;
+
+      row.addEventListener('click', async () => {
+        // Ask user for amount (prefill with min)
+        const minAllowed = Math.max(50, min);
+        let entered = window.prompt(`Enter amount to invest (minimum ${minAllowed}):`, String(minAllowed));
+        if (entered === null) return; // user cancelled
+
+        entered = String(entered).replace(/,/g, '').trim();
+        const amount = Number(entered);
+        if (!amount || isNaN(amount) || amount < minAllowed) {
+          safeToast(false, `Invalid amount. Minimum is ${minAllowed}.`);
+          return;
+        }
+
+        // Confirm one more time (optional; remove if you don't want)
+        const confirmMsg = `Invest $${amount.toFixed(2)} in this plan?`;
+        if (!window.confirm(confirmMsg)) return;
+
+        // Send AJAX POST to /api/invest (same style as your existing code)
+        try {
+          $.ajax({
+            url: "/api/invest",
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({ amount: amount }),
+            success: function (res) {
+              safeToast(res.status == 201, res.message || "Investment created");
+              setTimeout(() => {
+                location.reload();
+              }, 1500);
+            },
+            error: function (xhr) {
+              const msg = xhr?.responseJSON?.message || "Something went wrong while creating investment!";
+              safeToast(false, msg);
+              setTimeout(() => location.reload(), 1500);
+            }
+          });
+        } catch (err) {
+          console.error("Invest AJAX error", err);
+          safeToast(false, "Request failed.");
+        }
+      });
+    });
+
+    return true;
+  }
+
+  // Poll for plan rows for a short time (they're rendered async)
+  let tries = 0;
+  const maxTries = 20;
+  const t = setInterval(() => {
+    const ok = attachPlanClickHandlers();
+    if (ok || ++tries >= maxTries) clearInterval(t);
+  }, 300);
+})();
+
+
+  });
+
+  $.ajax({
+  url: '/api/info',
+  method: 'GET',
+  dataType: 'json',
+  cache: false,
+  success: function(res) {
+    if (!res || !res.status || !res.user) {
+      console.warn('/api/info returned unexpected', res);
+      return;
+    }
+
+    const user = res.user;
+    const lastLogin = res.last_login || (Array.isArray(res.last_5_login) ? res.last_5_login[0] : null);
+
+    function fmtMoney(n) {
+      const num = Number(n) || 0;
+      return '$ ' + num.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function fmtLastLogin(l) {
+      if (!l) return '—';
+      const raw = l.today || l.login_at || l.time || l.created_at || l.date || l.datetime || null;
+      if (!raw) {
+        const v = Object.values(l)[0];
+        if (!v) return '—';
+        return String(v);
+      }
+      let dt = /^\d+$/.test(String(raw)) ? new Date(Number(raw)) : new Date(raw);
+      if (isNaN(dt.getTime())) return String(raw);
+      const d = dt.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: '2-digit' });
+      const t = dt.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
+      return `${d} · ${t}`;
+    }
+
+    if (user.withdrawable_balance !== undefined && user.withdrawable_balance !== null) {
+      $('.withdrawBalance').text(fmtMoney(user.withdrawable_balance));
+    } 
+    if (user.money ) $('.depositedMoney').text(fmtMoney(user.money));
+    
+    if (res.totalWithdrawAmount) $('.totalWithdraw').text(fmtMoney(res.totalWithdrawAmount));
+    $('#lastActivity').text(fmtLastLogin(lastLogin));
+
+  },
+  error: function(xhr) {
+    if (xhr && xhr.status === 401) {
+      window.location.href = '/login';
+      return;
+    }
+    console.error('/api/info error', xhr && xhr.responseText);
+  }
+});
+
+</script>
+
+
+<script>
+(function () {
+  // Modal elements
+  const modal = document.getElementById('investModal');
+  const backdrop = document.getElementById('cvModalBackdrop');
+  const closeBtn = document.getElementById('cvModalClose');
+  const cancelBtn = document.getElementById('cvCancelBtn');
+  const confirmBtn = document.getElementById('cvConfirmBtn');
+  const amountInput = document.getElementById('cvAmountInput');
+  const planMeta = document.getElementById('cvPlanMeta');
+  const validationMsg = document.getElementById('cvValidationMsg');
+  const toast = document.getElementById('cvToast');
+
+  let currentPlan = { id: null, min: null, max: null };
+
+  function showModal() {
+    modal.style.display = 'flex';
+    // small entrance
+    requestAnimationFrame(() => {
+      modal.classList.add('cv-open');
+    });
+    amountInput.focus();
+    amountInput.select();
+  }
+
+  function hideModal() {
+    modal.style.display = 'none';
+    validationMsg.textContent = '';
+    amountInput.value = '';
+    currentPlan = { id: null, min: null, max: null };
+  }
+
+  // Close handlers
+  backdrop.addEventListener('click', hideModal);
+  closeBtn.addEventListener('click', hideModal);
+  cancelBtn.addEventListener('click', hideModal);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') hideModal(); });
+
+  // Preset click binding (sets amount)
+  document.querySelectorAll('.cv-chip').forEach(c => {
+    c.addEventListener('click', () => {
+      amountInput.value = c.getAttribute('data-val');
+    });
+  });
+
+  // Show toast helper (uses showToast if available)
+  function showCvToast(ok, message) {
+    try {
+      if (typeof showToast === 'function') {
+        showToast(ok, message);
+        return;
+      }
+    } catch (err) { /* ignore */ }
+
+    // fallback visual toast
+    toast.innerText = message;
+    toast.style.display = 'block';
+    toast.style.opacity = '1';
+    setTimeout(() => {
+      toast.style.transition = 'opacity .4s';
+      toast.style.opacity = '0';
+      setTimeout(() => toast.style.display = 'none', 420);
+    }, 2000);
+  }
+
+  // Validate amount against plan min/max
+  function validateAmount(value) {
+    validationMsg.textContent = '';
+    const num = Number(String(value).replace(/,/g,'').trim());
+    if (!num || isNaN(num) || num <= 0) return { ok:false, msg: 'Enter a valid amount' };
+    if (currentPlan.min && !isNaN(Number(currentPlan.min)) && num < Number(currentPlan.min)) {
+      return { ok:false, msg: `Minimum amount is ${Number(currentPlan.min)}` };
+    }
+    // global business rule: minimum $50 (keeps your existing constraint)
+    if (num < 50) return { ok:false, msg: 'Minimum amount is $50' };
+    if (currentPlan.max && !isNaN(Number(currentPlan.max)) && num > Number(currentPlan.max)) {
+      return { ok:false, msg: `Maximum amount is ${Number(currentPlan.max)}` };
+    }
+    return { ok:true, value: num };
+  }
+
+  // When Mine button clicked — open modal with prefilled plan values
+  // We re-bind to .mine-btn (safe to re-run even if existing bindings exist)
+  function bindMineButtons() {
+    document.querySelectorAll('.mine-btn').forEach(btn => {
+      // prevent double binding
+      if (btn.__cvBound) return;
+      btn.__cvBound = true;
+
+      btn.addEventListener('click', () => {
+        const planId = btn.getAttribute('data-plan-id') || null;
+        const minAttr = btn.getAttribute('data-min') || '';
+        const maxAttr = btn.getAttribute('data-max') || '';
+
+        const parsedMin = minAttr === '' ? null : Number(minAttr);
+        const parsedMax = maxAttr === '' ? null : Number(maxAttr);
+
+        currentPlan.id = planId;
+        currentPlan.min = (parsedMin && !isNaN(parsedMin)) ? parsedMin : null;
+        currentPlan.max = (parsedMax && !isNaN(parsedMax)) ? parsedMax : null;
+
+        // Build meta text
+        let meta = `Plan: ${btn.closest('.canvas-box')?.querySelector('h4')?.textContent || 'Plan'}`;
+        if (currentPlan.min) meta += ` · Min ${currentPlan.min}`;
+        if (currentPlan.max) meta += ` · Max ${currentPlan.max}`;
+        planMeta.textContent = meta;
+
+        // Prefill input (plan min -> else 50)
+        const defaultVal = currentPlan.min ? currentPlan.min : 50;
+        amountInput.value = defaultVal;
+        validationMsg.textContent = '';
+        showModal();
+      });
+    });
+  }
+
+  // initial bind (if .mine-btn were already created)
+  bindMineButtons();
+
+  // Also attempt to re-bind after DOM changes (if your plan loader re-renders)
+  // (safe: it checks __cvBound to prevent duplicates) 
+  const observer = new MutationObserver(() => bindMineButtons());
+  observer.observe(document.body, { childList: true, subtree: true });
+
+  // Confirm invest
+  confirmBtn.addEventListener('click', async () => {
+    const entered = amountInput.value;
+    const check = validateAmount(entered);
+    if (!check.ok) {
+      validationMsg.textContent = check.msg;
+      return;
+    }
+
+    // Disable UI while processing
+    confirmBtn.disabled = true;
+    confirmBtn.innerText = 'Processing...';
+
+    try {
+      // Ajax POST to /api/invest (same style as your existing code)
+      const payload = { amount: check.value };
+
+      // jQuery style (you use jQuery in project)
+      $.ajax({
+        url: "/api/invest",
+        method: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(payload),
+
+        success: function (res) {
+          showCvToast(res.status == 201, res.message || "Investment created");
+          setTimeout(() => {
+            hideModal();
+            location.reload();
+          }, 1200);
+        },
+
+        error: function (xhr) {
+          const msg = xhr?.responseJSON?.message || "Something went wrong while creating investment!";
+          showCvToast(false, msg);
+          confirmBtn.disabled = false;
+          confirmBtn.innerText = 'Invest';
+        }
+      });
+
+    } catch (err) {
+      console.error("Invest request error:", err);
+      showCvToast(false, "Network error");
+      confirmBtn.disabled = false;
+      confirmBtn.innerText = 'Invest';
+    }
+  });
+
+  // If user edits amount manually, allow Enter key to confirm
+  amountInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      confirmBtn.click();
+    }
+  });
+
+  // Expose tiny API for external scripts (if you want to open modal programmatically)
+  window.cvInvestModal = {
+    open: (plan) => {
+      // plan: { id, min, max, title }
+      try {
+        currentPlan.id = plan.id || null;
+        currentPlan.min = plan.min || null;
+        currentPlan.max = plan.max || null;
+        planMeta.textContent = plan.title || 'Plan';
+        amountInput.value = currentPlan.min || 50;
+        showModal();
+      } catch (e) {}
+    }
+  };
+
+})();
+</script>
+

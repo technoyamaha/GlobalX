@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>
+    <%= title %>
+  </title>
+</head>
+
+
+<style>
+  .d-fl-row {
+    width: 100%;
+  }
+
+  .coming-soon-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .email-box {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .email-box input[type="email"] {
+    padding: 10px;
+    font-size: 16px;
+    width: 250px;
+    max-width: 90%;
+  }
+
+  .email-box button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .footer {
+    margin-top: 40px;
+    font-size: 14px;
+    color: #888;
+  }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<body>
+  <div class="d-fl-row">
+    <%- include('../partials/header') %>
+      <div class="coming-soon-wrapper">
+        <div class="container">
+          <h1>Coming Soon...</h1>
+          <p>We're working hard on something amazing. Stay tuned!</p>
+          <!-- <div class="email-box">
+              <input
+                type="email"
+                placeholder="Enter your email to get notified"
+              />
+              <button>Notify Me</button>
+            </div> -->
+          <div class="footer">
+            &copy; 2025 Your App Name. All rights reserved.
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <script>
+
+    function deleteAllCookies() {
+      document.cookie.split(";").forEach((cookie) => {
+        const eqPos = cookie.indexOf("=");
+        const name = eqPos > -1 ? cookie.substring(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+      });
+    }
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const signoutBtn = document.getElementById("signoutBtn");
+
+      if (signoutBtn) {
+        signoutBtn.addEventListener("click", function (e) {
+          e.preventDefault();
+          deleteAllCookies();
+          localStorage.clear();
+          window.location.href = "/login";
+        });
+      }
+    });
+
+  </script>
+
+
+</body>
+
+</html>

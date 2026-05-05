@@ -1,0 +1,161 @@
+<div class="main px-lg-4 px-md-4">
+  <%- include('../partials/header') %>
+    <div class="body d-flex py-3">
+      <div class="container-xxl">
+        <div class="row align-items-center">
+          <div class="border-0 mb-4">
+            <div
+              class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
+              <h3 class="fw-bold mb-0">Mining Income</h3>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="card mb-3">
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th scope="col">Sr.No</th>
+                        <th scope="col" class="text-center">Income</th>
+                        <th scope="col">Tenure</th>
+                        <th scope="col">Income Date</th>
+                      </tr>
+                    </thead>
+                    <tbody id="records">
+                    </tbody>
+                  </table>
+                </div>
+                <div class="row align-items-center">
+                  <div class="col ps-2">
+                    <div class="row align-items-center mx-0 mb-3">
+                      <div class="col-12 footable-paging-external footable-paging-right d-flex justify-content-center"
+                        id="footable-pagination">
+                        <div class="footable-pagination-wrapper">
+                          <!-- <ul class="pagination">
+                            <li class="footable-page-nav disabled ps-3 px-3" style="width: auto">
+                              <a class="footable-page-link" onclick="fetchData(currentPage - 1)" href="">« Previous</a>
+                            </li>
+                            <li class="ps-3 px-3 footable-page visible active" style="width: auto">
+                              <a class="footable-page-link" href="#">1</a>
+                            </li>
+                         <li class="ps-3 px-3 footable-page visible" style="width: auto">
+                            <a class="footable-page-link" href="#">2</a>
+                          </li>
+                          <li class="ps-3 px-3 footable-page visible" style="width: auto">
+                            <a class="footable-page-link" href="#">3</a>
+                            <li class="ps-3 px-3 footable-page visible" style="width: auto">
+                              <a class="footable-page-link" onclick="fetchData(currentPage + 1)" href="#">Next »</a>
+                            </li>
+                          </ul> -->
+                          <ul class="pagination" id="pagination">
+
+                          </ul>
+                        </div>
+
+
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<script>
+  let currentPage = 1;
+  const limit = 10;
+
+  function formatDate(dateStr) {
+    if (!dateStr) return '-';
+    const date = new Date(dateStr);
+    if (isNaN(date)) return '-';
+    return date.toLocaleDateString();
+  }
+
+  function fetchData(page) {
+    if (page < 1) return;
+
+    $.ajax({
+      url: `/api/mining-income?page=${page}&limit=${limit}`,
+      method: 'GET',
+      success: function (response) {
+        const { data, totalPages } = response;
+        currentPage = page;
+
+        const tbody = $('table tbody');
+        tbody.empty();
+
+        if (!data || data.length === 0) {
+          tbody.append(`
+            <tr>
+              <td colspan="4" class="text-center text-muted">No Mining Income Found</td>
+            </tr>
+          `);
+        } else {
+          data.forEach((item, index) => {
+            tbody.append(`
+              <tr>
+                <td>${(currentPage - 1) * limit + index + 1}</td>
+                <td class="text-center"><b>$${Number(item.earned_amount).toFixed(2)}</b></td>
+                <td>${item.months ?? '-'}</td>
+                <td>${formatDate(item.last_credited_date)}</td>
+              </tr>
+            `);
+          });
+        }
+
+        // Render pagination only if totalPages > 1
+        const pagination = $('#pagination');
+        pagination.empty();
+
+        if (totalPages > 1) {
+          // Previous button
+          pagination.append(`
+            <li class="footable-page-nav ps-3 px-3 ${currentPage <= 1 ? 'disabled' : ''}" style="width: auto">
+              <a class="footable-page-link" href="#" onclick="fetchData(${currentPage - 1}); return false;">« Previous</a>
+            </li>
+          `);
+
+          // Page numbers
+          for (let i = 1; i <= totalPages; i++) {
+            pagination.append(`
+              <li class="ps-3 px-3 footable-page visible ${i === currentPage ? 'active' : ''}" style="width: auto">
+                <a class="footable-page-link" href="#" onclick="fetchData(${i}); return false;">${i}</a>
+              </li>
+            `);
+          }
+
+          // Next button
+          pagination.append(`
+            <li class="footable-page-nav ps-3 px-3 ${currentPage >= totalPages ? 'disabled' : ''}" style="width: auto">
+              <a class="footable-page-link" href="#" onclick="fetchData(${currentPage + 1}); return false;">Next »</a>
+            </li>
+          `);
+        }
+      },
+      error: function (error) {
+        console.error('Error fetching mining income:', error);
+        $('table tbody').html(`
+          <tr><td colspan="4" class="text-center text-danger">Error loading data</td></tr>
+        `);
+      }
+    });
+  }
+
+        // Initial fetch on page load
+        $(document).ready(function() {
+            fetchData(currentPage);
+        });
+    </script>
+

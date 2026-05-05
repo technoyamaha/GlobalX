@@ -1,0 +1,351 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>invesment</title>
+</head>
+<style>
+  body{
+    padding: 0 15px;
+  }
+/* Container */
+.table-main-outer {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  color: #eaf4ff;
+}
+
+/* Header */
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.table-header h1 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #000000;
+}
+
+/* Wrapper */
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Table */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+  background: #ffffff;
+}
+
+/* Head */
+.data-table thead th {
+  text-align: left;
+  padding: 14px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #00aaff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* Body */
+.data-table tbody td {
+  padding: 14px 12px;
+  font-size: 14px;
+  color: #000000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.data-table tbody tr:hover {
+  background: rgba(0, 170, 255, 0.06);
+}
+
+/* Amount */
+.data-table td.amount {
+  font-weight: 600;
+  color: #00e6ff;
+}
+
+/* Percent */
+.data-table td.percent {
+  color: #33bf82;
+  font-weight: 600;
+}
+
+/* Empty row */
+.data-table .empty-row {
+  text-align: center;
+  padding: 20px;
+  color: #9fb7d1;
+}
+
+/* Scrollbar */
+.table-wrapper::-webkit-scrollbar {
+  height: 6px;
+}
+.table-wrapper::-webkit-scrollbar-thumb {
+  background: #00aaff;
+  border-radius: 10px;
+}
+
+  </style>
+
+<body>
+
+  <%- include('../partials/supportFloat') %>
+  
+
+    <%- include('../partials/header') %>
+
+<div class="table-main-outer">
+  <div class="table-header">
+    <h1>My Investments</h1>
+  </div>
+
+  <div class="table-wrapper">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Order ID</th>
+          <th>Plan</th>
+          <th>Amount</th>
+          <th>Phone</th>
+          <th>Daily %</th>
+          <th>Date & Time</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- footer -->
+<%- include('../partials/footer') %>
+</table>
+
+
+<!-- Cancel Investment Confirmation Modal -->
+<div class="modal fade" id="cancelInvestmentModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Confirm Investment Closure</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+        <div id="cancelInvestmentSummary" class="mb-2"></div>
+        <p class="text-danger mb-0">
+          This action cannot be undone.
+        </p>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cancel
+        </button>
+        <button type="button" id="confirmCancelInvestmentBtn" class="btn btn-danger">
+          Yes, Close Investment
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>
+
+<script>
+  
+$.ajax({
+  url: '/api/info',
+  method: 'GET',
+  dataType: 'json',
+  cache: false,
+  success: function(res) {
+    if (!res || !res.status || !res.user) {
+      console.warn('/api/info returned unexpected', res);
+      return;
+    }
+
+    const user = res.user;
+    const lastLogin = res.last_login || (Array.isArray(res.last_5_login) ? res.last_5_login[0] : null);
+
+    function fmtMoney(n) {
+      const num = Number(n) || 0;
+      return '$ ' + num.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function fmtLastLogin(l) {
+      if (!l) return '—';
+      const raw = l.today || l.login_at || l.time || l.created_at || l.date || l.datetime || null;
+      if (!raw) {
+        const v = Object.values(l)[0];
+        if (!v) return '—';
+        return String(v);
+      }
+      let dt = /^\d+$/.test(String(raw)) ? new Date(Number(raw)) : new Date(raw);
+      if (isNaN(dt.getTime())) return String(raw);
+      const d = dt.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: '2-digit' });
+      const t = dt.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
+      return `${d} · ${t}`;
+    }
+
+    if (user.withdrawable_balance !== undefined && user.withdrawable_balance !== null) {
+      $('.withdrawBalance').text(fmtMoney(user.withdrawable_balance));
+    } 
+    if (user.money ) $('.depositedMoney').text(fmtMoney(user.money));
+    
+    if (res.totalWithdrawAmount) $('.totalWithdraw').text(fmtMoney(res.totalWithdrawAmount));
+    $('#lastActivity').text(fmtLastLogin(lastLogin));
+
+  },
+  error: function(xhr) {
+    if (xhr && xhr.status === 401) {
+      window.location.href = '/login';
+      return;
+    }
+    console.error('/api/info error', xhr && xhr.responseText);
+  }
+});
+
+$(document).ready(function () {
+  const userId = window.USER_ID || $('#userId').val();
+  $.ajax({
+    url: `/api/myInvestments`,
+    method: 'GET',
+    dataType: 'json',
+    cache: false,
+    success: function (res) {
+
+      if (!res || !res.status || !Array.isArray(res.data)) {
+        console.warn('Unexpected response:', res);
+        return;
+      }
+
+      const investments = res.data;
+      const $tbody = $('.data-table tbody');
+
+      // Clear existing rows (N/A row)
+      $tbody.empty();
+
+      if (investments.length === 0) {
+        $tbody.append(`
+          <tr>
+            <td colspan="7" style="text-align:center;">No investments found</td>
+          </tr>
+        `);
+        return;
+      }
+
+      investments.forEach((inv, index) => {
+        // const dateTime = new Date(Number(inv.created_at)).toLocaleString();
+         const dateTime = new Date(Number(inv.start_date)).toLocaleString();
+
+       $tbody.append(`
+  <tr>
+    <td>${index + 1}</td>
+    <td>${inv.order_id}</td>
+    <td>${inv.plan?.name || 'N/A'}</td>
+    <td class="amount">${inv.amount}</td>
+    <td>${inv.phone || 'N/A'}</td>
+    <td class="percent">${inv.daily_percent}%</td>
+    <td>${dateTime}</td>
+   <td>
+  ${inv.status == 1 ? `
+    <button class="btn btn-sm btn-danger cancel-investment-btn"
+      data-id="${inv.id}"
+      data-amount="${inv.amount}"
+      data-start="${inv.start_date}">
+      Cancel
+    </button>
+  ` : `<span class="text-muted">Closed</span>`}
+</td>
+  </tr>
+`);
+
+
+      });
+    },
+
+    error: function (xhr) {
+      if (xhr && xhr.status === 401) {
+        window.location.href = '/login';
+        return;
+      }
+      console.error('My Investments error:', xhr && xhr.responseText);
+    }
+  });
+
+});
+
+
+let cancelInvestmentId = null;
+let cancelInvestmentModal = new bootstrap.Modal(
+  document.getElementById("cancelInvestmentModal")
+);
+
+// Open confirmation popup
+$(document).on("click", ".cancel-investment-btn", function () {
+  cancelInvestmentId = $(this).data("id");
+
+  const amount = Number($(this).data("amount"));
+  const startDate = Number($(this).data("start"));
+  const now = Date.now();
+
+  const DAYS_30_MS = 30 * 24 * 60 * 60 * 1000;
+  const isEarlyClose = now - startDate < DAYS_30_MS;
+
+  const fee = isEarlyClose ? amount * 0.30 : 0;
+  const receive = amount - fee;
+
+  $("#cancelInvestmentSummary").html(`
+    <div><strong>Invested Amount:</strong> $${amount.toFixed(2)}</div>
+    <div><strong>Cancellation Fee:</strong> $${fee.toFixed(2)}</div>
+    <div><strong>You Will Receive:</strong> $${receive.toFixed(2)}</div>
+  `);
+
+  cancelInvestmentModal.show();
+});
+
+// Confirm cancel
+$("#confirmCancelInvestmentBtn").on("click", function () {
+  const $btn = $(this);
+  $btn.prop("disabled", true);
+
+  $.ajax({
+    url: "/api/cancelInvestment",
+    method: "POST",
+    contentType: "application/json",
+    data: JSON.stringify({ investment_id: cancelInvestmentId }),
+    success: function (res) {
+      if (res && res.status) {
+        location.reload(); 
+      } else {
+        showToast(false, res.message || "Failed to cancel investment");
+      }
+    },
+    error: function () {
+      showToast(false, "Cancel request failed");
+    },
+    complete: function () {
+      $btn.prop("disabled", false);
+    }
+  });
+});
+
+</script>

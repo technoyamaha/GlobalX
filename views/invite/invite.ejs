@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Invite & Earn — Preview</title>
+<style>
+  :root{
+    --bg:#0f172a;
+    --card:#0b1220;
+    --muted:#141414;
+    --accent:#00c0ff;
+    --glass:rgba(255,255,255,0.03);
+    --rounded:12px;
+  }
+
+  html, body { height:100%; }
+
+  body{
+    margin:0;
+    font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial;
+    color:#000000;
+    /* background:linear-gradient(180deg,var(--bg) 0%,#081026 100%); */
+    padding:16px;
+  }
+
+  /*Main container layout*/
+  .container{
+    max-width:1100px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:1fr 360px;
+    gap:22px;
+  }
+
+  /*For tablets*/
+  @media(max-width:900px){
+    .container{
+      grid-template-columns:1fr;
+      padding:8px;
+    }
+  }
+
+  /*For mobile*/
+  @media(max-width:600px){
+    body{ padding:10px; }
+    .container{ gap:16px; }
+  }
+
+  .card{
+    background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));
+    border-radius:var(--rounded);
+    padding:20px;
+    box-shadow:0 6px 30px rgba(2,6,23,0.6);
+    border:1px solid rgba(255,255,255,0.03);
+    color: #000000;
+  }
+
+  .hero{
+    display:flex;
+    gap:18px;
+    align-items:flex-start;
+    justify-content:space-between;
+    flex-wrap:wrap;
+  }
+
+  /* Make hero column stack on mobile */
+  @media(max-width:700px){
+    .hero{
+      flex-direction:column;
+      align-items:center;
+    }
+  }
+
+  .left-block{ min-width:0; flex:1; }
+
+  .title{
+    font-size:20px;
+    font-weight:700;
+    margin:0 0 6px 0;
+    color:#000000;
+  }
+
+  .subtitle{
+    margin:0;
+    color:var(--muted);
+    font-size:13px;
+  }
+
+  .ref-box{
+    display:flex;
+    gap:10px;
+    margin-top:16px;
+    align-items:center;
+    flex-wrap:wrap;
+    width:100%;
+  }
+
+  .code{
+    background:linear-gradient(90deg,rgba(0,192,255,0.06),rgba(0,192,255,0.02));
+    border:1px solid rgba(0,192,255,0.12);
+    color:var(--accent);
+    font-weight:800;
+    padding:12px 18px;
+    border-radius:10px;
+    letter-spacing:1px;
+    font-family:monospace;
+    font-size:18px;
+    flex-shrink:0;
+  }
+
+  /*Make link box full width on mobile*/
+  @media(max-width:500px){
+    .ref-box { flex-direction:column; align-items:flex-start; }
+    .link-box { width:100%; }
+    .code { width:100%; text-align:center; }
+  }
+
+  .link-box{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:var(--glass);
+    padding:10px 12px;
+    border-radius:10px;
+    max-width:260px;
+    max-width:100%;
+    overflow:hidden;
+    color:#707070;
+    font-size:14px;
+    flex-wrap: wrap;
+  }
+
+  .link-text{
+    /* white-space:nowrap; */
+    overflow:hidden;
+    text-overflow:ellipsis;
+    display:block;
+    flex:1;
+  }
+
+  .actions{
+    display:flex;
+    gap:10px;
+    align-items:center;
+    margin-top:12px;
+    flex-wrap:wrap;
+  }
+
+  /*Buttons*/
+.btn {
+    background: #33bf82;
+    border: 1px solid rgba(255,255,255,0.06);
+    color: #ffffff;
+    padding: 9px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+  .btn-primary{
+    background:linear-gradient(90deg,var(--accent),#00a6e0);
+    color:#ffffff;
+    border:none;
+    box-shadow:0 8px 24px rgba(0,192,255,0.08);
+  }
+
+  .mini{ font-size:13px; padding:7px 10px; border-radius:8px; }
+
+  .share-row{
+    display:flex;
+    gap:8px;
+    align-items:center;
+    margin-top:14px;
+    flex-wrap:wrap;
+  }
+
+  @media(max-width:500px){
+    .share-row{ flex-direction:column; align-items:flex-start; }
+  }
+
+  .share-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:8px 12px;
+    border-radius:8px;
+    background:rgba(255,255,255,0.02);
+    border:1px solid rgba(255,255,255,0.03);
+    cursor:pointer;
+    color:#000000;
+    font-weight:600;
+    font-size:13px;
+  }
+  button.btn:hover {
+    background-color: transparent;
+    border-color: #000;
+}
+
+  .qr-card{
+    text-align:center;
+    padding:18px;
+    border-radius:12px;
+    background:linear-gradient(180deg,rgba(255,255,255,0.015),rgba(255,255,255,0.01));
+    border:1px solid rgba(255,255,255,0.03);
+    width:100%;
+  }
+
+  .qr{
+    width:180px;
+    height:180px;
+    border-radius:8px;
+    background:#fff;
+    overflow:hidden;
+    margin:0 auto 12px;
+  }
+
+  /*Responsive QR size*/
+  @media(max-width:520px){
+    .qr{ width:140px; height:140px; }
+  }
+
+  .stats{
+    margin-top:14px;
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+  }
+
+  .stat{
+    background:rgba(255,255,255,0.02);
+    padding:10px 12px;
+    border-radius:8px;
+   max-width:120px;
+    text-align:center;
+    flex:1;
+  }
+
+  .stat .num{
+    font-weight:800;
+    color:var(--accent);
+    font-size:16px;
+  }
+
+  .muted{ color:var(--muted); font-size:13px; }
+
+  .right-col{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+
+  /*Stack right column after content on mobile*/
+  @media(max-width:900px){
+    .right-col{ order:3; }
+  }
+
+  .invite-preview{
+    display:flex;
+    gap:12px;
+    align-items:center;
+    justify-content:space-between;
+    padding:12px;
+    border-radius:10px;
+    background:linear-gradient(90deg,rgba(0,192,255,0.03),rgba(0,192,255,0.01));
+    border:1px solid rgba(0,192,255,0.06);
+  }
+
+  footer.note{ margin-top:18px; font-size:13px; color:var(--muted); line-height:1.45; }
+</style>
+
+</head>
+<body>
+
+  <%- include('../partials/supportFloat') %>
+  
+     <%- include('../partials/header') %>
+  
+  <main class="container" role="main" aria-labelledby="inviteHeading">
+    <section class="card">
+      <div class="hero">
+        <div class="left-block">
+          <h1 id="inviteHeading" class="title">Invite friends — earn rewards</h1>
+          <p class="subtitle">Share your referral code and get rewards when friends sign up and trade. Payouts credited automatically.</p>
+
+          <div class="ref-box" style="align-items:center;">
+            <div id="refCode" class="code">- - - -</div>
+            <div class="link-box" style="flex:1" title="Referral link">
+              <div class="link-text" id="refLink">Your referral link will appear here</div>
+              <button id="copyLinkBtn" class="btn mini" aria-label="Copy referral link">Copy</button>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button id="copyCodeBtn" class="btn">Copy Code</button>
+            <button id="openShareBtn" class="btn btn-primary">Share & Invite</button>
+            <button id="downloadQrBtn" class="btn">Download QR</button>
+          </div>
+
+          <div class="share-row" aria-hidden="false">
+            <button class="share-btn" id="twitterShare">Twitter</button>
+            <button class="share-btn" id="telegramShare">Telegram</button>
+            <button class="share-btn" id="whatsappShare">WhatsApp</button>
+            <div style="flex:1"></div>
+            <div class="muted">Your referral link expires never — keep sharing.</div>
+          </div>
+
+          <div class="stats" aria-live="polite">
+            <div class="stat"><div class="num" id="totalInvites">0</div><div class="muted">Invited</div></div>
+            <div class="stat"><div class="num" id="totalEarned">$0</div><div class="muted">Earned</div></div>
+            <div class="stat"><div class="num" id="totalClicks">0</div><div class="muted">Clicks</div></div>
+          </div>
+
+          <p class="muted" style="margin-top:14px">Tip: paste your referral link in social groups, or share it directly with friends. Use the QR code for mobile users.</p>
+        </div>
+
+        <aside style="width:220px; min-width:200px;">
+          <div class="qr-card">
+            <div id="qrWrap" class="qr" role="img" aria-label="Referral QR code">
+              <img id="qrImg" src="" alt="QR code" style="width:100%;height:100%;object-fit:cover;display:block" />
+            </div>
+            <div class="muted" style="margin-top:8px">Scan to open referral link</div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <aside class="right-col">
+      <div class="card invite-preview">
+        <div>
+          <div class="muted">Your referral</div>
+          <div class="big" id="sideCode">- - - -</div>
+        </div>
+        <div style="text-align:right">
+          <div class="muted small">Share</div>
+          <div style="height:6px"></div>
+          <button id="sideShare" class="btn mini">Share</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div style="font-weight:700;margin-bottom:6px">How it works</div>
+        <ol class="muted" style="padding-left:16px;margin:0;line-height:1.6">
+          <li>Share your link or code with friends</li>
+          <li>When they sign up, you both earn rewards</li>
+          <li>Rewards are automatically credited to your account</li>
+        </ol>
+      </div>
+
+      <div class="card">
+        <div style="font-weight:700;margin-bottom:8px">Need help?</div>
+        <div class="muted">support@yourapp.com</div>
+      </div>
+
+      <footer class="note"><div class="muted">Referral terms apply. Rewards subject to verification and may take up to 24 hours to appear.</div></footer>
+    </aside>
+
+    
+  </main>
+
+  <script>
+    (function(){
+      const PRIMARY = '#00c0ff';
+      const DEFAULT_BASE = window.location.origin;
+      const refCodeEl = document.getElementById('refCode');
+      const refLinkEl = document.getElementById('refLink');
+      const qrImg = document.getElementById('qrImg');
+      const totalInvitesEl = document.getElementById('totalInvites');
+      const totalEarnedEl = document.getElementById('totalEarned');
+      const totalClicksEl = document.getElementById('totalClicks');
+      const sideCodeEl = document.getElementById('sideCode');
+
+      function setReferral(code, link){ if(code){ refCodeEl.textContent = code; sideCodeEl.textContent = code;} if(link){ refLinkEl.textContent = link; refLinkEl.setAttribute('data-link', link); setQR(link);} }
+      function buildLinkFromCode(code){ return DEFAULT_BASE + '/register?ref=' + encodeURIComponent(code); }
+      function setQR(link){ if(!link){ qrImg.src=''; return;} qrImg.src = 'https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl=' + encodeURIComponent(link) + '&chld=L|1'; }
+      function copyToClipboard(txt){ if(!txt) return Promise.reject('No text'); if(navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(txt); const ta=document.createElement('textarea'); ta.value=txt; ta.style.position='fixed'; ta.style.left='-9999px'; document.body.appendChild(ta); ta.select(); try{ document.execCommand('copy'); document.body.removeChild(ta); return Promise.resolve(); }catch(e){ document.body.removeChild(ta); return Promise.reject(e);} }
+      function toast(msg, ok=true){ const el=document.createElement('div'); el.textContent=msg; el.style.position='fixed'; el.style.right='18px'; el.style.bottom='18px'; el.style.padding='10px 14px'; el.style.borderRadius='10px'; el.style.fontWeight='700'; el.style.boxShadow='0 8px 30px rgba(0,0,0,0.6)'; el.style.zIndex=99999; el.style.background = ok?PRIMARY:'rgba(255,80,80,0.95)'; el.style.color='#021627'; document.body.appendChild(el); setTimeout(()=> el.style.opacity='0.0',1800); setTimeout(()=> document.body.removeChild(el),2400); }
+
+      document.getElementById('copyCodeBtn').addEventListener('click', ()=>{ const code = refCodeEl.textContent.trim(); if(!code) return toast('No referral code', false); copyToClipboard(code).then(()=> toast('Referral code copied')).catch(()=> alert('Copy failed')); });
+      document.getElementById('copyLinkBtn').addEventListener('click', ()=>{ const link = refLinkEl.getAttribute('data-link') || refLinkEl.textContent.trim(); if(!link) return toast('No referral link', false); copyToClipboard(link).then(()=> toast('Referral link copied')).catch(()=> alert('Copy failed')); });
+      document.getElementById('downloadQrBtn').addEventListener('click', ()=>{ const url = qrImg.src; if(!url) return toast('QR not generated', false); const a=document.createElement('a'); a.href=url; a.download='ref-qr.png'; document.body.appendChild(a); a.click(); a.remove(); toast('QR downloaded'); });
+
+      function openPopup(url){ const w=680,h=520,left=(screen.width/2)-(w/2),top=(screen.height/2)-(h/2); window.open(url,'_blank',`toolbar=0,status=0,width=${w},height=${h},top=${top},left=${left}`); }
+      document.getElementById('twitterShare').addEventListener('click', ()=>{ const link = refLinkEl.getAttribute('data-link') || refLinkEl.textContent.trim(); const text = encodeURIComponent('Join me and earn rewards! Use my referral link: '); openPopup(`https://twitter.com/intent/tweet?text=${text}&url=${encodeURIComponent(link)}`); });
+      document.getElementById('telegramShare').addEventListener('click', ()=>{ const link = refLinkEl.getAttribute('data-link') || refLinkEl.textContent.trim(); openPopup(`https://t.me/share/url?url=${encodeURIComponent(link)}&text=${encodeURIComponent('Join via my invite!')}`); });
+      document.getElementById('whatsappShare').addEventListener('click', ()=>{ const link = refLinkEl.getAttribute('data-link') || refLinkEl.textContent.trim(); window.open(`https://wa.me/?text=${encodeURIComponent('Join via my invite: ' + link)}`,'_blank'); });
+      document.getElementById('openShareBtn').addEventListener('click', ()=>{ const link = refLinkEl.getAttribute('data-link') || refLinkEl.textContent.trim(); if(navigator.share){ navigator.share({ title:'Join via my invite', text:'Use my referral link', url:link }).catch(()=>{}); } else { document.getElementById('twitterShare').click(); } });
+      document.getElementById('sideShare').addEventListener('click', ()=> document.getElementById('openShareBtn').click());
+
+      async function fetchUserInfo(){ try{ const rsp = await fetch('/api/info',{cache:'no-store'}); if(!rsp.ok) return; const json = await rsp.json(); if(!json||!json.status||!json.user) return; const u = json.user; const code = u.code || u.referral_code || u.ref_code || u.invite_code; const baseLink = window.location.origin; const link = (json.referral_link || (code ? (baseLink + '/register?ref=' + encodeURIComponent(code)) : '')); setReferral(code, link); if(typeof json.total_invites !== 'undefined') totalInvitesEl.textContent = json.total_invites; if(u.invited_count !== undefined) totalInvitesEl.textContent = u.invited_count; if(json.total_earned !== undefined) totalEarnedEl.textContent = '$' + Number(json.total_earned).toFixed(2); if(json.total_clicks !== undefined) totalClicksEl.textContent = json.total_clicks; }catch(err){} }
+      fetchUserInfo();
+
+      refLinkEl.addEventListener('click', function(){ const l = refLinkEl.getAttribute('data-link') || refLinkEl.textContent.trim(); if(l) copyToClipboard(l).then(()=> toast('Referral link copied')).catch(()=>{}); });
+
+      if(!refCodeEl.textContent.trim()||refCodeEl.textContent.trim()==='- - - -') refCodeEl.textContent='- - - -';
+      if(!refLinkEl.getAttribute('data-link')){ const codeFromDom = refCodeEl.textContent.trim(); if(codeFromDom && codeFromDom !== '- - - -'){ const link = buildLinkFromCode(codeFromDom); refLinkEl.textContent = link; refLinkEl.setAttribute('data-link', link); setQR(link); } else { refLinkEl.textContent = 'Your referral link will appear here'; } }
+    })();
+
+
+   $.ajax({
+  url: '/api/info',
+  method: 'GET',
+  dataType: 'json',
+  cache: false,
+  success: function(res) {
+    if (!res || !res.status || !res.user) {
+      console.warn('/api/info returned unexpected', res);
+      return;
+    }
+
+    const user = res.user;
+    const lastLogin = res.last_login || (Array.isArray(res.last_5_login) ? res.last_5_login[0] : null);
+
+    function fmtMoney(n) {
+      const num = Number(n) || 0;
+      return '$ ' + num.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function fmtLastLogin(l) {
+      if (!l) return '—';
+      const raw = l.today || l.login_at || l.time || l.created_at || l.date || l.datetime || null;
+      if (!raw) {
+        const v = Object.values(l)[0];
+        if (!v) return '—';
+        return String(v);
+      }
+      let dt = /^\d+$/.test(String(raw)) ? new Date(Number(raw)) : new Date(raw);
+      if (isNaN(dt.getTime())) return String(raw);
+      const d = dt.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: '2-digit' });
+      const t = dt.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
+      return `${d} · ${t}`;
+    }
+
+    if (user.withdrawable_balance !== undefined && user.withdrawable_balance !== null) {
+      $('.withdrawBalance').text(fmtMoney(user.withdrawable_balance));
+    } 
+    if (user.money ) $('.depositedMoney').text(fmtMoney(user.money));
+    
+    if (res.totalWithdrawAmount) $('.totalWithdraw').text(fmtMoney(res.totalWithdrawAmount));
+    $('#lastActivity').text(fmtLastLogin(lastLogin));
+
+  },
+  error: function(xhr) {
+    if (xhr && xhr.status === 401) {
+      window.location.href = '/login';
+      return;
+    }
+    console.error('/api/info error', xhr && xhr.responseText);
+  }
+});
+
+  </script>
+</body>
+</html>

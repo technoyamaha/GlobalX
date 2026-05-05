@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Mining Pool</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg: #050b2e;
+      --card: rgba(255, 255, 255, 0.08);
+      --accent: #00f2ff;
+      --accent2: #7c7cff;
+      --success: #00ff9c;
+      --text: #eaf1ff;
+      --muted: #9aa4c7;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #0b1a52, var(--bg));
+      font-family: Inter, system-ui, sans-serif;
+      color: var(--text);
+      overflow-x: hidden;
+      /* remove horizontal scrollbar */
+    }
+
+    /* hide vertical scrollbar but allow scroll */
+    ::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: transparent;
+    }
+
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 28px 20px 40px;
+    }
+
+    .title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .title h1 {
+      margin: 0;
+      font-size: 22px;
+    }
+
+    .status {
+      padding: 6px 16px;
+      background: rgba(0, 255, 156, .15);
+      color: var(--success);
+      font-size: 13px;
+      font-weight: 700;
+      border-radius: 20px;
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(0, 255, 156, .4);
+      }
+
+      70% {
+        box-shadow: 0 0 0 14px rgba(0, 255, 156, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(0, 255, 156, 0);
+      }
+    }
+
+    div#cryptoon-layout {
+      background: linear-gradient(90deg, #E8F3FA 0%, #CDFBE7 46.63%, #FAECE3 100%);
+    }
+
+    div#cryptoon-layout h2,
+    div#cryptoon-layout h3,
+    div#cryptoon-layout p,
+    div#cryptoon-layout span {
+      color: #000000;
+    }
+
+    .header-top i {
+      color: #000;
+    }
+
+    .plans-grid .plan {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 14px;
+      border-radius: 12px;
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 8px 30px rgba(2, 6, 23, 0.03);
+      color: #000000;
+    }
+
+    .plans-grid .plan::before {
+      background: transparent;
+    }
+
+    .status {
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 0;
+      background: linear-gradient(90deg, #00aaff, #00aaff);
+      color: #ffffff;
+      cursor: pointer;
+      font-weight: 600;
+      box-shadow: none !important;
+    }
+
+    /* -------- Mining Visual -------- */
+    .mining-visual {
+      margin: 26px auto 36px;
+      width: 240px;
+      height: 240px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 3px dashed var(--accent);
+      animation: spin 14s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .mining-visual img {
+      width: 150px;
+      animation: float 3.2s ease-in-out infinite;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-14px);
+      }
+    }
+
+    /* -------- Plans Grid -------- */
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+    }
+
+    @media (max-width: 600px) {
+      .plans-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .mining-visual {
+        width: 190px;
+        height: 190px;
+      }
+
+      .mining-visual img {
+        width: 120px;
+      }
+    }
+
+    @media (min-width: 601px) and (max-width: 1024px) {
+      .plans-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .plan {
+      background: linear-gradient(180deg, rgba(255, 255, 255, .12), rgba(255, 255, 255, .04));
+      border-radius: 20px;
+      padding: 18px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, .45);
+      position: relative;
+    }
+
+    .plan::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border-radius: 20px;
+      background: linear-gradient(120deg, transparent, var(--accent), transparent);
+      opacity: .18;
+    }
+
+    .plan h3 {
+      margin: 0 0 12px;
+      font-size: 16px;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .row span {
+      color: var(--muted);
+    }
+
+    .progress {
+      height: 7px;
+      background: rgba(255, 255, 255, .12);
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 12px 0 8px;
+    }
+
+    .progress div {
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+    }
+
+    .earning {
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .earning strong {
+      color: var(--accent);
+      font-size: 18px;
+    }
+
+    @media (min-width: 900px) {
+      .mining-visual {
+        margin-bottom: 50px;
+      }
+    }
+
+
+    /* -------- Empty Mining Card -------- */
+.empty-mining {
+  text-align: center;
+  padding: 28px 22px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.14),
+    rgba(255, 255, 255, 0.04)
+  );
+}
+
+.empty-icon {
+  font-size: 42px;
+  line-height: 1;
+  filter: drop-shadow(0 0 10px rgba(0, 242, 255, 0.35));
+  animation: float 3s ease-in-out infinite;
+}
+
+.empty-mining h3 {
+  margin: 6px 0 4px;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.empty-text {
+  font-size: 14px;
+  color: var(--muted);
+  max-width: 260px;
+  line-height: 1.5;
+}
+
+.empty-text strong {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.empty-cta {
+  margin-top: 10px;
+  padding: 10px 18px;
+  border-radius: 22px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #001018;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  box-shadow: 0 10px 26px rgba(0, 242, 255, 0.35);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.empty-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px rgba(0, 242, 255, 0.45);
+} 
+  
+  
+  </style>
+</head>
+
+<body>
+  <%- include('../partials/supportFloat') %>
+
+  <div class="page">
+
+    <%- include('../partials/header') %>
+
+      <div class="title">
+        <h1>Mining Pool</h1>
+        <div class="status">UNDER MINING</div>
+      </div>
+
+      <div class="mining-visual">
+        <div class="ring"></div>
+        <img src="/assets/images/mining.gif" alt="tg-mg" />
+      </div>
+
+      <div id="plans" class="plans-grid"></div>
+      <h2 id="historyTitle" style="margin:40px 0 14px;font-size:18px">Mining Records</h2>
+      <div class="plans-grid" id="history" style="margin-bottom: 50px;">
+        <div class="plan">
+          <h3>Starter Mining</h3>
+          <div class="row"><span>Invested</span><strong>$100</strong></div>
+          <div class="row"><span>Total Earned</span><strong>$60.00</strong></div>
+          <div class="row"><span>Status</span><strong style="color:#19e67a">Completed</strong></div>
+        </div>
+
+        <div class="plan">
+          <h3>Silver Mining</h3>
+          <div class="row"><span>Invested</span><strong>$250</strong></div>
+          <div class="row"><span>Total Earned</span><strong>$145.00</strong></div>
+          <div class="row"><span>Status</span><strong style="color:#19e67a">Completed</strong></div>
+        </div>
+      </div>
+
+
+
+
+      <%- include('../partials/footer') %>
+
+  </div>
+
+  <script>
+    
+  function toggleHistoryTitle(show) {
+    const h2 = document.getElementById('historyTitle');
+    if (!h2) return;
+    h2.style.display = show ? 'block' : 'none';
+   }
+
+    function toNumber(val) {
+     if (val === null || val === undefined) return 0;
+    return Number(String(val).replace(/[^0-9.]/g, '')) || 0;
+   }
+
+function formatMoney(n) {
+  return '$' + Number(n || 0).toFixed(2);
+}
+
+
+    $.ajax({
+  url: '/api/info',
+  method: 'GET',
+  dataType: 'json',
+  cache: false,
+  success: function(res) {
+    if (!res || !res.status || !res.user) {
+      console.warn('/api/info returned unexpected', res);
+      return;
+    }
+
+    const user = res.user;
+    const lastLogin = res.last_login || (Array.isArray(res.last_5_login) ? res.last_5_login[0] : null);
+
+    function fmtMoney(n) {
+      const num = Number(n) || 0;
+      return '$ ' + num.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function fmtLastLogin(l) {
+      if (!l) return '—';
+      const raw = l.today || l.login_at || l.time || l.created_at || l.date || l.datetime || null;
+      if (!raw) {
+        const v = Object.values(l)[0];
+        if (!v) return '—';
+        return String(v);
+      }
+      let dt = /^\d+$/.test(String(raw)) ? new Date(Number(raw)) : new Date(raw);
+      if (isNaN(dt.getTime())) return String(raw);
+      const d = dt.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: '2-digit' });
+      const t = dt.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
+      return `${d} · ${t}`;
+    }
+
+    if (user.withdrawable_balance !== undefined && user.withdrawable_balance !== null) {
+      $('.withdrawBalance').text(fmtMoney(user.withdrawable_balance));
+    } 
+    if (user.money ) $('.depositedMoney').text(fmtMoney(user.money));
+    
+    if (res.totalWithdrawAmount) $('.totalWithdraw').text(fmtMoney(res.totalWithdrawAmount));
+    $('#lastActivity').text(fmtLastLogin(lastLogin));
+
+  },
+  error: function(xhr) {
+    if (xhr && xhr.status === 401) {
+      window.location.href = '/login';
+      return;
+    }
+    console.error('/api/info error', xhr && xhr.responseText);
+  }
+});
+
+
+let investments = [];
+
+function formatMoney(n) {
+  return '$' + Number(n || 0).toFixed(2);
+}
+
+function secondsSinceToday(startDate) {
+  const start = new Date(startDate);
+  const now = new Date();
+
+  const todayStart = new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate()
+  );
+
+  // Mining starts either from today 00:00 OR investment start time
+  const effectiveStart = start > todayStart ? start : todayStart;
+
+  return Math.max(0, Math.floor((now - effectiveStart) / 1000));
+}
+
+let activeInvestments = [];
+let completedInvestments = [];
+
+function loadMyInvestments() {
+  $.ajax({
+    url: '/api/myInvestments',
+    method: 'GET',
+    dataType: 'json',
+    success: function (res) {
+      if (!res || !res.success || !Array.isArray(res.data)) return;
+
+      activeInvestments = [];
+      completedInvestments = [];
+
+      res.data.forEach(inv => {
+        const amount = toNumber(inv.amount);
+        const dailyPercent = toNumber(inv.daily_percent);
+
+        const dailyEarning = (amount * dailyPercent) / 100;
+        const perSecond = dailyEarning / 86400;
+
+       const elapsedSeconds = secondsSinceToday(inv.start_date);
+       const earnedToday = Math.min(elapsedSeconds * perSecond, dailyEarning);
+
+        const obj = {
+          id: inv.id,
+          order_id: inv.order_id,
+          name: inv.plan.name,
+          amount,
+          dailyPercent,
+          dailyEarning,
+          perSecond,
+          earnedToday,
+          start_date: inv.start_date,
+          status: inv.status
+        };
+
+        if (inv.status == 1) {
+          activeInvestments.push(obj);
+        } else {
+          completedInvestments.push(obj);
+        }
+      });
+
+      renderActiveMining();
+      renderHistory();
+      startMiningEngine();
+    }
+  });
+}
+
+
+let miningInterval = null;
+
+function startMiningEngine() {
+  if (miningInterval) return;
+
+  miningInterval = setInterval(() => {
+    activeInvestments.forEach(inv => {
+      const seconds = secondsSinceToday(inv.start_date);
+
+      inv.earnedToday = Math.min(
+        seconds * inv.perSecond,
+        inv.dailyEarning
+      );
+
+      const card = document.querySelector(`.plan[data-id="${inv.id}"]`);
+      if (!card) return;
+
+      card.querySelector('.earned-amount').innerText =
+        '$' + inv.earnedToday.toFixed(2);
+
+      const percent = Math.min(
+        (inv.earnedToday / inv.dailyEarning) * 100,
+        100
+      );
+
+      card.querySelector('.progress div').style.width = percent + '%';
+    });
+  }, 1000);
+}
+
+function renderHistory() {
+  const history = document.getElementById('history');
+  history.innerHTML = '';
+
+  if (!completedInvestments.length) {
+    toggleHistoryTitle(false);
+    return;
+  }
+
+  toggleHistoryTitle(true); 
+
+  completedInvestments.forEach(inv => {
+    history.innerHTML += `
+      <div class="plan">
+        <h3>${inv.name}</h3>
+        <div class="row"><span>Invested</span><strong>${formatMoney(inv.amount)}</strong></div>
+        <div class="row"><span>Total Earned</span><strong>${formatMoney(inv.totalEarned || 0)}</strong></div>
+        <div class="row"><span>Status</span><strong style="color:#19e67a">Completed</strong></div>
+      </div>
+    `;
+  });
+}
+
+loadMyInvestments();
+
+
+function renderActiveMining() {
+  const wrap = document.getElementById('plans');
+  wrap.innerHTML = '';
+
+  if (!activeInvestments.length) {
+    wrap.innerHTML = `
+      <div class="plans-grid">
+        <div class="plan empty-mining">
+          <div class="empty-icon">⛏️</div>
+          <h3>No Active Mining Yet</h3>
+          <p class="empty-text">
+            Explore our mining plans and start earning
+            <strong>daily rewards</strong> automatically.
+          </p>
+          <a href="/mining" class="empty-cta">
+            Explore Mining Plans →
+          </a>
+        </div>
+      </div>
+    `;
+    return;
+  }
+
+  activeInvestments.forEach(inv => {
+    wrap.innerHTML += `
+      <div class="plan" data-id="${inv.id}">
+        <h3>${inv.name}</h3>
+        <div class="row"><span>Invested</span><strong>${formatMoney(inv.amount)}</strong></div>
+        <div class="row"><span>Daily Earning</span><strong>${formatMoney(inv.dailyEarning)}</strong></div>
+        <div class="row"><span>Status</span><strong style="color:var(--success)">Mining</strong></div>
+        <div class="progress"><div></div></div>
+        <div class="earning">
+          Earned<br>
+          <strong class="earned-amount">$0.00</strong>
+        </div>
+      </div>
+    `;
+  });
+}
+
+
+
+  </script>
+
+</body>
+
+</html>
